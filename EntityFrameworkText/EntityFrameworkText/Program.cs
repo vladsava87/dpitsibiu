@@ -189,7 +189,7 @@ namespace EntityFrameworkText
                         }
 
                         Console.WriteLine("Blog Updated... ");
-                        Console.WriteLine("");
+                        //Console.WriteLine("");
 
                         break;
 
