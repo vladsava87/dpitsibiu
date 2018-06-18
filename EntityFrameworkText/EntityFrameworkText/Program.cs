@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using DatabaseLayer;
+using DatabaseLayer.DataModels;
+
 
 namespace EntityFrameworkText
 {
@@ -10,7 +10,7 @@ namespace EntityFrameworkText
     {
         static void Main(string[] args)
         {
-            using (var db = new BloggingContex())
+            using (var db = new BloggingContex("BloggingConnection2"))
             {
                 // Create and save a new Blog 
                 Console.Write("Select operation: ");
@@ -126,12 +126,17 @@ namespace EntityFrameworkText
                                            where p.BlogId == bdId
                                            select p).FirstOrDefault();
 
-                        db.Blogs.Remove(dblogsQuery);
-                        db.SaveChanges();
+                        try
+                        {
+                            db.Blogs.Remove(dblogsQuery);
+                            db.SaveChanges();
 
-                        Console.WriteLine("Blog removed... ");
-                        Console.WriteLine("");
-
+                        }
+                        finally
+                        {
+                            Console.WriteLine("Blog removed... ");
+                            Console.WriteLine("");
+                        }
                         break;
 
                     // Update/change a Post Item
