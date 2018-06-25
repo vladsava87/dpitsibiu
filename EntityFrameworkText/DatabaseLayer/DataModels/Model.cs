@@ -101,7 +101,7 @@ namespace DatabaseLayer.DataModels
 
         public virtual List<t_nota> Note { get; set; }
         public virtual List<t_elev> Absente { get; set; }
-        public virtual List<t_observatii> Observatii { get; set; }
+        public virtual List<t_observatie> Observatii { get; set; }
     }
 
     public class t_nota
@@ -111,7 +111,7 @@ namespace DatabaseLayer.DataModels
         public virtual List<t_materie> Materie { get; set; }
         public double Nota { get; set; }
         public bool Teza { get; set; }
-        public Sem { get; set; }
+        public sem Semestrul { get; set; }
         public t_elev Elev { get; set; }
     }
 
