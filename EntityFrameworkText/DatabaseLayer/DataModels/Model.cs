@@ -46,7 +46,7 @@ namespace DatabaseLayer.DataModels
 
         public virtual List<t_absenta> Absente { get; set; }
         public virtual List<t_nota> Note { get; set; }
-        public virtual List<t_profesor> Profesori { get; set; }
+        public virtual ICollection<t_profesor_materie> Profesori { get; set; }
     }
 
     public class t_absenta
@@ -86,15 +86,7 @@ namespace DatabaseLayer.DataModels
         public int IdMaterii { get; set; }
 
         public virtual List<t_absenta> Absente { get; set; }
-    }
-
-    public class t_profesor_materie
-    {
-        [Key, Column(Order = 0)]
-        public int IdMaterie { get; set; }
-        
-
-        public virtual t_materie Materie { get; set; }
+        public virtual ICollection<t_profesor_materie> Materie { get; set; }
     }
     public class t_elev
     {
@@ -142,5 +134,17 @@ namespace DatabaseLayer.DataModels
         public int Id { get; set; }
         string Nume { get; set; }
         public virtual t_profil Profil { get; set; }
+    }
+
+    public class t_profesor_materie
+    {
+        [Key, Column(Order = 0)]
+        public int IdMaterie { get; set; }
+        [Key, Column(Order = 1)]
+        public int IdProfesor { get; set; }
+        
+
+        public virtual t_materie Materie { get; set; }
+        public virtual t_profesor Profesor { get; set; }
     }
 }
