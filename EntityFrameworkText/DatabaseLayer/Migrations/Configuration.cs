@@ -5,7 +5,7 @@ namespace DatabaseLayer.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<BloggingContex>
+    internal sealed class Configuration : DbMigrationsConfiguration<CatalogContex>
     {
         public Configuration()
         {
@@ -13,7 +13,7 @@ namespace DatabaseLayer.Migrations
             ContextKey = "EntityFrameworkText.BloggingContex";
         }
 
-        protected override void Seed(BloggingContex context)
+        protected override void Seed(CatalogContex context)
         {
             //  This method will be called after migrating to the latest version.
 

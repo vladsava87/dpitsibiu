@@ -49,7 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BloggingContex.cs" />
+    <Compile Include="CatalogContex.cs" />
     <Compile Include="DataModels\Model.cs" />
     <Compile Include="Migrations\201806080639249_InitialCreate.cs" />
     <Compile Include="Migrations\201806080639249_InitialCreate.Designer.cs">
