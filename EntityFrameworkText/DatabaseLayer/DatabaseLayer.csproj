@@ -51,11 +51,21 @@
   <ItemGroup>
     <Compile Include="CatalogContex.cs" />
     <Compile Include="DataModels\Model.cs" />
+    <Compile Include="Migrations\201806251437019_Initial.cs" />
+    <Compile Include="Migrations\201806251437019_Initial.Designer.cs">
+      <DependentUpon>201806251437019_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201806251437019_Initial.resx">
+      <DependentUpon>201806251437019_Initial.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

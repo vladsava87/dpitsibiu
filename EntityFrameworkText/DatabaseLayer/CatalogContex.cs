@@ -5,8 +5,8 @@ namespace DatabaseLayer
 {
     public class CatalogContex : DbContext
     {
-        public CatalogContex(string connectionName)
-            : base(string.Format("name={0}", connectionName))
+        public CatalogContex()
+            : base("CatalogConnection")
         {
 
         }
