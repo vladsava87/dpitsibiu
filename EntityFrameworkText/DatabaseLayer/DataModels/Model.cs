@@ -7,42 +7,12 @@ using System;
 
 namespace DatabaseLayer.DataModels
 {
-    public class Blog
-    {
-        [Key]
-        public int BlogId { get; set; }
-        public string Name { get; set; }
-        public string Url { get; set; }
-
-        public virtual List<Post> Posts { get; set; }
-    }
-
-    public class Post
-    {
-        [Key]
-        public int PostId { get; set; }
-        public string Title { get; set; }
-        public string Content { get; set; }
-
-        public int BlogId { get; set; }
-        public virtual Blog Blog { get; set; }
-    }
-
-    public class User
-    {
-        [Key]
-        public string Username { get; set; }
-        public string DisplayName { get; set; }
-    }
-
     public class t_materie
     {
         [Key]
         public int Id { get; set; }
         public int Nume { get; set; }
         public bool Optional { get; set; }
-       // public int IdProfesor { get; set; }
-
 
         public virtual List<t_absenta> Absente { get; set; }
         public virtual List<t_nota> Note { get; set; }
@@ -53,11 +23,17 @@ namespace DatabaseLayer.DataModels
     {
         [Key]
         public int Id { get; set; }
-        public int Materie { get; set; }
-        public bool Motivatie { get; set; }
+        public bool Motivata{ get; set; }
         public DateTime Data { get; set; }
         public sem Semestrul { get; set; }
-        public int Profesor { get; set; }
+
+        public int IdMaterie { get; set; }
+        public virtual t_materie Materie { get; set; }
+        public int IdProfesor { get; set; }
+        public virtual t_profesor Profesor { get; set; }
+
+        public int IdElev { get; set; }
+        public virtual t_elev Elev { get; set; }
     }
 
     public enum sem
@@ -71,8 +47,13 @@ namespace DatabaseLayer.DataModels
         [Key]
         public int Id { get; set; }
         public DateTime Data { get; set; }
-        public int Profesor { get; set; }
         public string Text { get; set; }
+
+
+        public int IdProfesor { get; set; }
+        public virtual t_profesor Profesor { get; set; }
+        public int IdElev { get; set; }
+        public virtual t_elev Elev { get; set; }
     }
 
    public class t_profesor
@@ -87,7 +68,9 @@ namespace DatabaseLayer.DataModels
 
         public virtual List<t_absenta> Absente { get; set; }
         public virtual ICollection<t_profesor_materie> Materie { get; set; }
+        public virtual List<t_observatie> Observatii { get; set; }
     }
+
     public class t_elev
     {
         [Key]
@@ -100,7 +83,7 @@ namespace DatabaseLayer.DataModels
         public int Clasa { get; set; }
 
         public virtual List<t_nota> Note { get; set; }
-        public virtual List<t_elev> Absente { get; set; }
+        public virtual List<t_absenta> Absente { get; set; }
         public virtual List<t_observatie> Observatii { get; set; }
     }
 
@@ -108,11 +91,14 @@ namespace DatabaseLayer.DataModels
     {
         [Key]
         public int Id { get; set; }
-        public virtual List<t_materie> Materie { get; set; }
         public double Nota { get; set; }
         public bool Teza { get; set; }
         public sem Semestrul { get; set; }
-        public t_elev Elev { get; set; }
+
+        public int IdElev { get; set; }
+        public virtual t_elev Elev { get; set; }
+        public int IdMaterie { get; set; }
+        public virtual t_materie Materie { get; set; }
     }
 
     public class t_clasa
@@ -123,8 +109,10 @@ namespace DatabaseLayer.DataModels
         public string Serie { get; set; }
         public int An { get; set; }
 
-        public virtual List<t_profil> Profil { get; set; }
-        public virtual List<t_profesor> Diriginte { get; set; }
+        public int IdProfil { get; set; }
+        public virtual t_profil Profil { get; set; }
+        public int IdProfesor { get; set; }
+        public virtual t_profesor Diriginte { get; set; }
         public virtual List<t_elev> Elevi { get; set; }
     }
 
@@ -132,8 +120,9 @@ namespace DatabaseLayer.DataModels
     {
         [Key]
         public int Id { get; set; }
-        string Nume { get; set; }
-        public virtual t_profil Profil { get; set; }
+        string Nume { get; set; } 
+        
+        public virtual List<t_clasa> Clase { get; set; }
     }
 
     public class t_profesor_materie
