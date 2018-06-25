@@ -11,8 +11,13 @@ namespace DatabaseLayer
 
         }
 
-        //public DbSet<Blog> Blogs { get; set; }
-        //public DbSet<Post> Posts { get; set; }
-        //public DbSet<User> Users { get; set; }
+        public DbSet<t_materie> Materii { get; set; }
+        public DbSet<t_absenta> Absente { get; set; }
+        public DbSet<t_observatie> Observatii { get; set; }
+        public DbSet<t_profesor> Profesorii { get; set; }
+        public DbSet<t_elev> Elevi { get; set; }
+        public DbSet<t_nota> Note { get; set; }
+        public DbSet<t_clasa> Clase { get; set; }
+        public DbSet<t_profil> Profiluri { get; set; }
     }
 }

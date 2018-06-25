@@ -51,42 +51,11 @@
   <ItemGroup>
     <Compile Include="CatalogContex.cs" />
     <Compile Include="DataModels\Model.cs" />
-    <Compile Include="Migrations\201806080639249_InitialCreate.cs" />
-    <Compile Include="Migrations\201806080639249_InitialCreate.Designer.cs">
-      <DependentUpon>201806080639249_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201806080648091_AddUrl.cs" />
-    <Compile Include="Migrations\201806080648091_AddUrl.Designer.cs">
-      <DependentUpon>201806080648091_AddUrl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201806080650108_AddUserTable.cs" />
-    <Compile Include="Migrations\201806080650108_AddUserTable.Designer.cs">
-      <DependentUpon>201806080650108_AddUserTable.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201806080651083_AddUserTable1.cs" />
-    <Compile Include="Migrations\201806080651083_AddUserTable1.Designer.cs">
-      <DependentUpon>201806080651083_AddUserTable1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201806080639249_InitialCreate.resx">
-      <DependentUpon>201806080639249_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201806080648091_AddUrl.resx">
-      <DependentUpon>201806080648091_AddUrl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201806080650108_AddUserTable.resx">
-      <DependentUpon>201806080650108_AddUserTable.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201806080651083_AddUserTable1.resx">
-      <DependentUpon>201806080651083_AddUserTable1.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
