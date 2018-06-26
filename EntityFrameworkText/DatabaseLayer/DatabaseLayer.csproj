@@ -55,6 +55,14 @@
     <Compile Include="Migrations\201806251437019_Initial.Designer.cs">
       <DependentUpon>201806251437019_Initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201806260732279_ProfilNameMissing.cs" />
+    <Compile Include="Migrations\201806260732279_ProfilNameMissing.Designer.cs">
+      <DependentUpon>201806260732279_ProfilNameMissing.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201806260743573_MaterieNametoString.cs" />
+    <Compile Include="Migrations\201806260743573_MaterieNametoString.Designer.cs">
+      <DependentUpon>201806260743573_MaterieNametoString.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -65,6 +73,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201806251437019_Initial.resx">
       <DependentUpon>201806251437019_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806260732279_ProfilNameMissing.resx">
+      <DependentUpon>201806260732279_ProfilNameMissing.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806260743573_MaterieNametoString.resx">
+      <DependentUpon>201806260743573_MaterieNametoString.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

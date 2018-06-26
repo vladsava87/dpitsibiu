@@ -11,7 +11,7 @@ namespace DatabaseLayer.DataModels
     {
         [Key]
         public int Id { get; set; }
-        public int Nume { get; set; }
+        public string Nume { get; set; }
         public bool Optional { get; set; }
 
         public virtual List<t_absenta> Absente { get; set; }
@@ -120,7 +120,7 @@ namespace DatabaseLayer.DataModels
     {
         [Key]
         public int Id { get; set; }
-        string Nume { get; set; } 
+        public string Nume { get; set; } 
         
         public virtual List<t_clasa> Clase { get; set; }
     }

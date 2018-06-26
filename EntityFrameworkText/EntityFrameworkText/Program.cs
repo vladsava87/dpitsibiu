@@ -16,6 +16,29 @@ namespace EntityFrameworkText
                 //Console.Write("Select operation: ");
                 //var op = Console.ReadLine();
 
+                var profesori = db.Profesorii.ToList();
+
+                foreach (var profesor in profesori)
+                {
+                    Console.WriteLine("====BEGIN DATE PROFESOR====");
+                    Console.WriteLine(profesor.Nume);
+                    Console.WriteLine(profesor.Prenume);
+                    Console.WriteLine(profesor.Email);
+                    Console.WriteLine(profesor.Telefon);
+
+                    Console.WriteLine("++++ MATERII PROFESOR ++++");
+                    foreach (var materie in profesor.Materie)
+                    {
+                        Console.WriteLine("-----> Materie");
+                        Console.WriteLine(materie.Materie.Nume);
+                        Console.WriteLine(materie.Materie.Optional);
+                        Console.WriteLine("-----> END Materie");
+                    }
+                    Console.WriteLine("++++ END MATERII PROFESOR ++++");
+
+                    Console.WriteLine("====END DATE PROFESOR====");
+                }
+
                 //switch (op)
                 //{
                 //    // Insert new Post
@@ -218,8 +241,8 @@ namespace EntityFrameworkText
                 //    Console.WriteLine(string.Format("{0} ({1})", item.Name, postsQuery.Count()));
                 //}
 
-                //Console.WriteLine("Press any key to exit...");
-                //Console.ReadKey();
+                Console.WriteLine("Press any key to exit...");
+                Console.ReadKey();
             }
         }
     }

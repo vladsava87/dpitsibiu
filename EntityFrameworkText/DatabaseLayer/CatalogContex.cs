@@ -6,7 +6,7 @@ namespace DatabaseLayer
     public class CatalogContex : DbContext
     {
         public CatalogContex()
-            : base("CatalogConnection")
+            : base("name=CatalogConnection")
         {
 
         }
@@ -19,5 +19,6 @@ namespace DatabaseLayer
         public DbSet<t_nota> Note { get; set; }
         public DbSet<t_clasa> Clase { get; set; }
         public DbSet<t_profil> Profiluri { get; set; }
+        public DbSet<t_profesor_materie> ProfesoriMaterii { get; set; }
     }
 }
