@@ -27,12 +27,12 @@ namespace DatabaseLayer.DataModels
         public DateTime Data { get; set; }
         public sem Semestrul { get; set; }
 
-        public int IdMaterie { get; set; }
+        public int MaterieID { get; set; }
         public virtual t_materie Materie { get; set; }
-        public int IdProfesor { get; set; }
+        public int ProfesorID { get; set; }
         public virtual t_profesor Profesor { get; set; }
 
-        public int IdElev { get; set; }
+        public int ElevID { get; set; }
         public virtual t_elev Elev { get; set; }
     }
 
@@ -50,9 +50,9 @@ namespace DatabaseLayer.DataModels
         public string Text { get; set; }
 
 
-        public int IdProfesor { get; set; }
+        public int ProfesorID { get; set; }
         public virtual t_profesor Profesor { get; set; }
-        public int IdElev { get; set; }
+        public int ElevID { get; set; }
         public virtual t_elev Elev { get; set; }
     }
 
@@ -64,7 +64,6 @@ namespace DatabaseLayer.DataModels
         public string Prenume { get; set; }
         public int Telefon { get; set; }
         public string Email { get; set; }
-        public int IdMaterii { get; set; }
 
         public virtual List<t_absenta> Absente { get; set; }
         public virtual ICollection<t_profesor_materie> Materie { get; set; }
@@ -80,7 +79,9 @@ namespace DatabaseLayer.DataModels
         public int Telefon { get; set; }
         public string Email { get; set; }
         public int Numar_Matricol { get; set; }
-        public int Clasa { get; set; }
+
+        public int ClasaID { get; set; }
+        public virtual t_clasa Clasa { get; set; }
 
         public virtual List<t_nota> Note { get; set; }
         public virtual List<t_absenta> Absente { get; set; }
@@ -95,9 +96,9 @@ namespace DatabaseLayer.DataModels
         public bool Teza { get; set; }
         public sem Semestrul { get; set; }
 
-        public int IdElev { get; set; }
+        public int ElevID { get; set; }
         public virtual t_elev Elev { get; set; }
-        public int IdMaterie { get; set; }
+        public int MaterieID { get; set; }
         public virtual t_materie Materie { get; set; }
     }
 
@@ -109,9 +110,9 @@ namespace DatabaseLayer.DataModels
         public string Serie { get; set; }
         public int An { get; set; }
 
-        public int IdProfil { get; set; }
+        public int ProfilID { get; set; }
         public virtual t_profil Profil { get; set; }
-        public int IdProfesor { get; set; }
+        public int DiriginteID { get; set; }
         public virtual t_profesor Diriginte { get; set; }
         public virtual List<t_elev> Elevi { get; set; }
     }
@@ -128,9 +129,9 @@ namespace DatabaseLayer.DataModels
     public class t_profesor_materie
     {
         [Key, Column(Order = 0)]
-        public int IdMaterie { get; set; }
+        public int MaterieID { get; set; }
         [Key, Column(Order = 1)]
-        public int IdProfesor { get; set; }
+        public int ProfesorID { get; set; }
         
 
         public virtual t_materie Materie { get; set; }

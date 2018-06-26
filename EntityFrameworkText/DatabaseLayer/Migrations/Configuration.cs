@@ -1,7 +1,7 @@
 namespace DatabaseLayer.Migrations
 {
-    using DataModels;
     using System;
+    using DataModels;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
@@ -48,14 +48,12 @@ namespace DatabaseLayer.Migrations
 
             context.Materii.AddOrUpdate(newMaterie);
             context.SaveChanges();
-            
+
             int materieId = newMaterie.Id; // ID-ul din baza de date dupa ce a fost inserat
 
             // adaug legatura intre cele 2 tabele prin tabela de legatura
             var newProfesorMaterieRelationship = new t_profesor_materie();
             newProfesorMaterieRelationship.Profesor = newProfesor;
-            newProfesorMaterieRelationship.IdProfesor = profesorId;
-            newProfesorMaterieRelationship.IdMaterie = materieId;
             newProfesorMaterieRelationship.Materie = newMaterie;
 
             context.ProfesoriMaterii.AddOrUpdate(newProfesorMaterieRelationship);
@@ -87,8 +85,6 @@ namespace DatabaseLayer.Migrations
 
             newProfesorMaterieRelationship = new t_profesor_materie();
             newProfesorMaterieRelationship.Profesor = newProfesor;
-            newProfesorMaterieRelationship.IdProfesor = secodprofesorId;
-            newProfesorMaterieRelationship.IdMaterie = materieId;
             newProfesorMaterieRelationship.Materie = newMaterie;
 
             context.ProfesoriMaterii.AddOrUpdate(newProfesorMaterieRelationship);
@@ -114,8 +110,6 @@ namespace DatabaseLayer.Migrations
 
             newProfesorMaterieRelationship = new t_profesor_materie();
             newProfesorMaterieRelationship.Profesor = newProfesor;
-            newProfesorMaterieRelationship.IdProfesor = secodprofesorId;
-            newProfesorMaterieRelationship.IdMaterie = materieId;
             newProfesorMaterieRelationship.Materie = newMaterie;
 
             context.ProfesoriMaterii.AddOrUpdate(newProfesorMaterieRelationship);

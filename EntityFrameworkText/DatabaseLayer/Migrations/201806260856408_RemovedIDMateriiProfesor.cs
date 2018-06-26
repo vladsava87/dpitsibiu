@@ -3,16 +3,16 @@ namespace DatabaseLayer.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class ProfilNameMissing : DbMigration
+    public partial class RemovedIDMateriiProfesor : DbMigration
     {
         public override void Up()
         {
-            AddColumn("dbo.t_profil", "Nume", c => c.String());
+            DropColumn("dbo.t_profesor", "IdMaterii");
         }
         
         public override void Down()
         {
-            DropColumn("dbo.t_profil", "Nume");
+            AddColumn("dbo.t_profesor", "IdMaterii", c => c.Int(nullable: false));
         }
     }
 }

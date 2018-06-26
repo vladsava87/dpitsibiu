@@ -7,13 +7,13 @@ namespace DatabaseLayer.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class MaterieNametoString : IMigrationMetadata
+    public sealed partial class RemovedIDMateriiProfesor : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(MaterieNametoString));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(RemovedIDMateriiProfesor));
         
         string IMigrationMetadata.Id
         {
-            get { return "201806260743573_MaterieNametoString"; }
+            get { return "201806260856408_RemovedIDMateriiProfesor"; }
         }
         
         string IMigrationMetadata.Source

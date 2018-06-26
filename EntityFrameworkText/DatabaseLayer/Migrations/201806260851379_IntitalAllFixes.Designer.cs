@@ -7,13 +7,13 @@ namespace DatabaseLayer.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class ProfilNameMissing : IMigrationMetadata
+    public sealed partial class IntitalAllFixes : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(ProfilNameMissing));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(IntitalAllFixes));
         
         string IMigrationMetadata.Id
         {
-            get { return "201806260732279_ProfilNameMissing"; }
+            get { return "201806260851379_IntitalAllFixes"; }
         }
         
         string IMigrationMetadata.Source
