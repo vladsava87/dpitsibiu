@@ -33,7 +33,7 @@ namespace DatabaseLayer.Migrations
             var newProfesor = new t_profesor();
             newProfesor.Nume = "Vasie";
             newProfesor.Prenume = "Pop";
-            newProfesor.Telefon = 0746662435;
+            newProfesor.Telefon = "0746662435";
             newProfesor.Email = "pop.vasile@scoala.ro";
 
             context.Profesorii.AddOrUpdate(newProfesor);
@@ -75,7 +75,7 @@ namespace DatabaseLayer.Migrations
             newProfesor = new t_profesor();
             newProfesor.Nume = "Maria";
             newProfesor.Prenume = "Adrian";
-            newProfesor.Telefon = 0741000000;
+            newProfesor.Telefon = "0741000000";
             newProfesor.Email = "Maria.Adrian@scoala.ro";
 
             context.Profesorii.AddOrUpdate(newProfesor);

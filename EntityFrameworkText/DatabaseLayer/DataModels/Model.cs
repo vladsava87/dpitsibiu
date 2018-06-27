@@ -62,7 +62,7 @@ namespace DatabaseLayer.DataModels
         public int Id { get; set; }
         public string Nume { get; set; }
         public string Prenume { get; set; }
-        public int Telefon { get; set; }
+        public string Telefon { get; set; }
         public string Email { get; set; }
 
         public virtual List<t_absenta> Absente { get; set; }
@@ -76,7 +76,7 @@ namespace DatabaseLayer.DataModels
         public int Id { get; set; }
         public string Nume { get; set; }
         public DateTime Date { get; set; }
-        public int Telefon { get; set; }
+        public string Telefon { get; set; }
         public string Email { get; set; }
         public int Numar_Matricol { get; set; }
 
