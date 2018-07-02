@@ -92,13 +92,17 @@ namespace DatabaseLayer.Migrations
             context.SaveChanges();
         }
 
-        int AddAbsenta(int Materie, Boolean Motivata, DateTime Data, sem Semestrul, int Profesor, DatabaseLayer.CatalogContex context)
+        int AddAbsenta(int Materie, Boolean Motivata, DateTime Data, sem Semestrul, int Profesor,int Elev, DatabaseLayer.CatalogContex context)
         {
             var newAbsenta = new t_absenta();
             newAbsenta.MaterieID = Materie;
 
             var tempMaterie = context.Materii.Where(m => m.Id == Materie).FirstOrDefault();
             newAbsenta.Materie = tempMaterie;
+
+            var tempElev = context.Elevi.Where(p => p.Id == Elev).FirstOrDefault();
+            newAbsenta.Elev = tempElev;
+
 
             newAbsenta.Motivata = Motivata;
             newAbsenta.Data = Data;
@@ -116,22 +120,25 @@ namespace DatabaseLayer.Migrations
             
         }
 
-        void AddAbsentaElev(int elev, int absenta, DatabaseLayer.CatalogContex context)
-        {
-            var newElev = context.Elevi.Where(p => p.Id == elev).FirstOrDefault();
-            var newAbsenta = context.Absente.Where(m => m.Id == absenta).FirstOrDefault();
-            newElev.Absente.Add(newAbsenta);
-            // context.Elevi.AddOrUpdate(newElev);
-            context.SaveChanges();
-        }
+        //void AddAbsentaElev(int elev, int absenta, DatabaseLayer.CatalogContex context)
+        //{
+        //    var newElev = context.Elevi.Where(p => p.Id == elev).FirstOrDefault();
+        //    var newAbsenta = context.Absente.Where(m => m.Id == absenta).FirstOrDefault();
+        //    newElev.Absente.Add(newAbsenta);
+        //    // context.Elevi.AddOrUpdate(newElev);
+        //    context.SaveChanges();
+        //}
 
-        int AddNota(int ElevId, int Materie, double Nota, Boolean Teza, sem Semestrul,DateTime Data, DatabaseLayer.CatalogContex context)
+        int AddNota(int Elev, int Materie, double Nota, Boolean Teza, sem Semestrul,DateTime Data, DatabaseLayer.CatalogContex context)
         {
             var newNota = new t_nota();
             newNota.MaterieID = Materie;
 
             var tempMaterie = context.Materii.Where(p => p.Id == Materie).FirstOrDefault();
             newNota.Materie = tempMaterie;
+
+            var tempElev = context.Elevi.Where(p => p.Id == Elev).FirstOrDefault();
+            newNota.Elev = tempElev;
 
 
             newNota.Data = Data;
@@ -174,15 +181,15 @@ namespace DatabaseLayer.Migrations
 
         }
 
-        void AddObservatieElev(int elev, int observatie, DatabaseLayer.CatalogContex context)
-        {
-            var newElev = context.Elevi.Where(p => p.Id == elev).FirstOrDefault();
-            var newObservatie = context.Observatii.Where(m => m.Id == observatie).FirstOrDefault();
-            newElev.Observatii.Add(newObservatie);
-            //context.Elevi.AddOrUpdate(newElev);
+        //void AddObservatieElev(int elev, int observatie, DatabaseLayer.CatalogContex context)
+        //{
+        //    var newElev = context.Elevi.Where(p => p.Id == elev).FirstOrDefault();
+        //    var newObservatie = context.Observatii.Where(m => m.Id == observatie).FirstOrDefault();
+        //    newElev.Observatii.Add(newObservatie);
+        //    //context.Elevi.AddOrUpdate(newElev);
 
-            context.SaveChanges();
-        }
+        //    context.SaveChanges();
+        //}
 
         int AddElev (string Nume, string Prenume, DateTime Data_Nasterii, string Telefon, string Email, int Numar_Matricol, int Clasa, DatabaseLayer.CatalogContex context)
         {
@@ -212,16 +219,16 @@ namespace DatabaseLayer.Migrations
 
         }
 
-        void AddNotaElev(int elev, int nota, DatabaseLayer.CatalogContex context)
-        {
-            var newElev = context.Elevi.Where(p => p.Id == elev).FirstOrDefault();
-            var newNota = context.Note.Where(m => m.Id == nota).FirstOrDefault();
-            newElev.Note.Add(newNota);
-            //context.Elevi.AddOrUpdate(newElev);
+        //void AddNotaElev(int elev, int nota, DatabaseLayer.CatalogContex context)
+        //{
+        //    var newElev = context.Elevi.Where(p => p.Id == elev).FirstOrDefault();
+        //    var newNota = context.Note.Where(m => m.Id == nota).FirstOrDefault();
+        //    newElev.Note.Add(newNota);
+        //    //context.Elevi.AddOrUpdate(newElev);
 
-            context.SaveChanges();
+        //    context.SaveChanges();
 
-        }
+        //}
 
 
         int AddClasa(int Numar, string Serie, int An, int Profil, int Diriginte, DatabaseLayer.CatalogContex context)
@@ -384,11 +391,11 @@ namespace DatabaseLayer.Migrations
 
          
             
-            int a_Alexandrescu1 = AddAbsenta(d_Matematica, true, new DateTime(2018, 02, 02), Semestrul, p_IoanRoata, context);
-            int a_Alexandrescu2 = AddAbsenta(d_Matematica, true, new DateTime(2018, 02, 02), Semestrul, p_IoanRoata, context);
+            int a_Alexandrescu1 = AddAbsenta(d_Matematica, true, new DateTime(2018, 02, 02), Semestrul, p_IoanRoata,e_AlexandruAlexandrescu, context);
+            int a_Alexandrescu2 = AddAbsenta(d_Matematica, true, new DateTime(2018, 02, 02), Semestrul, p_IoanRoata, e_AlexandruAlexandrescu, context);
 
             
-            int a_Alexandrescu3 = AddAbsenta(d_MatematicaM3, false, new DateTime(2018, 02, 01), Semestrul, p_IoanRoata, context);
+            int a_Alexandrescu3 = AddAbsenta(d_MatematicaM3, false, new DateTime(2018, 02, 01), Semestrul, p_IoanRoata, e_AlexandruAlexandrescu, context);
 
             int n_AlexandrescuChimie1 = AddNota(e_AlexandruAlexandrescu, d_Chimie, 7, false, Semestrul, new DateTime(2018, 02, 01), context);
             int n_AlexandrescuChimie2 = AddNota(e_AlexandruAlexandrescu, d_Chimie, 8, true, Semestrul, new DateTime(2018, 02, 01), context);
@@ -401,18 +408,18 @@ namespace DatabaseLayer.Migrations
 
             //AddObservatieElev(e_AlexandruAlexandrescu, o_ObsAlexandrescu, context);
 
-            AddAbsentaElev(e_AlexandruAlexandrescu, a_Alexandrescu1, context);
-            AddAbsentaElev(e_AlexandruAlexandrescu, a_Alexandrescu2, context);
-            AddAbsentaElev(e_AlexandruAlexandrescu, a_Alexandrescu3, context);
+            //AddAbsentaElev(e_AlexandruAlexandrescu, a_Alexandrescu1, context);
+            //AddAbsentaElev(e_AlexandruAlexandrescu, a_Alexandrescu2, context);
+            //AddAbsentaElev(e_AlexandruAlexandrescu, a_Alexandrescu3, context);
 
-            AddNotaElev(e_AlexandruAlexandrescu, n_AlexandrescuChimie1, context);
-            AddNotaElev(e_AlexandruAlexandrescu, n_AlexandrescuChimie2, context);
-            AddNotaElev(e_AlexandruAlexandrescu, n_AlexandrescuFizica1, context);
-            AddNotaElev(e_AlexandruAlexandrescu, n_AlexandrescuFizica2, context);
-            AddNotaElev(e_AlexandruAlexandrescu, n_AlexandrescuMate1, context);
-            AddNotaElev(e_AlexandruAlexandrescu, n_AlexandrescuMate2, context);
-            AddNotaElev(e_AlexandruAlexandrescu, n_AlexandrescuMate3, context);
-            AddNotaElev(e_AlexandruAlexandrescu, n_AlexandrescuMateM31, context);
+            //AddNotaElev(e_AlexandruAlexandrescu, n_AlexandrescuChimie1, context);
+            //AddNotaElev(e_AlexandruAlexandrescu, n_AlexandrescuChimie2, context);
+            //AddNotaElev(e_AlexandruAlexandrescu, n_AlexandrescuFizica1, context);
+            //AddNotaElev(e_AlexandruAlexandrescu, n_AlexandrescuFizica2, context);
+            //AddNotaElev(e_AlexandruAlexandrescu, n_AlexandrescuMate1, context);
+            //AddNotaElev(e_AlexandruAlexandrescu, n_AlexandrescuMate2, context);
+            //AddNotaElev(e_AlexandruAlexandrescu, n_AlexandrescuMate3, context);
+            //AddNotaElev(e_AlexandruAlexandrescu, n_AlexandrescuMateM31, context);
 
             AddElevClasa(c_9A, e_AlexandruAlexandrescu, context);
 
@@ -427,8 +434,8 @@ namespace DatabaseLayer.Migrations
             int o_ObsFlorescu = AddObservatie(new DateTime(2002, 02, 03), p_IoanRoata, e_FlorinFlorescu, "Folosirea telefonului mobil in timpul orei", context);
 
            
-            int a_Florescu1 = AddAbsenta(d_MatematicaM3, false, new DateTime(01, 02, 2018), Semestrul, p_IoanRoata, context);
-            int a_Florescu2 = AddAbsenta(d_Fizica, false, new DateTime(01, 02, 2018), Semestrul, p_RaduPopescu, context);
+            int a_Florescu1 = AddAbsenta(d_MatematicaM3, false, new DateTime(2018,02,01), Semestrul, p_IoanRoata, e_FlorinFlorescu, context);
+            int a_Florescu2 = AddAbsenta(d_Fizica, false, new DateTime(2018, 02, 01), Semestrul, p_RaduPopescu, e_FlorinFlorescu, context);
 
             int n_FlorescuChimie1 = AddNota(e_FlorinFlorescu, d_Chimie, 10, false, Semestrul, new DateTime(2018, 02, 01), context);
             int n_FlorescuFizica1 = AddNota(e_FlorinFlorescu, d_Fizica, 10, false, Semestrul, new DateTime(2018, 02, 01), context);
@@ -440,16 +447,16 @@ namespace DatabaseLayer.Migrations
 
             //AddObservatieElev(e_FlorinFlorescu, o_ObsFlorescu, context);
 
-            AddAbsentaElev(e_FlorinFlorescu, a_Florescu1, context);
-            AddAbsentaElev(e_FlorinFlorescu, a_Florescu2, context);
+            //AddAbsentaElev(e_FlorinFlorescu, a_Florescu1, context);
+            //AddAbsentaElev(e_FlorinFlorescu, a_Florescu2, context);
 
-            AddNotaElev(e_FlorinFlorescu, n_FlorescuChimie1, context);
-            AddNotaElev(e_FlorinFlorescu, n_FlorescuFizica1, context);
-            AddNotaElev(e_FlorinFlorescu, n_FlorescuFizica2, context);
-            AddNotaElev(e_FlorinFlorescu, n_FlorescuMate1, context);
-            AddNotaElev(e_FlorinFlorescu, n_FlorescuMate2, context);
-            AddNotaElev(e_FlorinFlorescu, n_FlorescuRomana1, context);
-            AddNotaElev(e_FlorinFlorescu, n_FlorescuRomana2, context);
+            //AddNotaElev(e_FlorinFlorescu, n_FlorescuChimie1, context);
+            //AddNotaElev(e_FlorinFlorescu, n_FlorescuFizica1, context);
+            //AddNotaElev(e_FlorinFlorescu, n_FlorescuFizica2, context);
+            //AddNotaElev(e_FlorinFlorescu, n_FlorescuMate1, context);
+            //AddNotaElev(e_FlorinFlorescu, n_FlorescuMate2, context);
+            //AddNotaElev(e_FlorinFlorescu, n_FlorescuRomana1, context);
+            //AddNotaElev(e_FlorinFlorescu, n_FlorescuRomana2, context);
 
 
             AddElevClasa(c_11B, e_FlorinFlorescu, context);
@@ -467,14 +474,14 @@ namespace DatabaseLayer.Migrations
             int n_GeorgescuMate3 = AddNota(e_GeorgeGeorgescu, d_Matematica, 10, true, Semestrul, new DateTime(2018, 02, 01), context);
             int n_GeorgescuFizica1 = AddNota(e_GeorgeGeorgescu, d_Fizica, 9, false, Semestrul, new DateTime(2018, 02, 01), context);
 
-            AddNotaElev(e_GeorgeGeorgescu, n_GeorgescuChimie1, context);
-            AddNotaElev(e_GeorgeGeorgescu, n_GeorgescuChimie2, context);
-            AddNotaElev(e_GeorgeGeorgescu, n_GeorgescuRomana1, context);
-            AddNotaElev(e_GeorgeGeorgescu, n_GeorgescuRomana2, context);
-            AddNotaElev(e_GeorgeGeorgescu, n_GeorgescuMate1, context);
-            AddNotaElev(e_GeorgeGeorgescu, n_GeorgescuMate2, context);
-            AddNotaElev(e_GeorgeGeorgescu, n_GeorgescuMate3, context);
-            AddNotaElev(e_GeorgeGeorgescu, n_GeorgescuFizica1, context);
+            //AddNotaElev(e_GeorgeGeorgescu, n_GeorgescuChimie1, context);
+            //AddNotaElev(e_GeorgeGeorgescu, n_GeorgescuChimie2, context);
+            //AddNotaElev(e_GeorgeGeorgescu, n_GeorgescuRomana1, context);
+            //AddNotaElev(e_GeorgeGeorgescu, n_GeorgescuRomana2, context);
+            //AddNotaElev(e_GeorgeGeorgescu, n_GeorgescuMate1, context);
+            //AddNotaElev(e_GeorgeGeorgescu, n_GeorgescuMate2, context);
+            //AddNotaElev(e_GeorgeGeorgescu, n_GeorgescuMate3, context);
+            //AddNotaElev(e_GeorgeGeorgescu, n_GeorgescuFizica1, context);
 
             AddElevClasa(c_11B, e_GeorgeGeorgescu, context);
 
