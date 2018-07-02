@@ -152,7 +152,7 @@ namespace DatabaseLayer.Migrations
         }
 
 
-        int AddObservatie( DateTime Data, int Profesor, String Text, DatabaseLayer.CatalogContex context)
+        int AddObservatie( DateTime Data, int Profesor, int Elev, String Text, DatabaseLayer.CatalogContex context)
         {
             var newObservatie = new t_observatie();
             newObservatie.Data = Data;
@@ -160,6 +160,9 @@ namespace DatabaseLayer.Migrations
 
             var tempProfesor = context.Profesorii.Where(p => p.Id == Profesor).FirstOrDefault();
             newObservatie.Profesor = tempProfesor;
+
+            var tempElev = context.Elevi.Where(p => p.Id == Elev).FirstOrDefault();
+            newObservatie.Elev = tempElev;
 
             newObservatie.Text = Text;
 
@@ -377,7 +380,7 @@ namespace DatabaseLayer.Migrations
             int e_AlexandruAlexandrescu = AddElev("Alexandrescu","Alexandru", new DateTime(2002, 03, 24), "074555000444","AlexAlexandrescu@elev.ro", 7452, c_9A, context);
 
             
-            int o_ObsAlexandrescu = AddObservatie(new DateTime(2018, 02, 02), p_IoanRoata, "Folosirea telefonului mobil in timpul orei", context);
+            int o_ObsAlexandrescu = AddObservatie(new DateTime(2018, 02, 02), p_IoanRoata, e_AlexandruAlexandrescu, "Folosirea telefonului mobil in timpul orei", context);
 
          
             
@@ -396,7 +399,7 @@ namespace DatabaseLayer.Migrations
             int n_AlexandrescuMate3 = AddNota(e_AlexandruAlexandrescu, d_Matematica, 10, true, Semestrul, new DateTime(2018, 02, 01), context);
             int n_AlexandrescuMateM31 = AddNota(e_AlexandruAlexandrescu, d_MatematicaM3, 9, false, Semestrul, new DateTime(2018, 02, 01), context);
 
-            AddObservatieElev(e_AlexandruAlexandrescu, o_ObsAlexandrescu, context);
+            //AddObservatieElev(e_AlexandruAlexandrescu, o_ObsAlexandrescu, context);
 
             AddAbsentaElev(e_AlexandruAlexandrescu, a_Alexandrescu1, context);
             AddAbsentaElev(e_AlexandruAlexandrescu, a_Alexandrescu2, context);
@@ -421,7 +424,7 @@ namespace DatabaseLayer.Migrations
             int e_FlorinFlorescu = AddElev("Florescu", "Florin", new DateTime(2001, 04, 15), "074445556667", "FlorinFlorescu@elev.ro", 1234, c_11B, context);
 
           
-            int o_ObsFlorescu = AddObservatie(new DateTime(2002, 02, 03), p_IoanRoata, "Folosirea telefonului mobil in timpul orei", context);
+            int o_ObsFlorescu = AddObservatie(new DateTime(2002, 02, 03), p_IoanRoata, e_FlorinFlorescu, "Folosirea telefonului mobil in timpul orei", context);
 
            
             int a_Florescu1 = AddAbsenta(d_MatematicaM3, false, new DateTime(01, 02, 2018), Semestrul, p_IoanRoata, context);
@@ -435,7 +438,7 @@ namespace DatabaseLayer.Migrations
             int n_FlorescuRomana1 = AddNota(e_FlorinFlorescu, d_Romana, 7, true, Semestrul, new DateTime(2018, 02, 01), context);
             int n_FlorescuRomana2 = AddNota(e_FlorinFlorescu, d_Romana, 7, false, Semestrul, new DateTime(2018, 02, 01), context);
 
-            AddObservatieElev(e_FlorinFlorescu, o_ObsFlorescu, context);
+            //AddObservatieElev(e_FlorinFlorescu, o_ObsFlorescu, context);
 
             AddAbsentaElev(e_FlorinFlorescu, a_Florescu1, context);
             AddAbsentaElev(e_FlorinFlorescu, a_Florescu2, context);
