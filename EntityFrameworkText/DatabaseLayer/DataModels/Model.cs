@@ -75,6 +75,7 @@ namespace DatabaseLayer.DataModels
         [Key]
         public int Id { get; set; }
         public string Nume { get; set; }
+        public string Prenume { get; set; }
         public DateTime Date { get; set; }
         public string Telefon { get; set; }
         public string Email { get; set; }
@@ -95,6 +96,7 @@ namespace DatabaseLayer.DataModels
         public double Nota { get; set; }
         public bool Teza { get; set; }
         public sem Semestrul { get; set; }
+        public DateTime Data { get; set; }
 
         public int ElevID { get; set; }
         public virtual t_elev Elev { get; set; }

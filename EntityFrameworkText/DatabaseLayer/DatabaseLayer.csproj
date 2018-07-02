@@ -59,6 +59,14 @@
     <Compile Include="Migrations\201806260856408_RemovedIDMateriiProfesor.Designer.cs">
       <DependentUpon>201806260856408_RemovedIDMateriiProfesor.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201807021205252_TelephoneNrToString.cs" />
+    <Compile Include="Migrations\201807021205252_TelephoneNrToString.Designer.cs">
+      <DependentUpon>201807021205252_TelephoneNrToString.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807021240168_PrenumeElev.cs" />
+    <Compile Include="Migrations\201807021240168_PrenumeElev.Designer.cs">
+      <DependentUpon>201807021240168_PrenumeElev.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -72,6 +80,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201806260856408_RemovedIDMateriiProfesor.resx">
       <DependentUpon>201806260856408_RemovedIDMateriiProfesor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807021205252_TelephoneNrToString.resx">
+      <DependentUpon>201807021205252_TelephoneNrToString.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807021240168_PrenumeElev.resx">
+      <DependentUpon>201807021240168_PrenumeElev.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
