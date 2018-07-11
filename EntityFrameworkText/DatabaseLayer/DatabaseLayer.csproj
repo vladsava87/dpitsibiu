@@ -41,6 +41,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -51,6 +52,8 @@
   <ItemGroup>
     <Compile Include="CatalogContex.cs" />
     <Compile Include="DataModels\Model.cs" />
+    <Compile Include="DTO\ClasaDTO.cs" />
+    <Compile Include="DTO\ProfilDTO.cs" />
     <Compile Include="Migrations\201806260851379_IntitalAllFixes.cs" />
     <Compile Include="Migrations\201806260851379_IntitalAllFixes.Designer.cs">
       <DependentUpon>201806260851379_IntitalAllFixes.cs</DependentUpon>
