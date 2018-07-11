@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EntityFrameworkText", "Enti
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatabaseLayer", "DatabaseLayer\DatabaseLayer.csproj", "{51C46814-462B-400E-81A8-DB2161041A40}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApi", "WebApi\WebApi.csproj", "{160E3E44-C10B-45F4-B774-D842119F7EEB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{51C46814-462B-400E-81A8-DB2161041A40}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{51C46814-462B-400E-81A8-DB2161041A40}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{51C46814-462B-400E-81A8-DB2161041A40}.Release|Any CPU.Build.0 = Release|Any CPU
+		{160E3E44-C10B-45F4-B774-D842119F7EEB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{160E3E44-C10B-45F4-B774-D842119F7EEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{160E3E44-C10B-45F4-B774-D842119F7EEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{160E3E44-C10B-45F4-B774-D842119F7EEB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
