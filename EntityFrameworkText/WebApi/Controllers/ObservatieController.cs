@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DatabaseLayer;
+using DatabaseLayer.DataModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -9,9 +11,13 @@ namespace WebApi.Controllers
 {
     public class ObservatieController : ApiController
     {
+        private CatalogContex catalog = new CatalogContex();
+        
         // GET api/values
         public IEnumerable<string> Get()
         {
+            var obs = new t_observatie();
+
             return new string[] { "value1", "value2" };
         }
 

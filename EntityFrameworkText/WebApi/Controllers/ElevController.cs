@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DatabaseLayer;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -9,6 +10,8 @@ namespace WebApi.Controllers
 {
     public class ElevController : ApiController
     {
+        private CatalogContex catalog = new CatalogContex();
+
         // GET: api/Elev
         public IEnumerable<string> Get()
         {
