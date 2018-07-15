@@ -1,14 +1,16 @@
-﻿using System.Web.Http;
+﻿using AutoMapper;
+using DatabaseLayer.DataModels;
+using DatabaseLayer.DTO;
+using Newtonsoft.Json;
+using NewWebService.App_Start;
+using System.Web;
+using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
-using Newtonsoft.Json;
-using NewWebService.App_Start;
 
 namespace NewWebService
 {
-    using System.Web;
-
     public class WebApiApplication : HttpApplication
     {
         protected void Application_Start()
@@ -25,6 +27,16 @@ namespace NewWebService
             GlobalConfiguration.Configuration.Formatters
                 .Remove(GlobalConfiguration.Configuration.Formatters.XmlFormatter);
 
+        }
+
+        public static class AutoMapperConfiguration
+        {
+            public static void Configure()
+            {
+                Mapper.CreateMap<t_clasa, ClasaDTO>();
+                Mapper.CreateMap<t_observatie, ObservatieDTO>();
+                Mapper.CreateMap<t_profesor, ProfesorDTO>();
+            }
         }
     }
 }

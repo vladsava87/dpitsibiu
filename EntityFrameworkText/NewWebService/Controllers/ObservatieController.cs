@@ -1,10 +1,8 @@
-﻿using DatabaseLayer;
-using DatabaseLayer.DataModels;
-using System;
+﻿using AutoMapper;
+using DatabaseLayer;
+using DatabaseLayer.DTO;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 
 namespace NewWebService.Controllers
@@ -14,11 +12,13 @@ namespace NewWebService.Controllers
         private CatalogContex catalog = new CatalogContex();
         
         // GET api/values
-        public IEnumerable<string> Get()
+        public IEnumerable<ObservatieDTO> Get()
         {
-            var obs = new t_observatie();
+            var obs = catalog.Observatii.ToList();
 
-            return new string[] { "value1", "value2" };
+            var tObs = Mapper.Map<List<ObservatieDTO>>(obs);
+
+            return tObs;
         }
 
         // GET api/values/5

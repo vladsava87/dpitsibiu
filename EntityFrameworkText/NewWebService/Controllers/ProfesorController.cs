@@ -1,9 +1,8 @@
-﻿using DatabaseLayer;
-using System;
+﻿using AutoMapper;
+using DatabaseLayer;
+using DatabaseLayer.DTO;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 
 namespace NewWebService.Controllers
@@ -13,9 +12,13 @@ namespace NewWebService.Controllers
         private CatalogContex catalog = new CatalogContex();
 
         // GET: api/Profesor
-        public IEnumerable<string> Get()
+        public IEnumerable<ProfesorDTO> Get()
         {
-            return new string[] { "value1", "value2" };
+            var profesori = catalog.Profesorii.ToList();
+
+            var tprofesori = Mapper.Map<List<ProfesorDTO>>(profesori);
+
+            return tprofesori;
         }
 
         // GET: api/Profesor/5
