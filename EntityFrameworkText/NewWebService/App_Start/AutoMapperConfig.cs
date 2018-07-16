@@ -11,9 +11,11 @@ namespace NewWebService.App_Start
         {
             Mapper.Initialize(cfg => {
                     cfg.CreateMap<t_profil, ProfilDTO>();
-                    cfg.CreateMap<t_clasa, ClasaDTO>();
+                    cfg.CreateMap<t_clasa, ClasaDTO>()
+                       .ForMember(ignoraelevii => ignoraelevii.Elevi, opt => opt.Ignore());
                     cfg.CreateMap<t_observatie, ObservatieDTO>();
-                    cfg.CreateMap<t_profesor, ProfesorDTO>();
+                    cfg.CreateMap<t_profesor, ProfesorDTO>()
+                       .ForMember(ignoramaterii => ignoramaterii.Materii, opt => opt.Ignore());
             });
         }
     }
