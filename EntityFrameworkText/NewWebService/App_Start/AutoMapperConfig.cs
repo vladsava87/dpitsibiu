@@ -11,8 +11,10 @@ namespace NewWebService.App_Start
         {
             Mapper.Initialize(cfg => {
                     cfg.CreateMap<t_profil, ProfilDTO>();
-                });
-
+                    cfg.CreateMap<t_clasa, ClasaDTO>();
+                    cfg.CreateMap<t_observatie, ObservatieDTO>();
+                    cfg.CreateMap<t_profesor, ProfesorDTO>();
+            });
         }
     }
 }

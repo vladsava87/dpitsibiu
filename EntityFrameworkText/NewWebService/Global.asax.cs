@@ -28,15 +28,5 @@ namespace NewWebService
                 .Remove(GlobalConfiguration.Configuration.Formatters.XmlFormatter);
 
         }
-
-        public static class AutoMapperConfiguration
-        {
-            public static void Configure()
-            {
-                Mapper.CreateMap<t_clasa, ClasaDTO>();
-                Mapper.CreateMap<t_observatie, ObservatieDTO>();
-                Mapper.CreateMap<t_profesor, ProfesorDTO>();
-            }
-        }
     }
 }
