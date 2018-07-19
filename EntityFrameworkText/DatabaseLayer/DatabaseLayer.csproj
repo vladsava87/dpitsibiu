@@ -53,8 +53,10 @@
     <Compile Include="CatalogContex.cs" />
     <Compile Include="DataModels\Model.cs" />
     <Compile Include="DTO\ClasaDTO.cs" />
+    <Compile Include="DTO\AbsentaDTO.cs" />
     <Compile Include="DTO\ElevDTO.cs" />
     <Compile Include="DTO\MaterieDTO.cs" />
+    <Compile Include="DTO\NotaDTO.cs" />
     <Compile Include="DTO\ObservatieDTO.cs" />
     <Compile Include="DTO\ProfesorDTO.cs" />
     <Compile Include="DTO\ProfilDTO.cs" />
