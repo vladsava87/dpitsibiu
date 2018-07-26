@@ -10,12 +10,20 @@ namespace NewWebService.App_Start
         public static void Configure()
         {
             Mapper.Initialize(cfg => {
-                    cfg.CreateMap<t_profil, ProfilDTO>();
+                    cfg.CreateMap<t_absenta, AbsentaDTO>()
+                        .ForMember(ignoraabsenta => ignoraabsenta.Elev, opt => opt.Ignore())
+                        .ForMember(ignoramaterie => ignoramaterie.Materie, opt => opt.Ignore())
+                        .ForMember(ignoraprofesor => ignoraprofesor.Profesor, opt => opt.Ignore());
                     cfg.CreateMap<t_clasa, ClasaDTO>()
-                       .ForMember(ignoraelevii => ignoraelevii.Elevi, opt => opt.Ignore());
-                    cfg.CreateMap<t_observatie, ObservatieDTO>();
+                        .ForMember(ignoraelevi => ignoraelevi.Elevi, opt => opt.Ignore())
+                        .ForMember(ignoraprofesori => ignoraprofesori.Diriginte, opt => opt.Ignore())
+                        .ForMember(ignoraprofilul => ignoraprofilul.Profil, opt => opt.Ignore());
+                    cfg.CreateMap<t_observatie, ObservatieDTO>()
+                        .ForMember(ignoraprofesori => ignoraprofesori.Profesor, opt => opt.Ignore())
+                        .ForMember(ignoraelevii => ignoraelevii.Elev, opt => opt.Ignore());
                     cfg.CreateMap<t_profesor, ProfesorDTO>()
-                       .ForMember(ignoramaterii => ignoramaterii.Materii, opt => opt.Ignore());
+                        .ForMember(ignoramaterii => ignoramaterii.Materii, opt => opt.Ignore());
+                    cfg.CreateMap<t_profil, ProfilDTO>();
             });
         }
     }
