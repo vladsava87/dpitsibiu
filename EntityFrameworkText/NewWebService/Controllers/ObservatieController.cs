@@ -6,9 +6,11 @@ using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using System.Net.Http;
 
 namespace NewWebService.Controllers
 {
+
     public class ObservatieController : ApiController
     {
         private CatalogContex catalog = new CatalogContex();
@@ -34,8 +36,10 @@ namespace NewWebService.Controllers
         }
 
         // POST api/values
-        public void Post([FromBody]string value)
+        public void Post(HttpRequestMessage request)
         {
+            var value = request.Content.ReadAsStringAsync().Result;
+
             ObservatieDTO obs = JsonConvert.DeserializeObject<ObservatieDTO>(value);
             t_observatie obsnou = Mapper.Map<ObservatieDTO, t_observatie>(obs);
 
