@@ -39,8 +39,10 @@ namespace NewWebService.Controllers
 
 
         // POST: api/Absenta
-        public void Post([FromBody] string value)
+        public void Post(HttpRequestMessage request)
         {
+            var value = request.Content.ReadAsStringAsync().Result;
+
             AbsentaDTO Absenta = JsonConvert.DeserializeObject<AbsentaDTO>(value);
             t_absenta Absentanoua = Mapper.Map<AbsentaDTO, t_absenta>(Absenta);
 
@@ -66,8 +68,10 @@ namespace NewWebService.Controllers
         }
 
         // PUT: api/Absenta/5
-        public void Put(int id, [FromBody]string value)
+        public void Put(int id, HttpRequestMessage request)
         {
+            var value = request.Content.ReadAsStringAsync().Result;
+
             t_absenta Absenta = catalog.Absente.Where(a => a.Id == id).FirstOrDefault();
             AbsentaDTO Absentanoua = JsonConvert.DeserializeObject<AbsentaDTO>(value);
             //if (!ModelState.IsValid)

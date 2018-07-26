@@ -38,8 +38,10 @@ namespace NewWebService.Controllers
         }
 
         // POST: api/Materie
-        public void Post([FromBody] string value)
+        public void Post(HttpRequestMessage request)
         {
+            var value = request.Content.ReadAsStringAsync().Result;
+
             MaterieDTO Materie = JsonConvert.DeserializeObject<MaterieDTO>(value);
             t_materie Materienoua = Mapper.Map<MaterieDTO, t_materie>(Materie);
 
@@ -64,8 +66,10 @@ namespace NewWebService.Controllers
         }
 
         // PUT: api/Materie/5
-        public void Put(int id, [FromBody]string value)
+        public void Put(int id, HttpRequestMessage request)
         {
+            var value = request.Content.ReadAsStringAsync().Result;
+
             t_materie Materie = catalog.Materii.Where(m => m.Id == id).FirstOrDefault();
             MaterieDTO Materienoua = JsonConvert.DeserializeObject<MaterieDTO>(value);
 
