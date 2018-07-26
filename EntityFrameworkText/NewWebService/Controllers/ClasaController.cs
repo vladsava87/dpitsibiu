@@ -5,6 +5,7 @@ using DatabaseLayer.DTO;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Web.Http;
 
 namespace NewWebService.Controllers
@@ -34,8 +35,10 @@ namespace NewWebService.Controllers
         }
 
         // POST: api/Clasa
-        public void Post([FromBody]string value)
+        public void Post(HttpRequestMessage request)
         {
+            var value = request.Content.ReadAsStringAsync().Result;
+
             ClasaDTO clasa = JsonConvert.DeserializeObject<ClasaDTO>(value);
             t_clasa clasanoua = Mapper.Map<ClasaDTO, t_clasa>(clasa);
 
@@ -44,8 +47,10 @@ namespace NewWebService.Controllers
         }
 
         // PUT: api/Clasa/5
-        public void Put(int id, [FromBody]string value)
+        public void Put(int id, HttpRequestMessage request)
         {
+            var value = request.Content.ReadAsStringAsync().Result;
+
             t_clasa clasa = catalog.Clase.Where(clasacautata => clasacautata.Id == id).FirstOrDefault();
             ClasaDTO clasanoua = JsonConvert.DeserializeObject<ClasaDTO>(value);
 

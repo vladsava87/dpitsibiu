@@ -48,10 +48,12 @@ namespace NewWebService.Controllers
         }
 
         // PUT api/values/5
-        public void Put(int id, [FromBody]string value)
+        public void Put(int id, HttpRequestMessage request)
         {
-            t_observatie obs = catalog.Observatii.Where(observatie => observatie.Id == id).FirstOrDefault();
+            var value = request.Content.ReadAsStringAsync().Result;
+
             ObservatieDTO obsdes = JsonConvert.DeserializeObject<ObservatieDTO>(value);
+            t_observatie obs = catalog.Observatii.Where(observatie => observatie.Id == id).FirstOrDefault();
             
             obs.Id = obsdes.Id;
             obs.Data = obsdes.Date;

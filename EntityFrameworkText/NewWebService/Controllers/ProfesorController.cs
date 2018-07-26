@@ -5,6 +5,7 @@ using DatabaseLayer.DTO;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Web.Http;
 
 namespace NewWebService.Controllers
@@ -34,8 +35,10 @@ namespace NewWebService.Controllers
         }
 
         // POST: api/Profesor
-        public void Post([FromBody]string value)
+        public void Post(HttpRequestMessage request)
         {
+            var value = request.Content.ReadAsStringAsync().Result;
+
             ProfesorDTO profesor = JsonConvert.DeserializeObject<ProfesorDTO>(value);
             t_profesor profnou = Mapper.Map<ProfesorDTO, t_profesor>(profesor);
 
@@ -44,10 +47,12 @@ namespace NewWebService.Controllers
         }
 
         // PUT: api/Profesor/5
-        public void Put(int id, [FromBody]string value)
+        public void Put(int id, HttpRequestMessage request)
         {
-            t_profesor profesor = catalog.Profesorii.Where(prof => prof.Id == id).FirstOrDefault();
+            var value = request.Content.ReadAsStringAsync().Result;
+
             ProfesorDTO profesornou = JsonConvert.DeserializeObject<ProfesorDTO>(value);
+            t_profesor profesor = catalog.Profesorii.Where(prof => prof.Id == id).FirstOrDefault();
 
             profesor.Id = profesornou.Id;
             profesor.Nume = profesornou.Nume;
