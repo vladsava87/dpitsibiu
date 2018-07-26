@@ -18,7 +18,11 @@ namespace DatabaseLayer.DTO
         public bool Optional { get; set; }
 
         [DataMember]
+        public int AbsentaID { get; set; }
+        [DataMember]
         public List<AbsentaDTO> Absente { get; set; }
+        [DataMember]
+        public int NotaID { get; set; }
         [DataMember]
         public List<NotaDTO> Note { get; set; }
 
