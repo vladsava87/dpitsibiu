@@ -18,10 +18,10 @@ namespace NewWebService.App_Start
                         .ForMember(ignoraelevi => ignoraelevi.Elevi, opt => opt.Ignore())
                         .ForMember(ignoraprofesori => ignoraprofesori.Diriginte, opt => opt.Ignore())
                         .ForMember(ignoraprofilul => ignoraprofilul.Profil, opt => opt.Ignore());
-                    cfg.CreateMap<t_Materie, MaterieDTO>()
+                    cfg.CreateMap<t_materie, MaterieDTO>()
                         .ForMember(ignoraabsente => ignoraabsente.Absente, opt => opt.Ignore())
                         .ForMember(ignoranote => ignoranote.Note, opt => opt.Ignore());
-                    cfg.CreateMap<t_Nota, NotaDTO>
+                    cfg.CreateMap<t_nota, NotaDTO>()
                         .ForMember(ignoraelev => ignoraelev.Elev, opt => opt.Ignore())
                         .ForMember(ignoramaterie => ignoramaterie.Materie, opt => opt.Ignore());
                     cfg.CreateMap<t_observatie, ObservatieDTO>()
