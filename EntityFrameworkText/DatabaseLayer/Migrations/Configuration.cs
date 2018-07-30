@@ -196,7 +196,7 @@ namespace DatabaseLayer.Migrations
             var newElev = new t_elev();
             newElev.Nume = Nume;
             newElev.Prenume = Prenume;
-            newElev.Date = Data_Nasterii;
+            newElev.Data = Data_Nasterii;
             newElev.Telefon = Telefon;
             newElev.Email = Email;
             newElev.Numar_Matricol = Numar_Matricol;

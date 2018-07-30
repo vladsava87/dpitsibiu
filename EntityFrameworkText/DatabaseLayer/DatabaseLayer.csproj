@@ -76,6 +76,10 @@
     <Compile Include="Migrations\201807021240168_PrenumeElev.Designer.cs">
       <DependentUpon>201807021240168_PrenumeElev.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201807301218007_PostObservatie1.cs" />
+    <Compile Include="Migrations\201807301218007_PostObservatie1.Designer.cs">
+      <DependentUpon>201807301218007_PostObservatie1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -95,6 +99,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201807021240168_PrenumeElev.resx">
       <DependentUpon>201807021240168_PrenumeElev.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807301218007_PostObservatie1.resx">
+      <DependentUpon>201807301218007_PostObservatie1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />

@@ -36,7 +36,7 @@ namespace NewWebService.Controllers
         }
 
         // POST api/values
-        public void Post(HttpRequestMessage request)
+        public HttpResponseMessage Post(HttpRequestMessage request)
         {
             var value = request.Content.ReadAsStringAsync().Result;
 
@@ -45,6 +45,12 @@ namespace NewWebService.Controllers
 
             catalog.Observatii.Add(obsnou);
             catalog.SaveChanges();
+
+            var msg = new HttpResponseMessage();
+            msg.StatusCode = System.Net.HttpStatusCode.OK;
+            msg.Content = new StringContent("Your response text");
+
+            return msg;
         }
 
         // PUT api/values/5
@@ -56,7 +62,7 @@ namespace NewWebService.Controllers
             t_observatie obs = catalog.Observatii.Where(observatie => observatie.Id == id).FirstOrDefault();
             
             obs.Id = obsdes.Id;
-            obs.Data = obsdes.Date;
+            obs.Data = obsdes.Data;
             obs.Text = obsdes.Text;
 
             t_profesor prof = catalog.Profesorii.Where(profesor => profesor.Id == obsdes.ProfesorID).FirstOrDefault();
