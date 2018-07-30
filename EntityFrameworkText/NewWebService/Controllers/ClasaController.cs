@@ -17,7 +17,7 @@ namespace NewWebService.Controllers
         // GET: api/Clasa
         public IEnumerable<ClasaDTO> Get()
         {
-            var clase = catalog.Elevi.ToList();
+            var clase = catalog.Clase.ToList();
 
             var tclase = Mapper.Map<List<ClasaDTO>>(clase);
 
@@ -27,7 +27,7 @@ namespace NewWebService.Controllers
         // GET: api/Clasa/5
         public ClasaDTO Get(int id)
         {
-            var clasa = catalog.Elevi.Where(elev => elev.Id == id).FirstOrDefault();
+            var clasa = catalog.Clase.Where(elev => elev.Id == id).FirstOrDefault();
 
             var tclasa = Mapper.Map<ClasaDTO>(clasa);
 
