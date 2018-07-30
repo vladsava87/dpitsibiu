@@ -14,6 +14,9 @@ namespace DatabaseLayer.DTO
         public int Id { get; set; }
         [DataMember]
         public string Nume { get; set; }
+
+        // [DataMember]
+        // public int ClasaID { get; set; }
         [DataMember]
         public List<ClasaDTO> Clase { get; set; }
     }

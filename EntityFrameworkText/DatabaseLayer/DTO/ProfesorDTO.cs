@@ -21,8 +21,8 @@ namespace DatabaseLayer.DTO
         [DataMember]
         public string Email { get; set; }
 
-        [DataMember]
-        public int MaterieID { get; set; }
+        // [DataMember]
+        // public int MaterieID { get; set; }
         [DataMember]
         public List<MaterieDTO> Materii { get; set; }
     }

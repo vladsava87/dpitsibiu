@@ -21,19 +21,21 @@ namespace DatabaseLayer.DTO
         public string Email { get; set; }
         [DataMember]
         public int NumarMatricol { get; set; }
-        [DataMember]
-        public int Clasa { get; set; }
 
         [DataMember]
-        public int NotaID { get; set; }
+        public int ClasaID { get; set; }
+        [DataMember]
+        public ClasaDTO Clasa { get; set; }
+        // [DataMember]
+        // public int NotaID { get; set; }
         [DataMember]
         public List<NotaDTO> Note { get; set; }
-        [DataMember]
-        public int AbsentaID { get; set; }
+        // [DataMember]
+        // public int AbsentaID { get; set; }
         [DataMember]
         public List<AbsentaDTO> Absente { get; set; }
-        [DataMember]
-        public int ObservatieID { get; set; }
+        // [DataMember]
+        // public int ObservatieID { get; set; }
         [DataMember]
         public List<ObservatieDTO> Observatii { get; set; }
     }
