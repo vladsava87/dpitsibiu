@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
 using System.Net.Http;
+using System;
 
 namespace NewWebService.Controllers
 {
@@ -38,17 +39,26 @@ namespace NewWebService.Controllers
         // POST api/values
         public HttpResponseMessage Post(HttpRequestMessage request)
         {
-            var value = request.Content.ReadAsStringAsync().Result;
-
-            ObservatieDTO obs = JsonConvert.DeserializeObject<ObservatieDTO>(value);
-            t_observatie obsnou = Mapper.Map<ObservatieDTO, t_observatie>(obs);
-
-            catalog.Observatii.Add(obsnou);
-            catalog.SaveChanges();
-
             var msg = new HttpResponseMessage();
-            msg.StatusCode = System.Net.HttpStatusCode.OK;
-            msg.Content = new StringContent("Your response text");
+
+            try
+            {
+                var value = request.Content.ReadAsStringAsync().Result;
+
+                ObservatieDTO obs = JsonConvert.DeserializeObject<ObservatieDTO>(value);
+                t_observatie obsnou = Mapper.Map<ObservatieDTO, t_observatie>(obs);
+
+                catalog.Observatii.Add(obsnou);
+                catalog.SaveChanges();
+
+                msg.StatusCode = System.Net.HttpStatusCode.OK;
+                msg.Content = new StringContent("POST Request performed successfully");
+            }
+            catch(Exception e)
+            {
+                msg.StatusCode = System.Net.HttpStatusCode.BadRequest;
+                msg.Content = new StringContent("POST Request could not be performed");
+            }
 
             return msg;
         }

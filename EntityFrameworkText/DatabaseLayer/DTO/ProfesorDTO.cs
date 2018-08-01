@@ -25,5 +25,9 @@ namespace DatabaseLayer.DTO
         // public int MaterieID { get; set; }
         [DataMember]
         public List<MaterieDTO> Materii { get; set; }
+        // [DataMember]
+        // public int ObservatieID { get; set; }
+        [DataMember]
+        public List<ObservatieDTO> Observatii { get; set; }
     }
 }

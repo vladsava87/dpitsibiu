@@ -3,6 +3,7 @@ using DatabaseLayer;
 using DatabaseLayer.DataModels;
 using DatabaseLayer.DTO;
 using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
@@ -35,15 +36,30 @@ namespace NewWebService.Controllers
         }
 
         // POST: api/Clasa
-        public void Post(HttpRequestMessage request)
+        public HttpResponseMessage Post(HttpRequestMessage request)
         {
-            var value = request.Content.ReadAsStringAsync().Result;
+            var msg = new HttpResponseMessage();
+            
+            try
+            {
+                var value = request.Content.ReadAsStringAsync().Result;
 
-            ClasaDTO clasa = JsonConvert.DeserializeObject<ClasaDTO>(value);
-            t_clasa clasanoua = Mapper.Map<ClasaDTO, t_clasa>(clasa);
+                ClasaDTO clasa = JsonConvert.DeserializeObject<ClasaDTO>(value);
+                t_clasa clasanoua = Mapper.Map<ClasaDTO, t_clasa>(clasa);
 
-            catalog.Clase.Add(clasanoua);
-            catalog.SaveChanges();
+                catalog.Clase.Add(clasanoua);
+                catalog.SaveChanges();
+
+                msg.StatusCode = System.Net.HttpStatusCode.OK;
+                msg.Content = new StringContent("POST Request performed successfully");
+            }
+            catch(Exception e)
+            {
+                msg.StatusCode = System.Net.HttpStatusCode.BadRequest;
+                msg.Content = new StringContent("POST Request could not be performed");
+            }
+
+            return msg;
         }
 
         // PUT: api/Clasa/5

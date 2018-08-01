@@ -205,6 +205,7 @@
     <Compile Include="Controllers\ClasaController.cs" />
     <Compile Include="Controllers\ElevController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\MaterieController.cs" />
     <Compile Include="Controllers\NotaController.cs" />
     <Compile Include="Controllers\ObservatieController.cs" />

@@ -22,8 +22,8 @@ namespace DatabaseLayer.DTO
         [DataMember]
         public int NumarMatricol { get; set; }
 
-        [DataMember]
-        public int ClasaID { get; set; }
+        // [DataMember]
+        // public int ClasaID { get; set; }
         [DataMember]
         public ClasaDTO Clasa { get; set; }
         // [DataMember]
