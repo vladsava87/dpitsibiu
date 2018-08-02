@@ -20,11 +20,17 @@ namespace DatabaseLayer.DTO
         public string Telefon { get; set; }
         [DataMember]
         public string Email { get; set; }
+        [DataMember]
+        public string Parola { get; set; }
 
+        // [DataMember]
+        // public int AbsentaID { get; set; }
+        [DataMember]
+        public List<AbsentaDTO> Absente { get; set; }
         // [DataMember]
         // public int MaterieID { get; set; }
         [DataMember]
-        public List<MaterieDTO> Materii { get; set; }
+        public List<MaterieDTO> Materie { get; set; }
         // [DataMember]
         // public int ObservatieID { get; set; }
         [DataMember]
