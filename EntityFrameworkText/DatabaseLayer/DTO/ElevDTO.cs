@@ -16,16 +16,18 @@ namespace DatabaseLayer.DTO
         [DataMember]
         public string Prenume { get; set; }
         [DataMember]
-        public int Telefon { get; set; }
+        public DateTime Data { get; set; }
+        [DataMember]
+        public string Telefon { get; set; }
         [DataMember]
         public string Email { get; set; }
         [DataMember]
-        public int NumarMatricol { get; set; }
+        public int Numar_Matricol { get; set; }
 
         // [DataMember]
         // public int ClasaID { get; set; }
         [DataMember]
-        public ClasaDTO Clasa { get; set; }
+        public int Clasa { get; set; }
         // [DataMember]
         // public int NotaID { get; set; }
         [DataMember]

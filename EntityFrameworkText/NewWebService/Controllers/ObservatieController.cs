@@ -54,7 +54,7 @@ namespace NewWebService.Controllers
                 msg.StatusCode = System.Net.HttpStatusCode.OK;
                 msg.Content = new StringContent("POST Request performed successfully");
             }
-            catch(Exception e)
+            catch(Exception)
             {
                 msg.StatusCode = System.Net.HttpStatusCode.BadRequest;
                 msg.Content = new StringContent("POST Request could not be performed");

@@ -26,7 +26,7 @@ namespace NewWebService.Controllers
         }
 
         // GET: api/Profil/5
-        public string Get(int id)
+        public ProfilDTO Get(int id)
         {
             var profil = catalog.Profiluri.Where(p => p.Id == id).FirstOrDefault();
 
@@ -45,7 +45,7 @@ namespace NewWebService.Controllers
                 var value = request.Content.ReadAsStringAsync().Result;
 
                 ProfilDTO profil = JsonConvert.DeserializeObject<ProfilDTO>(value);
-                t_profil profilnou = Mapper.Map<ElevDTO, t_profil>(profil);
+                t_profil profilnou = Mapper.Map<ProfilDTO, t_profil>(profil);
 
                 catalog.Profiluri.Add(profilnou);
                 catalog.SaveChanges();
@@ -53,7 +53,7 @@ namespace NewWebService.Controllers
                 msg.StatusCode = System.Net.HttpStatusCode.OK;
                 msg.Content = new StringContent("POST Request performed successfully");
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 msg.StatusCode = System.Net.HttpStatusCode.BadRequest;
                 msg.Content = new StringContent("POST Request could not be performed");
@@ -63,12 +63,12 @@ namespace NewWebService.Controllers
         }
 
         // PUT: api/Profil/5
-        public void Put(int id, [FromBody]string value)
+        public void Put(int id, HttpRequestMessage request)
         {
             var value = request.Content.ReadAsStringAsync().Result;
 
-            t_profil Profil = catalog.Profiluri.Where(p => p.Id == id).FirstOrDefault();
             ProfilDTO profilnou = JsonConvert.DeserializeObject<ProfilDTO>(value);
+            t_profil Profil = catalog.Profiluri.Where(p => p.Id == id).FirstOrDefault();
 
             Profil.Id = profilnou.Id;
             Profil.Nume = profilnou.Nume;

@@ -16,7 +16,7 @@ namespace NewWebService.Controllers
         private CatalogContex catalog = new CatalogContex();
 
         // GET: api/Elev
-        public IEnumerable<string> Get()
+        public IEnumerable<ElevDTO> Get()
         {
             var elevi = catalog.Elevi.ToList();
 
@@ -26,7 +26,7 @@ namespace NewWebService.Controllers
         }
 
         // GET: api/Elev/5
-        public string Get(int id)
+        public ElevDTO Get(int id)
         {
             var elev = catalog.Elevi.Where(e => e.Id == id).FirstOrDefault();
 
@@ -53,7 +53,7 @@ namespace NewWebService.Controllers
                 msg.StatusCode = System.Net.HttpStatusCode.OK;
                 msg.Content = new StringContent("POST Request performed successfully");
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 msg.StatusCode = System.Net.HttpStatusCode.BadRequest;
                 msg.Content = new StringContent("POST Request could not be performed");
@@ -63,30 +63,31 @@ namespace NewWebService.Controllers
         }
 
         // PUT: api/Elev/5
-        public void Put(int id, [FromBody]string value)
+        public void Put(int id, HttpRequestMessage request)
         {
             var value = request.Content.ReadAsStringAsync().Result;
 
-            t_elev Elev = catalog.Elevi.Where(e => e.Id == id).FirstOrDefault();
             ElevDTO elevnou = JsonConvert.DeserializeObject<ElevDTO>(value);
+            t_elev elev = catalog.Elevi.Where(e => e.Id == id).FirstOrDefault();
            
-            Elev.Id = elevnou.Id;
-            Elev.Nume = elevnou.Nume;
-            Elev.Prenume = elevnou.Prenume;
-            Elev.DataNastere = elevnou.DataNestere;
-            Elev.Telefon = elevnou.Telefon;
-            Elev.Email = elevnou.Email;
-            Elev.NumarMatricol = elevnou.NumarMatricol;
-            Elev.Clasa = elevnou.Clasa;
+            elev.Id = elevnou.Id;
+            elev.Nume = elevnou.Nume;
+            elev.Prenume = elevnou.Prenume;
+            elev.Data = elevnou.Data;
+            elev.Telefon = elevnou.Telefon;
+            elev.Email = elevnou.Email;
+            elev.Numar_Matricol = elevnou.Numar_Matricol;
             
-            t_nota Nota = catalog.Note.Where(n => n.Id == elevnou.Id).FirstOrDefault();
-            Elev.Nota = Nota;
+            //t_nota Nota = catalog.Note.Where(n => n.Id == elevnou.Id).FirstOrDefault();
+            //Elev.Nota = Nota;
             
-            t_elev Absenta = catalog.Absente.Where(a => a.Id == elevnou.Id).FirstOrDefault();
-            Elev.Absenta = Absenta;
+            //t_elev Absenta = catalog.Absente.Where(a => a.Id == elevnou.Id).FirstOrDefault();
+            //Elev.Absenta = Absenta;
 
-            t_elev Observatie = catalog.Observatii.Where(o => o.Id == elevnou.Id).FirstOrDefault();
-            Elev.Observatie = Observatie;
+            //t_elev Observatie = catalog.Observatii.Where(o => o.Id == elevnou.Id).FirstOrDefault();
+            //Elev.Observatie = Observatie;
+
+            catalog.SaveChanges();
         }
 
         // DELETE: api/Elev/5
