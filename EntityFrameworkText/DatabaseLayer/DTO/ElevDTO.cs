@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace DatabaseLayer.DTO
 {
+    [DataContract]
     public class ElevDTO
     {
         [DataMember]
@@ -16,18 +17,19 @@ namespace DatabaseLayer.DTO
         [DataMember]
         public string Prenume { get; set; }
         [DataMember]
-        public DateTime Data { get; set; }
+        public string Parola { get; set; }
         [DataMember]
         public string Telefon { get; set; }
         [DataMember]
         public string Email { get; set; }
         [DataMember]
         public int Numar_Matricol { get; set; }
-
-        // [DataMember]
-        // public int ClasaID { get; set; }
         [DataMember]
-        public int Clasa { get; set; }
+        public DateTime Data { get; set; }
+
+        [DataMember]
+        public int ClasaID { get; set; }
+
         // [DataMember]
         // public int NotaID { get; set; }
         [DataMember]

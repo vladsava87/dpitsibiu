@@ -69,7 +69,7 @@ namespace NewWebService.Controllers
 
             ElevDTO elevnou = JsonConvert.DeserializeObject<ElevDTO>(value);
             t_elev elev = catalog.Elevi.Where(e => e.Id == id).FirstOrDefault();
-           
+
             elev.Id = elevnou.Id;
             elev.Nume = elevnou.Nume;
             elev.Prenume = elevnou.Prenume;
@@ -77,10 +77,14 @@ namespace NewWebService.Controllers
             elev.Telefon = elevnou.Telefon;
             elev.Email = elevnou.Email;
             elev.Numar_Matricol = elevnou.Numar_Matricol;
-            
+
+            //t_clasa clasa = catalog.Clase.Where(c => c.Id == elevnou.Id).FirstOrDefault();
+            //elev.Clasa = clasa;
+
+
             //t_nota Nota = catalog.Note.Where(n => n.Id == elevnou.Id).FirstOrDefault();
             //Elev.Nota = Nota;
-            
+
             //t_elev Absenta = catalog.Absente.Where(a => a.Id == elevnou.Id).FirstOrDefault();
             //Elev.Absenta = Absenta;
 

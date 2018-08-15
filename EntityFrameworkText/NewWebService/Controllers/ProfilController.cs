@@ -72,6 +72,8 @@ namespace NewWebService.Controllers
 
             Profil.Id = profilnou.Id;
             Profil.Nume = profilnou.Nume;
+
+            catalog.SaveChanges();
         }
 
         // DELETE: api/Profil/5
