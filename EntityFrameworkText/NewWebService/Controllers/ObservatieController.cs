@@ -6,9 +6,12 @@ using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using System.Net.Http;
+using System;
 
 namespace NewWebService.Controllers
 {
+
     public class ObservatieController : ApiController
     {
         private CatalogContex catalog = new CatalogContex();
@@ -34,23 +37,42 @@ namespace NewWebService.Controllers
         }
 
         // POST api/values
-        public void Post([FromBody]string value)
+        public HttpResponseMessage Post(HttpRequestMessage request)
         {
-            ObservatieDTO obs = JsonConvert.DeserializeObject<ObservatieDTO>(value);
-            t_observatie obsnou = Mapper.Map<ObservatieDTO, t_observatie>(obs);
+            var msg = new HttpResponseMessage();
 
-            catalog.Observatii.Add(obsnou);
-            catalog.SaveChanges();
+            try
+            {
+                var value = request.Content.ReadAsStringAsync().Result;
+
+                ObservatieDTO obs = JsonConvert.DeserializeObject<ObservatieDTO>(value);
+                t_observatie obsnou = Mapper.Map<ObservatieDTO, t_observatie>(obs);
+
+                catalog.Observatii.Add(obsnou);
+                catalog.SaveChanges();
+
+                msg.StatusCode = System.Net.HttpStatusCode.OK;
+                msg.Content = new StringContent("POST Request performed successfully");
+            }
+            catch(Exception)
+            {
+                msg.StatusCode = System.Net.HttpStatusCode.BadRequest;
+                msg.Content = new StringContent("POST Request could not be performed");
+            }
+
+            return msg;
         }
 
         // PUT api/values/5
-        public void Put(int id, [FromBody]string value)
+        public void Put(int id, HttpRequestMessage request)
         {
-            t_observatie obs = catalog.Observatii.Where(observatie => observatie.Id == id).FirstOrDefault();
+            var value = request.Content.ReadAsStringAsync().Result;
+
             ObservatieDTO obsdes = JsonConvert.DeserializeObject<ObservatieDTO>(value);
+            t_observatie obs = catalog.Observatii.Where(observatie => observatie.Id == id).FirstOrDefault();
             
             obs.Id = obsdes.Id;
-            obs.Data = obsdes.Date;
+            obs.Data = obsdes.Data;
             obs.Text = obsdes.Text;
 
             t_profesor prof = catalog.Profesorii.Where(profesor => profesor.Id == obsdes.ProfesorID).FirstOrDefault();

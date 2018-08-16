@@ -3,12 +3,15 @@ using DatabaseLayer;
 using DatabaseLayer.DataModels;
 using DatabaseLayer.DTO;
 using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Web.Http;
 
 namespace NewWebService.Controllers
 {
+    [BasicAuthentication]
     public class ProfesorController : ApiController
     {
         private CatalogContex catalog = new CatalogContex();
@@ -34,20 +37,39 @@ namespace NewWebService.Controllers
         }
 
         // POST: api/Profesor
-        public void Post([FromBody]string value)
+        public HttpResponseMessage Post(HttpRequestMessage request)
         {
-            ProfesorDTO profesor = JsonConvert.DeserializeObject<ProfesorDTO>(value);
-            t_profesor profnou = Mapper.Map<ProfesorDTO, t_profesor>(profesor);
+            var msg = new HttpResponseMessage();
 
-            catalog.Profesorii.Add(profnou);
-            catalog.SaveChanges();
+            try
+            {
+                var value = request.Content.ReadAsStringAsync().Result;
+
+                ProfesorDTO profesor = JsonConvert.DeserializeObject<ProfesorDTO>(value);
+                t_profesor profnou = Mapper.Map<ProfesorDTO, t_profesor>(profesor);
+
+                catalog.Profesorii.Add(profnou);
+                catalog.SaveChanges();
+
+                msg.StatusCode = System.Net.HttpStatusCode.OK;
+                msg.Content = new StringContent("POST Request performed successfully");
+            }
+            catch(Exception)
+            {
+                msg.StatusCode = System.Net.HttpStatusCode.BadRequest;
+                msg.Content = new StringContent("POST Request could not be performed");
+            }
+
+            return msg;
         }
 
         // PUT: api/Profesor/5
-        public void Put(int id, [FromBody]string value)
+        public void Put(int id, HttpRequestMessage request)
         {
-            t_profesor profesor = catalog.Profesorii.Where(prof => prof.Id == id).FirstOrDefault();
+            var value = request.Content.ReadAsStringAsync().Result;
+
             ProfesorDTO profesornou = JsonConvert.DeserializeObject<ProfesorDTO>(value);
+            t_profesor profesor = catalog.Profesorii.Where(prof => prof.Id == id).FirstOrDefault();
 
             profesor.Id = profesornou.Id;
             profesor.Nume = profesornou.Nume;

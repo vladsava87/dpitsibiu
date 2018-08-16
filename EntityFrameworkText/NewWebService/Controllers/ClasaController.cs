@@ -3,8 +3,10 @@ using DatabaseLayer;
 using DatabaseLayer.DataModels;
 using DatabaseLayer.DTO;
 using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Web.Http;
 
 namespace NewWebService.Controllers
@@ -16,7 +18,7 @@ namespace NewWebService.Controllers
         // GET: api/Clasa
         public IEnumerable<ClasaDTO> Get()
         {
-            var clase = catalog.Elevi.ToList();
+            var clase = catalog.Clase.ToList();
 
             var tclase = Mapper.Map<List<ClasaDTO>>(clase);
 
@@ -26,7 +28,7 @@ namespace NewWebService.Controllers
         // GET: api/Clasa/5
         public ClasaDTO Get(int id)
         {
-            var clasa = catalog.Elevi.Where(elev => elev.Id == id).FirstOrDefault();
+            var clasa = catalog.Clase.Where(elev => elev.Id == id).FirstOrDefault();
 
             var tclasa = Mapper.Map<ClasaDTO>(clasa);
 
@@ -34,18 +36,37 @@ namespace NewWebService.Controllers
         }
 
         // POST: api/Clasa
-        public void Post([FromBody]string value)
+        public HttpResponseMessage Post(HttpRequestMessage request)
         {
-            ClasaDTO clasa = JsonConvert.DeserializeObject<ClasaDTO>(value);
-            t_clasa clasanoua = Mapper.Map<ClasaDTO, t_clasa>(clasa);
+            var msg = new HttpResponseMessage();
+            
+            try
+            {
+                var value = request.Content.ReadAsStringAsync().Result;
 
-            catalog.Clase.Add(clasanoua);
-            catalog.SaveChanges();
+                ClasaDTO clasa = JsonConvert.DeserializeObject<ClasaDTO>(value);
+                t_clasa clasanoua = Mapper.Map<ClasaDTO, t_clasa>(clasa);
+
+                catalog.Clase.Add(clasanoua);
+                catalog.SaveChanges();
+
+                msg.StatusCode = System.Net.HttpStatusCode.OK;
+                msg.Content = new StringContent("POST Request performed successfully");
+            }
+            catch(Exception)
+            {
+                msg.StatusCode = System.Net.HttpStatusCode.BadRequest;
+                msg.Content = new StringContent("POST Request could not be performed");
+            }
+
+            return msg;
         }
 
         // PUT: api/Clasa/5
-        public void Put(int id, [FromBody]string value)
+        public void Put(int id, HttpRequestMessage request)
         {
+            var value = request.Content.ReadAsStringAsync().Result;
+
             t_clasa clasa = catalog.Clase.Where(clasacautata => clasacautata.Id == id).FirstOrDefault();
             ClasaDTO clasanoua = JsonConvert.DeserializeObject<ClasaDTO>(value);
 

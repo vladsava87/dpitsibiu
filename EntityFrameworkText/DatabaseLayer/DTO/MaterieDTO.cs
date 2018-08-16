@@ -17,10 +17,18 @@ namespace DatabaseLayer.DTO
         [DataMember]
         public bool Optional { get; set; }
 
+        // [DataMember]
+        // public int AbsentaID { get; set; }
         [DataMember]
         public List<AbsentaDTO> Absente { get; set; }
+        // [DataMember]
+        // public int NotaID { get; set; }
         [DataMember]
         public List<NotaDTO> Note { get; set; }
+        [DataMember]
+        public int ProfesorID { get; set; }
+        [DataMember]
+        public ProfesorDTO Profesor { get; set; }
 
 
         //public virtual ICollection<t_profesor_materie> Profesori { get; set; }

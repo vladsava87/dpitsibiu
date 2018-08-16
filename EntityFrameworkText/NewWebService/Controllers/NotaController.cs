@@ -37,8 +37,10 @@ namespace NewWebService.Controllers
         }
 
         // POST: api/Nota
-        public void Post([FromBody] string value)
+        public void Post(HttpRequestMessage request)
         {
+            var value = request.Content.ReadAsStringAsync().Result;
+
             NotaDTO Nota = JsonConvert.DeserializeObject<NotaDTO>(value);
             t_nota Notanoua = Mapper.Map<NotaDTO, t_nota>(Nota);
 
@@ -64,8 +66,10 @@ namespace NewWebService.Controllers
         }
 
         // PUT: api/Nota/5
-        public void Put(int id, [FromBody]string value)
+        public void Put(int id, HttpRequestMessage request)
         {
+            var value = request.Content.ReadAsStringAsync().Result;
+
             t_nota Nota = catalog.Note.Where(n => n.Id == id).FirstOrDefault();
             NotaDTO Notanoua = JsonConvert.DeserializeObject<NotaDTO>(value);
 

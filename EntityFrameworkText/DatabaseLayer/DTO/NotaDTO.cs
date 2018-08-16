@@ -21,6 +21,7 @@ namespace DatabaseLayer.DTO
         public sem Semestrul { get; set; }
         [DataMember]
         public DateTime Data { get; set; }
+
         [DataMember]
         public int ElevID { get; set; }
         [DataMember]
