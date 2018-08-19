@@ -77,11 +77,11 @@ namespace NewWebService.Controllers
             elev.Telefon = elevnou.Telefon;
             elev.Email = elevnou.Email;
             elev.Numar_Matricol = elevnou.Numar_Matricol;
+            elev.ClasaID = elevnou.ClasaID;
 
             //t_clasa clasa = catalog.Clase.Where(c => c.Id == elevnou.Id).FirstOrDefault();
             //elev.Clasa = clasa;
-
-
+            
             //t_nota Nota = catalog.Note.Where(n => n.Id == elevnou.Id).FirstOrDefault();
             //Elev.Nota = Nota;
 
