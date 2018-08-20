@@ -1,4 +1,5 @@
 ﻿using CatalogDesktopApp.Annotations;
+using DatabaseLayer.DTO;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -12,47 +13,67 @@ namespace CatalogDesktopApp.ViewModels
 {
     public class ElevWindowViewModel : INotifyPropertyChanged
     {
-        private bool note = true;
-        private bool abs = true;
-        private bool obs = true;
+        //private bool note = true;
+        //private bool abs = true;
+        //private bool obs = true;
+        public ElevDTO Elev
+        {
+            get; set;
+        }
 
         public ElevWindowViewModel()
         {
-            NoteCommand = new RelayCommand(ListNote, CanListNote);
+            NoteCommand = new RelayCommand(ListNote);
 
-            AbsenteCommand = new RelayCommand(ListAbs, CanListAbs);
+            AbsenteCommand = new RelayCommand(ListAbs);
 
-            ObservatiiCommand = new RelayCommand(ListObs, CanListObs);
+            ObservatiiCommand = new RelayCommand(ListObs);
+
+            Elev = new ElevDTO();
+            Elev.Nume = "Mihai";
+            Elev.Prenume = "Popescu";
+            Elev.Email = "MP@gmail.ro";
+            Elev.Telefon = "097532678";
+            Elev.Numar_Matricol = 1234;
+
+            ClassName = "12A";
+
+            
         }
 
-        private bool CanListObs(object arg)
+        public string NumePrenume
         {
-            return obs;
+            get { return Elev.Nume + " " + Elev.Prenume; }
+            
+        }
+
+        private string className;
+        
+        public string ClassName
+        {
+            get { return className; }
+            set { className = value;
+                OnPropertyChanged(ClassName);
+                }
+
         }
 
         private void ListObs(object obj)
         {
-            obs = false;
+  
         }
 
-        private bool CanListAbs(object arg)
-        {
-            return abs;
-        }
+       
 
         private void ListAbs(object obj)
         {
-            abs = false;
-        }
 
-        private bool CanListNote(object arg)
-        {
-            return note;
         }
+    
 
         private void ListNote(object obj)
         {
-            note = false;
+
         }
 
         public ICommand NoteCommand { get; set; }

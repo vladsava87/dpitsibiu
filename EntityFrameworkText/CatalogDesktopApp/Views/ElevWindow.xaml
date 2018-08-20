@@ -11,7 +11,8 @@
         <VM:ElevWindowViewModel />
     </Window.DataContext>
     <Grid>
-        <Label Content="Nume si Prenume Elev" Height="44" Margin="272,57,274,0" VerticalAlignment="Top" Width="247" FontWeight="Bold" FontSize="22" HorizontalAlignment="Center"/>
+        
+        <Label Content="{Binding NumePrenume, Mode=OneWay}" Height="44" Margin="272,57,274,0" VerticalAlignment="Top" Width="247" FontWeight="Bold" FontSize="22" HorizontalAlignment="Center"/>
         <Grid Margin="123,129,274,110" ShowGridLines="True">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>
@@ -25,10 +26,19 @@
                 <RowDefinition Height="1*" />
             </Grid.RowDefinitions>
             <Label Content="Clasa:" Grid.Column="0" Grid.Row="0" FontSize="15"/>
+            <Label Content="{Binding ClassName}" Grid.Column="1" Grid.Row="0" FontSize="15"/>
+           
             <Label Content="Numar Matricol:" Grid.Column="0" Grid.Row="1" FontSize="15"/>
+            <Label Content="{Binding Elev.Numar_Matricol}" Grid.Column="1" Grid.Row="1" FontSize="15"/>
+            
             <Label Content="Data Nasterii:" Grid.Column="0" Grid.Row="2" FontSize="15"/>
+            <Label Content="{Binding Elev.Data}" Grid.Column="1" Grid.Row="2" FontSize="15"/>
+            
             <Label Content="Telefon:" Grid.Column="0" Grid.Row="3" FontSize="15"/>
+            <Label Content="{Binding Elev.Telefon}" Grid.Column="1" Grid.Row="3" FontSize="15"/>
+            
             <Label Content="Email:" Grid.Column="0" Grid.Row="4" FontSize="15"/>
+            <Label Content="{Binding Elev.Email}" Grid.Column="1" Grid.Row="4" FontSize="15"/>
 
         </Grid>
         <Grid HorizontalAlignment="Left" Height="180" Margin="602,129,0,0" VerticalAlignment="Top" Width="138">
