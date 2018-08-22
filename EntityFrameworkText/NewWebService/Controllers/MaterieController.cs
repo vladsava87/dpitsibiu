@@ -76,8 +76,8 @@ namespace NewWebService.Controllers
             Materie.Id = Materienoua.Id;
             Materie.Nume = Materienoua.Nume;
             Materie.Optional = Materienoua.Optional;
-            //  Materie.Absente = Materienoua.Absente;
-            //  Materie.Note = Materienoua.Note;
+            //Materie.Absente = Materienoua.Absente;
+            //Materie.Note = Materienoua.Note;
 
         }
 

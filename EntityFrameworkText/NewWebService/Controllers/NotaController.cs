@@ -80,7 +80,7 @@ namespace NewWebService.Controllers
             Nota.Semestrul = Notanoua.Semestrul;
             Nota.Data = Notanoua.Data;
             Nota.ElevID = Notanoua.ElevID;
-            t_elev Elev = catalog.Elevi.Where(e => e.Id == Nota.Id).FirstOrDefault();
+            t_elev Elev = catalog.Elevi.Where(e => e.Id == Nota.ElevID).FirstOrDefault();
             Nota.Elev = Elev;
             // Nota.Elev = Notades.Elev;
             Nota.MaterieID = Notanoua.MaterieID;

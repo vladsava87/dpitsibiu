@@ -25,8 +25,8 @@ namespace DatabaseLayer.DTO
         // public int NotaID { get; set; }
         [DataMember]
         public List<NotaDTO> Note { get; set; }
-        [DataMember]
-        public int ProfesorID { get; set; }
+        //[DataMember]
+        //public int ProfesorID { get; set; }
         [DataMember]
         public ProfesorDTO Profesor { get; set; }
 

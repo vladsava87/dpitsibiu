@@ -82,10 +82,10 @@ namespace NewWebService.Controllers
             Absenta.Data = Absentanoua.Data;
             Absenta.Semestrul = Absentanoua.Semestrul;
             //Absenta.MaterieID = Absentanoua.MaterieID;
-            t_materie Materie = catalog.Materii.Where(m => m.Id == Absentanoua.Id).FirstOrDefault();
+            t_materie Materie = catalog.Materii.Where(m => m.Id == Absentanoua.MaterieID).FirstOrDefault();
             Absenta.Materie = Materie;
             //Absenta.ProfesorId = Absentanoua.ProfesorID;
-            t_profesor Profesor = catalog.Profesorii.Where(p => p.Id == Absentanoua.Id).FirstOrDefault();
+            t_profesor Profesor = catalog.Profesorii.Where(p => p.Id == Absentanoua.ProfesorID).FirstOrDefault();
             Absenta.Profesor = Profesor;
 
             //var existingAbsenta = catalog.Absente.Where(a => a == Absenta.Id).FirstorDefault<AbsentaDTO>();
