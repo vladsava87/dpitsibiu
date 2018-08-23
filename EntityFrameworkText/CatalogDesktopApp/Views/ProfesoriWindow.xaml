@@ -1,0 +1,29 @@
+﻿<Window x:Class="CatalogDesktopApp.Views.ProfesoriWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CatalogDesktopApp.Views"
+        mc:Ignorable="d"
+        Title="ProfesoriWindow" Height="450" Width="800">
+    <Grid>
+        <TextBox HorizontalAlignment="Left" Height="44" TextWrapping="Wrap" Text="Lista Clase" VerticalAlignment="Top" Width="120" Margin="321,39,0,0" FontSize="22"/>
+        <Button Content="9A" HorizontalAlignment="Left" Margin="123,143,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button Content="9B" HorizontalAlignment="Left" Margin="123,196,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button Content="9C" HorizontalAlignment="Left" Margin="123,246,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button Content="9D" HorizontalAlignment="Left" Margin="123,300,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button Content="10A" HorizontalAlignment="Left" Margin="291,143,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button Content="11A" HorizontalAlignment="Left" Margin="449,143,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button Content="12A" HorizontalAlignment="Left" Margin="622,143,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button Content="10B" HorizontalAlignment="Left" Margin="291,196,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button Content="11B" HorizontalAlignment="Left" Margin="449,196,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button Content="12B" HorizontalAlignment="Left" Margin="622,196,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button Content="10C" HorizontalAlignment="Left" Margin="291,246,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button Content="11C" HorizontalAlignment="Left" Margin="449,246,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button Content="12C" HorizontalAlignment="Left" Margin="622,246,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button Content="10D" HorizontalAlignment="Left" Margin="291,300,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button Content="11D" HorizontalAlignment="Left" Margin="449,300,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button Content="12D" HorizontalAlignment="Left" Margin="622,300,0,0" VerticalAlignment="Top" Width="75"/>
+
+    </Grid>
+</Window>

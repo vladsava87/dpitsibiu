@@ -38,38 +38,40 @@ namespace CatalogDesktopApp.ViewModels
 
             ClassName = "12A";
 
-            
+
         }
 
         public string NumePrenume
         {
             get { return Elev.Nume + " " + Elev.Prenume; }
-            
+
         }
 
         private string className;
-        
+
         public string ClassName
         {
             get { return className; }
-            set { className = value;
+            set
+            {
+                className = value;
                 OnPropertyChanged(ClassName);
-                }
+            }
 
         }
 
         private void ListObs(object obj)
         {
-  
+
         }
 
-       
+
 
         private void ListAbs(object obj)
         {
 
         }
-    
+
 
         private void ListNote(object obj)
         {

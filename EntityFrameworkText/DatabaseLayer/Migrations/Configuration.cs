@@ -196,7 +196,11 @@ namespace DatabaseLayer.Migrations
             var newElev = new t_elev();
             newElev.Nume = Nume;
             newElev.Prenume = Prenume;
+<<<<<<< Updated upstream
             newElev.Data = Data_Nasterii;
+=======
+            newElev.Data_nastere = Data_Nasterii;
+>>>>>>> Stashed changes
             newElev.Telefon = Telefon;
             newElev.Email = Email;
             newElev.Numar_Matricol = Numar_Matricol;
