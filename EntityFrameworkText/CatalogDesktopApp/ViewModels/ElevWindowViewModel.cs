@@ -7,6 +7,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace CatalogDesktopApp.ViewModels
@@ -21,6 +22,8 @@ namespace CatalogDesktopApp.ViewModels
             get; set;
         }
 
+        private MessageBus messageBus;
+        
         public ElevWindowViewModel()
         {
             NoteCommand = new RelayCommand(ListNote);
@@ -38,7 +41,13 @@ namespace CatalogDesktopApp.ViewModels
 
             ClassName = "12A";
 
-            
+            messageBus = MessageBus.Instance;
+            messageBus.Subscribe<TestMessage>(Getelev);
+        }
+
+        private void Getelev(TestMessage obj)
+        {
+            MessageBox.Show(obj.test.ToString(), "Mesaj primit");
         }
 
         public string NumePrenume
@@ -73,7 +82,7 @@ namespace CatalogDesktopApp.ViewModels
 
         private void ListNote(object obj)
         {
-
+            messageBus.Publish<TestMessage>(new TestMessage(3));
         }
 
         public ICommand NoteCommand { get; set; }
