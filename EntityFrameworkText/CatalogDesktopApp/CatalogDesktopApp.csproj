@@ -60,6 +60,7 @@
     <Compile Include="MessageBus\MessageBus.cs" />
     <Compile Include="MessageBus\TestMessage.cs" />
     <Compile Include="Properties\Annotations.cs" />
+    <Compile Include="Services\UserService.cs" />
     <Compile Include="ViewModels\ClasaWindowViewModel.cs" />
     <Compile Include="ViewModels\ElevWindowViewModel.cs" />
     <Compile Include="ViewModels\LoginWindowViewModel.cs" />
@@ -85,6 +86,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="Views\ClasaWindow.xaml.cs">
       <DependentUpon>ClasaWindow.xaml</DependentUpon>
     </Compile>

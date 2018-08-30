@@ -11,7 +11,7 @@ using System.Windows.Input;
 
 namespace CatalogDesktopApp.ViewModels
 {
-    public class ClasaWindowViewModel : INotifyPropertyChanged
+    public class ClasaWindowViewModel : ViewModelBase
     {
         public ClasaDTO Clasa { get; set; }
         

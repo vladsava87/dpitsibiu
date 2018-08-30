@@ -12,7 +12,7 @@ using System.Windows.Input;
 
 namespace CatalogDesktopApp.ViewModels
 {
-    public class ElevWindowViewModel : INotifyPropertyChanged
+    public class ElevWindowViewModel : ViewModelBase
     {
         //private bool note = true;
         //private bool abs = true;
