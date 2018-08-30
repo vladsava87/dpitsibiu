@@ -1,0 +1,38 @@
+﻿<Window x:Class="WpfTutorialSamples.ItemsControl.ItemsControlPanelSample"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:system="clr-namespace:System;assembly=mscorlib"
+        Title="ProfesoriWindow" Height="450" Width="800">
+    <Grid Margin="10">
+        <ItemsControl Margin="143,161,143.6,-29">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Button Content="{Binding}" Margin="10,10,10,10" Width="100"/>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+            <system:String>9A</system:String>
+            <system:String>9B</system:String>
+            <system:String>9C</system:String>
+            <system:String>9D</system:String>
+            <system:String>10A</system:String>
+            <system:String>10B</system:String>
+            <system:String>10C</system:String>
+            <system:String>10D</system:String>
+            <system:String>11A</system:String>
+            <system:String>11B</system:String>
+            <system:String>11C</system:String>
+            <system:String>11D</system:String>
+            <system:String>12A</system:String>
+            <system:String>12B</system:String>
+            <system:String>12C</system:String>
+            <system:String>12D</system:String>
+
+        </ItemsControl>
+        <TextBox HorizontalAlignment="Left" Height="93" Margin="294,46,0,0" TextWrapping="Wrap" Text="Lista Clase" VerticalAlignment="Top" Width="270" FontSize="32"/>
+    </Grid>
+</Window>

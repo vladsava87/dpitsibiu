@@ -14,12 +14,15 @@ namespace WebApi.Controllers
 
         // GET: api/Profil
         public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
+        { var Profil = catalog.Profil.ToList();
+
+          var tprofil = Mapper.Map<List<PtofilDTO>>(Profil);
+
+            return tprofil;
         }
 
-        // GET: api/Profil/5
-        public string Get(int id)
+    // GET: api/Profil/5
+    public string Get(int id)
         {
             return "value";
         }

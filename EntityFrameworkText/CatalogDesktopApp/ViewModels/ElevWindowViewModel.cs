@@ -44,41 +44,62 @@ namespace CatalogDesktopApp.ViewModels
             messageBus = MessageBus.Instance;
             messageBus.Subscribe<TestMessage>(Getelev);
         }
+        public ElevWindowViewModel()
+        {
+            NoteCommand = new RelayCommand(ListNote);
 
         private void Getelev(TestMessage obj)
         {
             MessageBox.Show(obj.test.ToString(), "Mesaj primit");
         }
 
+            AbsenteCommand = new RelayCommand(ListAbs);
+
+            ObservatiiCommand = new RelayCommand(ListObs);
+
+            Elev = new ElevDTO();
+            Elev.Nume = "Mihai";
+            Elev.Prenume = "Popescu";
+            Elev.Email = "MP@gmail.ro";
+            Elev.Telefon = "097532678";
+            Elev.Numar_Matricol = 1234;
+
+            ClassName = "12A";
+
+
+        }
+
         public string NumePrenume
         {
             get { return Elev.Nume + " " + Elev.Prenume; }
-            
+
         }
 
         private string className;
-        
+
         public string ClassName
         {
             get { return className; }
-            set { className = value;
+            set
+            {
+                className = value;
                 OnPropertyChanged(ClassName);
-                }
+            }
 
         }
 
         private void ListObs(object obj)
         {
-  
+
         }
 
-       
+
 
         private void ListAbs(object obj)
         {
 
         }
-    
+
 
         private void ListNote(object obj)
         {
