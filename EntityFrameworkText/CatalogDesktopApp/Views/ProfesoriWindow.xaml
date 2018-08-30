@@ -1,8 +1,14 @@
-﻿<Window x:Class="WpfTutorialSamples.ItemsControl.ItemsControlPanelSample"
+﻿<UserControl x:Class="CatalogDesktopApp.Views.ProfesoriWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 		xmlns:system="clr-namespace:System;assembly=mscorlib"
-        Title="ProfesoriWindow" Height="450" Width="800">
+        
+        xmlns:vm="clr-namespace:CatalogDesktopApp.ViewModels"
+        Background="White" Height="450" Width="800">
+
+    <UserControl.DataContext>
+        <vm:ProfesoriWindowViewModel />
+    </UserControl.DataContext>
     <Grid Margin="10">
         <ItemsControl Margin="143,161,143.6,-29">
             <ItemsControl.ItemsPanel>
@@ -35,4 +41,4 @@
         </ItemsControl>
         <TextBox HorizontalAlignment="Left" Height="93" Margin="294,46,0,0" TextWrapping="Wrap" Text="Lista Clase" VerticalAlignment="Top" Width="270" FontSize="32"/>
     </Grid>
-</Window>
+</UserControl>

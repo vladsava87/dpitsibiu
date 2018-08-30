@@ -17,7 +17,7 @@ namespace CatalogDesktopApp.Views
     /// <summary>
     /// Interaction logic for ProfesoriWindow.xaml
     /// </summary>
-    public partial class ProfesoriWindow : Window
+    public partial class ProfesoriWindow : UserControl
     {
         public ProfesoriWindow()
         {

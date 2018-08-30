@@ -17,7 +17,7 @@ namespace CatalogDesktopApp.Views
     /// <summary>
     /// Interaction logic for ElevWindow.xaml
     /// </summary>
-    public partial class ElevWindow : Window
+    public partial class ElevWindow : UserControl
     {
         public ElevWindow()
         {

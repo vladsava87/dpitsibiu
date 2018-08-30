@@ -19,11 +19,37 @@ namespace CatalogDesktopApp.ViewModels
     {
         private bool _test = true;
 
+        private readonly MessageBus _messageBus;
+
+        private ViewModelBase _currentViewModel;
+
         public MainWindowViewModel()
         {
             MyClickCommand = new RelayCommand(ClickCommand, CanClickCommand);
 
             My2ClickCommand = new RelayCommand(OtherClickCommand);
+
+            CurrentViewModel = new LoginWindowViewModel();
+
+            _messageBus = MessageBus.Instance;
+
+            _messageBus.Subscribe<TestMessage>(OnNavigation);
+        }
+
+        private void OnNavigation(TestMessage obj)
+        {
+            //MessageBox.Show("OK");
+            CurrentViewModel = new ElevWindowViewModel();
+        }
+
+        public ViewModelBase CurrentViewModel
+        {
+            get { return _currentViewModel; }
+            set
+            {
+                _currentViewModel = value;
+                OnPropertyChanged("CurrentViewModel");
+            }
         }
 
         private void OtherClickCommand(object obj)
@@ -40,7 +66,6 @@ namespace CatalogDesktopApp.ViewModels
 
         private void ClickCommand(object obj)
         {
-            MessageBox.Show("Hello!");
 
             _test = false;
             MyLabel = MyLabel + " false";

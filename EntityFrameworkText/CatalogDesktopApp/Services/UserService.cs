@@ -8,7 +8,7 @@ namespace CatalogDesktopApp.Services
 {
     public sealed class UserService
     {
-        private const string WebSiteAPI = @"http://localhost:4545/api";
+        private const string WebSiteAPI = @"http://localhost:1208/api";
 
         private static HttpClient _client;
         private static UserService _instance;

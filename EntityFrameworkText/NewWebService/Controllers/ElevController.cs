@@ -1,15 +1,4 @@
-<<<<<<< Updated upstream
-﻿using AutoMapper;
-using DatabaseLayer;
-using DatabaseLayer.DataModels;
-using DatabaseLayer.DTO;
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Web.Http;
-=======
+
 ﻿using DatabaseLayer;
 using DatabaseLayer.DTO;
 using AutoMapper;
@@ -21,7 +10,7 @@ using System.Net.Http;
 using System.Web.Http;
 using Newtonsoft.Json;
 using DatabaseLayer.DataModels;
->>>>>>> Stashed changes
+
 
 namespace NewWebService.Controllers
 {
@@ -29,20 +18,12 @@ namespace NewWebService.Controllers
     {
         private CatalogContex catalog = new CatalogContex();
 
-<<<<<<< Updated upstream
         // GET: api/Elev
         public IEnumerable<ElevDTO> Get()
         {
             var elevi = catalog.Elevi.ToList();
 
             var televi = Mapper.Map<List<ElevDTO>>(elevi);
-=======
-        public IEnumerable<ElevDTO> Get()
-        {
-            var Elevi = catalog.Elevi.ToList();
-
-            var televi = Mapper.Map<List<ElevDTO>>(Elevi);
->>>>>>> Stashed changes
 
             return televi;
         }
@@ -50,16 +31,11 @@ namespace NewWebService.Controllers
         // GET: api/Elev/5
         public ElevDTO Get(int id)
         {
-<<<<<<< Updated upstream
             var elev = catalog.Elevi.Where(e => e.Id == id).FirstOrDefault();
-=======
-            var elev = catalog.Elevi.Where(elevul => elevul.Id == id).FirstOrDefault();
->>>>>>> Stashed changes
 
             var telev = Mapper.Map<ElevDTO>(elev);
 
             return telev;
-<<<<<<< Updated upstream
         }
 
         // POST: api/Elev
@@ -119,7 +95,6 @@ namespace NewWebService.Controllers
             //Elev.Observatie = Observatie;
 
             catalog.SaveChanges();
-=======
 
         }
 
@@ -142,10 +117,10 @@ namespace NewWebService.Controllers
             elev.Id = Elev_schimbat.Id;
             elev.Nume = Elev_schimbat.Nume;
             elev.Prenume = Elev_schimbat.Prenume;
-            elev.Data_nastere = Elev_schimbat.Data_nastere;
+            elev.Data = Elev_schimbat.Data;
             elev.Telefon = Elev_schimbat.Telefon;
             elev.Email = Elev_schimbat.Email;
-            elev.Numar_Matricol = Elev_schimbat.Numar_matricol;
+            elev.Numar_Matricol = Elev_schimbat.Numar_Matricol;
             elev.ClasaID = Elev_schimbat.ClasaID;
             //elev.Clasa = Elev_schimbat.Clasa;
             //elev.Note = Elev_schimbat.Note;
@@ -153,13 +128,11 @@ namespace NewWebService.Controllers
             //elev.Observatii = Elev_schimbat.Observatii;
 
             catalog.SaveChanges();
-
->>>>>>> Stashed changes
+            
         }
 
         // DELETE: api/Elev/5
         public void Delete(int id)
-<<<<<<< Updated upstream
         {
             t_elev Elev = catalog.Elevi.Where(e => e.Id == id).FirstOrDefault();
             catalog.Elevi.Remove(Elev);
@@ -167,14 +140,3 @@ namespace NewWebService.Controllers
         }
     }
 }
-=======
-        {
-            t_elev elev = catalog.Elevi.Where(elevi => elevi.Id == id).FirstOrDefault();
-            catalog.Elevi.Remove(elev);
-
-            catalog.SaveChanges();
-        }
-    }
-}
-
->>>>>>> Stashed changes

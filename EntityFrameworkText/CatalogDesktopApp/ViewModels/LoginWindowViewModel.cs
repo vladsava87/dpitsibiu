@@ -8,23 +8,40 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Input;
+using CatalogDesktopApp.Services;
 
 namespace CatalogDesktopApp.ViewModels
 {
     public class LoginWindowViewModel : ViewModelBase
     {
+        private MessageBus _messageBus;
+        private UserService _userService;
+
         public LoginWindowViewModel()
         {
             LoginButtonClick = new RelayCommand(MyLoginButtonClick);
           //  UserName = new RelayCommand(MyUserName);
             ForgotPasswordButtonClick = new RelayCommand(MyForgotPasswordButtonClick);
+
+            _messageBus = MessageBus.Instance;
+            _userService = UserService.Instance;
         }
 
 
-        private void MyLoginButtonClick(object obj)
+        private async void MyLoginButtonClick(object obj)
         {
-            string Username = UsernameTextBox;
-            string Password = PasswordTextBox;
+            //string Username = "AlexAlexandrescu@elev.ro";
+            //string Password = "1234";
+            
+            var ret = await _userService.PerformLogin(UsernameTextBox, PasswordTextBox);
+
+            if (ret != null)
+            {
+                var mesg = new TestMessage();
+                mesg.Str = ret;
+
+                _messageBus.Publish(mesg);
+            }
         }
 
         private void MyForgotPasswordButtonClick(object obj)
@@ -41,15 +58,5 @@ namespace CatalogDesktopApp.ViewModels
         public string UsernameTextBox { get; set; }
         public string PasswordTextBox { get; set; }
         
-
-
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        [NotifyPropertyChangedInvocator]
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
     }
 }

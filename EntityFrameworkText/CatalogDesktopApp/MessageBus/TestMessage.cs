@@ -8,8 +8,12 @@ namespace CatalogDesktopApp
 {
     public class TestMessage : IMessage
     {
-        public TestMessage(int t) { test = t; }
+        public TestMessage()
+        {
+        }
 
         public int test { get; set; }
+
+        public string Str { get; set; }
     }
 }

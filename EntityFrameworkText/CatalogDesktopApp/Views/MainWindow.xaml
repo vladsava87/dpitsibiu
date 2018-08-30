@@ -4,16 +4,22 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CatalogDesktopApp"
-        xmlns:VM="clr-namespace:CatalogDesktopApp.ViewModels"
+        xmlns:vm="clr-namespace:CatalogDesktopApp.ViewModels"
+        xmlns:view="clr-namespace:CatalogDesktopApp.Views"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Window.DataContext>
-        <VM:MainWindowViewModel />
+        <vm:MainWindowViewModel />
     </Window.DataContext>
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type vm:LoginWindowViewModel}">
+            <view:LoginWindow/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:ElevWindowViewModel}">
+            <view:ElevWindow/>
+        </DataTemplate>
+    </Window.Resources>
     <Grid>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="162,84,0,0" VerticalAlignment="Top" Width="75" Command="{Binding MyClickCommand}" />
-        <Button Content="Button" HorizontalAlignment="Left" Margin="280,84,0,0" VerticalAlignment="Top" Width="75" Command="{Binding My2ClickCommand}" />
-        <Label Content="{Binding MyLabel}" HorizontalAlignment="Left" Margin="162,160,0,0" VerticalAlignment="Top" Width="176"/>
-
+        <ContentControl Name="PresentationControl" Content="{Binding CurrentViewModel}"/>
     </Grid>
 </Window>

@@ -111,11 +111,7 @@ namespace DatabaseLayer.DataModels
         public int Id { get; set; }
         public string Nume { get; set; }
         public string Prenume { get; set; }
-<<<<<<< Updated upstream
         public DateTime Data { get; set; }
-=======
-        public DateTime Data_nastere { get; set; }
->>>>>>> Stashed changes
         public string Telefon { get; set; }
         public string Email { get; set; }
         public int Numar_Matricol { get; set; }

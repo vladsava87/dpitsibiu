@@ -44,31 +44,12 @@ namespace CatalogDesktopApp.ViewModels
             messageBus = MessageBus.Instance;
             messageBus.Subscribe<TestMessage>(Getelev);
         }
-        public ElevWindowViewModel()
-        {
-            NoteCommand = new RelayCommand(ListNote);
 
         private void Getelev(TestMessage obj)
         {
-            MessageBox.Show(obj.test.ToString(), "Mesaj primit");
+            //MessageBox.Show(obj.test.ToString(), "Mesaj primit");
         }
-
-            AbsenteCommand = new RelayCommand(ListAbs);
-
-            ObservatiiCommand = new RelayCommand(ListObs);
-
-            Elev = new ElevDTO();
-            Elev.Nume = "Mihai";
-            Elev.Prenume = "Popescu";
-            Elev.Email = "MP@gmail.ro";
-            Elev.Telefon = "097532678";
-            Elev.Numar_Matricol = 1234;
-
-            ClassName = "12A";
-
-
-        }
-
+        
         public string NumePrenume
         {
             get { return Elev.Nume + " " + Elev.Prenume; }
@@ -103,7 +84,7 @@ namespace CatalogDesktopApp.ViewModels
 
         private void ListNote(object obj)
         {
-            messageBus.Publish<TestMessage>(new TestMessage(3));
+            //messageBus.Publish<TestMessage>(new TestMessage(3));
         }
 
         public ICommand NoteCommand { get; set; }
