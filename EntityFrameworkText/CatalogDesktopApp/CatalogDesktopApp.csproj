@@ -55,12 +55,22 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="MessageBus\IMessage.cs" />
+    <Compile Include="MessageBus\IMessageBus.cs" />
+    <Compile Include="MessageBus\MessageBus.cs" />
+    <Compile Include="MessageBus\TestMessage.cs" />
     <Compile Include="Properties\Annotations.cs" />
+    <Compile Include="Services\UserService.cs" />
+    <Compile Include="ViewModels\ClasaWindowViewModel.cs" />
     <Compile Include="ViewModels\ProfesoriWindowViewModel.cs" />
     <Compile Include="ViewModels\ElevWindowViewModel.cs" />
     <Compile Include="ViewModels\LoginWindowViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\RelayCommand.cs" />
+    <Page Include="Views\ClasaWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Compile Include="Views\ProfesoriWindow.xaml.cs">
       <DependentUpon>ProfesoriWindow.xaml</DependentUpon>
     </Compile>
@@ -79,6 +89,10 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ViewModels\ViewModelBase.cs" />
+    <Compile Include="Views\ClasaWindow.xaml.cs">
+      <DependentUpon>ClasaWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ElevWindow.xaml.cs">
       <DependentUpon>ElevWindow.xaml</DependentUpon>
@@ -127,5 +141,6 @@
       <Name>DatabaseLayer</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

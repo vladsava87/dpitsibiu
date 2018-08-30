@@ -7,11 +7,12 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace CatalogDesktopApp.ViewModels
 {
-    public class ElevWindowViewModel : INotifyPropertyChanged
+    public class ElevWindowViewModel : ViewModelBase
     {
         //private bool note = true;
         //private bool abs = true;
@@ -21,9 +22,36 @@ namespace CatalogDesktopApp.ViewModels
             get; set;
         }
 
+        private MessageBus messageBus;
+        
         public ElevWindowViewModel()
         {
             NoteCommand = new RelayCommand(ListNote);
+
+            AbsenteCommand = new RelayCommand(ListAbs);
+
+            ObservatiiCommand = new RelayCommand(ListObs);
+
+            Elev = new ElevDTO();
+            Elev.Nume = "Mihai";
+            Elev.Prenume = "Popescu";
+            Elev.Email = "MP@gmail.ro";
+            Elev.Telefon = "097532678";
+            Elev.Numar_Matricol = 1234;
+
+            ClassName = "12A";
+
+            messageBus = MessageBus.Instance;
+            messageBus.Subscribe<TestMessage>(Getelev);
+        }
+        public ElevWindowViewModel()
+        {
+            NoteCommand = new RelayCommand(ListNote);
+
+        private void Getelev(TestMessage obj)
+        {
+            MessageBox.Show(obj.test.ToString(), "Mesaj primit");
+        }
 
             AbsenteCommand = new RelayCommand(ListAbs);
 
@@ -75,7 +103,7 @@ namespace CatalogDesktopApp.ViewModels
 
         private void ListNote(object obj)
         {
-
+            messageBus.Publish<TestMessage>(new TestMessage(3));
         }
 
         public ICommand NoteCommand { get; set; }

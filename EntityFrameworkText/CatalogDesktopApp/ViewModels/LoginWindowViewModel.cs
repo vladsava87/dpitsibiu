@@ -11,7 +11,7 @@ using System.Windows.Input;
 
 namespace CatalogDesktopApp.ViewModels
 {
-    public class LoginWindowViewModel : INotifyPropertyChanged
+    public class LoginWindowViewModel : ViewModelBase
     {
         public LoginWindowViewModel()
         {
