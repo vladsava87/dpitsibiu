@@ -1,12 +1,5 @@
-﻿using CatalogDesktopApp.Annotations;
-using DatabaseLayer.DTO;
-using System;
+﻿using DatabaseLayer.DTO;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace CatalogDesktopApp.ViewModels
@@ -16,21 +9,20 @@ namespace CatalogDesktopApp.ViewModels
         public ClasaDTO Clasa { get; set; }
 
         private List<ElevTest> elevi = new List<ElevTest>();
-
-
         
         public ClasaWindowViewModel()
         {
             EleviCommand = new RelayCommand(ListElevi);
 
+            Clasa = new ClasaDTO();
+
             var temp = new List<ElevTest>();
+
             temp.Add(new ElevTest { Nume = "Vlad", Prenume = "Sava" });
-            temp.Add(new ElevTest { Nume = "Vlad", Prenume = "Sava" });
-            temp.Add(new ElevTest { Nume = "Vlad", Prenume = "Sava" });
-            temp.Add(new ElevTest { Nume = "Vlad", Prenume = "Sava" });
-            temp.Add(new ElevTest { Nume = "Vlad", Prenume = "Sava" });
-            temp.Add(new ElevTest { Nume = "Vlad", Prenume = "Sava" });
-            temp.Add(new ElevTest { Nume = "Vlad", Prenume = "Sava" });
+            for (int i = 0; Clasa.Elevi[i] != null; i++)
+            {
+                temp.Add(new ElevTest { Nume = Clasa.Elevi[i].Nume, Prenume = Clasa.Elevi[i].Prenume });
+            }
 
             Elevi = temp;
         }
@@ -52,8 +44,6 @@ namespace CatalogDesktopApp.ViewModels
         }
 
         public ICommand EleviCommand { get; set; }
-
-        
     }
 
     public class ElevTest

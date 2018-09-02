@@ -13,7 +13,7 @@
     </Window.DataContext>
 
     <Grid>
-        <ListBox Name="EleviListBox" HorizontalContentAlignment="Stretch" ItemsSource="{Binding Elevi}" Width="200" >
+        <ListBox Name="EleviListBox" HorizontalAlignment="Left" HorizontalContentAlignment="Stretch" ItemsSource="{Binding Elevi}" Width="200">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid Margin="0,2">
