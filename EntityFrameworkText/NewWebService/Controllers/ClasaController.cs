@@ -28,7 +28,7 @@ namespace NewWebService.Controllers
         // GET: api/Clasa/5
         public ClasaDTO Get(int id)
         {
-            var clasa = catalog.Clase.Where(elev => elev.Id == id).FirstOrDefault();
+            var clasa = catalog.Clase.Where(c => c.Id == id).FirstOrDefault();
 
             var tclasa = Mapper.Map<ClasaDTO>(clasa);
 

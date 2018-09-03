@@ -18,6 +18,9 @@
         <DataTemplate DataType="{x:Type vm:ElevWindowViewModel}">
             <view:ElevWindow/>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:ClasaWindowViewModel}">
+            <view:ClasaWindow/>
+        </DataTemplate>
     </Window.Resources>
     <Grid>
         <ContentControl Name="PresentationControl" Content="{Binding CurrentViewModel}"/>

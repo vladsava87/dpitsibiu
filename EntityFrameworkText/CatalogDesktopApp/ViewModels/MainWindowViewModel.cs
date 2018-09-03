@@ -39,7 +39,9 @@ namespace CatalogDesktopApp.ViewModels
         private void OnNavigation(TestMessage obj)
         {
             //MessageBox.Show("OK");
-            CurrentViewModel = new ElevWindowViewModel();
+            //CurrentViewModel = new  ElevWindowViewModel();
+            CurrentViewModel = new ClasaWindowViewModel();
+            (CurrentViewModel as ClasaWindowViewModel).InitViewModel(1);
         }
 
         public ViewModelBase CurrentViewModel

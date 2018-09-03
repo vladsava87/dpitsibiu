@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using DatabaseLayer.DataModels;
 using DatabaseLayer.DTO;
+using System.Linq;
 
 namespace NewWebService.App_Start
 {
@@ -14,11 +15,16 @@ namespace NewWebService.App_Start
                         .ForMember(ignoraabsenta => ignoraabsenta.Elev, opt => opt.Ignore())
                         .ForMember(ignoramaterie => ignoramaterie.Materie, opt => opt.Ignore())
                         .ForMember(ignoraprofesor => ignoraprofesor.Profesor, opt => opt.Ignore());
-                    cfg.CreateMap<t_clasa, ClasaDTO>()
-                        .ForMember(ignoraelevi => ignoraelevi.Elevi, opt => opt.Ignore())
-                        .ForMember(ignoraprofesori => ignoraprofesori.Diriginte, opt => opt.Ignore())
-                        .ForMember(ignoraprofilul => ignoraprofilul.Profil, opt => opt.Ignore());
-                    cfg.CreateMap<t_elev, ElevDTO>()
+
+                cfg.CreateMap<t_clasa, ClasaDTO>()
+                    //.ForMember(ignoraelevi => ignoraelevi.Elevi, opt => opt.Ignore())
+                    .ForMember(ignoraprofesori => ignoraprofesori.Diriginte, opt => opt.Ignore())
+                    .ForMember(ignoraprofilul => ignoraprofilul.Profil, opt => opt.Ignore());
+
+                //cfg.CreateMap<t_clasa, ClasaDTO>()
+                //        .ForMember(clasa => clasa.Elevi, opt => opt.MapFrom(op => op.Elevi.Select(e => e.Id).ToList()));
+
+                cfg.CreateMap<t_elev, ElevDTO>()
                         .ForMember(ignoranote => ignoranote.Note, opt => opt.Ignore())
                         .ForMember(ignoraabsente => ignoraabsente.Absente, opt => opt.Ignore())
                         .ForMember(ignoraobservatii => ignoraobservatii.Observatii, opt => opt.Ignore())

@@ -90,14 +90,5 @@ namespace CatalogDesktopApp.ViewModels
         public ICommand NoteCommand { get; set; }
         public ICommand AbsenteCommand { get; set; }
         public ICommand ObservatiiCommand { get; set; }
-
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        [NotifyPropertyChangedInvocator]
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
     }
 }

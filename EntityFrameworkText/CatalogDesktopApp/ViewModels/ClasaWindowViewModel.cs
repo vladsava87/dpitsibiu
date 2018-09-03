@@ -1,30 +1,43 @@
-﻿using DatabaseLayer.DTO;
+﻿using CatalogDesktopApp.Services;
+using DatabaseLayer.DTO;
 using System.Collections.Generic;
+using System.Windows;
 using System.Windows.Input;
 
 namespace CatalogDesktopApp.ViewModels
 {
     public class ClasaWindowViewModel : ViewModelBase
     {
-        public ClasaDTO Clasa { get; set; }
+        private int _classId;
+
+        private ClasaService _clasaService;
+
+        public ClasaDTO Clasa
+        {
+            get => clasa;
+            set
+            {
+                clasa = value;
+                OnPropertyChanged("Clasa");
+            }
+        }
+
+        private ClasaDTO clasa = new ClasaDTO(); 
 
         private List<ElevTest> elevi = new List<ElevTest>();
+
+        public async void InitViewModel(int id)
+        {
+            _classId = id;
+
+            Clasa = await _clasaService.GetDetailsClasa(_classId);
+        }
         
         public ClasaWindowViewModel()
         {
             EleviCommand = new RelayCommand(ListElevi);
 
-            Clasa = new ClasaDTO();
-
-            var temp = new List<ElevTest>();
-
-            temp.Add(new ElevTest { Nume = "Vlad", Prenume = "Sava" });
-            for (int i = 0; Clasa.Elevi[i] != null; i++)
-            {
-                temp.Add(new ElevTest { Nume = Clasa.Elevi[i].Nume, Prenume = Clasa.Elevi[i].Prenume });
-            }
-
-            Elevi = temp;
+            _clasaService = ClasaService.Instance;
         }
 
         public List<ElevTest> Elevi

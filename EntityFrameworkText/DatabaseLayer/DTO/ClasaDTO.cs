@@ -31,5 +31,10 @@ namespace DatabaseLayer.DTO
         // public int ElevID { get; set; }
         [DataMember]
         public List<ElevDTO> Elevi { get; set; }
+
+        public ClasaDTO()
+        {
+            Elevi = new List<ElevDTO>();
+        }
     }
 }
