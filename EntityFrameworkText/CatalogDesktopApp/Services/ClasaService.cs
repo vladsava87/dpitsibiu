@@ -40,7 +40,30 @@ namespace CatalogDesktopApp.Services
                 return _instance;
             }
         }
-        
+
+        public async Task<List<ClasaDTO>> GetClasa()
+        {
+            try
+            {
+                var requestLink = "/Clasa";
+
+                var uri = new Uri(WebSiteAPI + requestLink);
+
+                var response = await _client.GetAsync(uri);
+                if (response.IsSuccessStatusCode)
+                {
+                    var content = await response.Content.ReadAsStringAsync();
+
+                    List<ClasaDTO> clasacautata = JsonConvert.DeserializeObject<List<ClasaDTO>>(content);
+
+                    return clasacautata;
+                }
+            }
+            catch (Exception ex) { }
+
+            return null;
+        }
+
         public async Task<ClasaDTO> GetDetailsClasa(int clasaID)
         {
             try
