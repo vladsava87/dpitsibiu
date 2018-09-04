@@ -59,10 +59,79 @@ namespace CatalogDesktopApp.Services
                     return clasacautata;
                 }
             }
-            catch (Exception ex)
-            {
+            catch (Exception ex) { }
+            
+            return null;
+        }
 
+        public async Task<string> PostClasa(ElevDTO clasaModificata)
+        {
+            try
+            {
+                var requestLink = "/Clasa/";
+
+                var uri = new Uri(WebSiteAPI + requestLink);
+
+                var myContent = JsonConvert.SerializeObject(clasaModificata);
+                var buffer = Encoding.UTF8.GetBytes(myContent);
+                var byteContent = new ByteArrayContent(buffer);
+
+                var response = await _client.PostAsync(uri, byteContent);
+                if(response.IsSuccessStatusCode)
+                {
+                    var content = await response.Content.ReadAsStringAsync();
+
+                    return content;
+                }
             }
+            catch (Exception ex) { }
+
+            return null;
+        }
+
+        public async Task<string> PutClasa(ElevDTO clasaModificat)
+        {
+            try
+            {
+                var requestLink = "/Clasa/";
+
+                var uri = new Uri(WebSiteAPI + requestLink + clasaModificat.Id);
+
+                var myContent = JsonConvert.SerializeObject(clasaModificat);
+                var buffer = Encoding.UTF8.GetBytes(myContent);
+                var byteContent = new ByteArrayContent(buffer);
+
+                var response = await _client.PutAsync(uri, byteContent);
+                if(response.IsSuccessStatusCode)
+                {
+                    var content = await response.Content.ReadAsStringAsync();
+
+                    return content;
+                }
+            }
+            catch (Exception ex) { }
+
+            return null;
+        }
+
+        public async Task<string> DeleteClasa(int _clasaID)
+        {
+            try
+            {
+                var requestLink = "/Clasa/";
+
+                var uri = new Uri(WebSiteAPI + requestLink + _clasaID);
+
+                var response = await _client.DeleteAsync(uri);
+                if (response.IsSuccessStatusCode)
+                {
+                    var content = await response.Content.ReadAsStringAsync();
+
+                    return content;
+                }
+            }
+            catch (Exception ex) { }
+
             return null;
         }
     }

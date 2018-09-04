@@ -51,46 +51,76 @@ namespace NewWebService.Controllers
                 catalog.SaveChanges();
 
                 msg.StatusCode = System.Net.HttpStatusCode.OK;
-                msg.Content = new StringContent("POST Request performed successfully");
+                msg.Content = new StringContent("O clasa noua a fost adaugata!");
             }
-            catch(Exception)
+            catch(Exception ex)
             {
                 msg.StatusCode = System.Net.HttpStatusCode.BadRequest;
-                msg.Content = new StringContent("POST Request could not be performed");
+                msg.Content = new StringContent("Nu s-a putut adauga o clasa noua!");
             }
 
             return msg;
         }
 
         // PUT: api/Clasa/5
-        public void Put(int id, HttpRequestMessage request)
+        public HttpResponseMessage Put(int id, HttpRequestMessage request)
         {
-            var value = request.Content.ReadAsStringAsync().Result;
+            var msg = new HttpResponseMessage();
 
-            t_clasa clasa = catalog.Clase.Where(clasacautata => clasacautata.Id == id).FirstOrDefault();
-            ClasaDTO clasanoua = JsonConvert.DeserializeObject<ClasaDTO>(value);
+            try
+            { 
+                var value = request.Content.ReadAsStringAsync().Result;
 
-            clasa.Id = clasanoua.Id;
-            clasa.Numar = clasanoua.Numar;
-            clasa.Serie = clasanoua.Serie;
-            clasa.An = clasanoua.An;
+                t_clasa clasa = catalog.Clase.Where(clasacautata => clasacautata.Id == id).FirstOrDefault();
+                ClasaDTO clasanoua = JsonConvert.DeserializeObject<ClasaDTO>(value);
 
-            t_profil profil = catalog.Profiluri.Where(profilcautat => profilcautat.Id == clasanoua.ProfilID).FirstOrDefault();
-            clasa.Profil = profil;
-            t_profesor diriginte = catalog.Profesorii.Where(dirig => dirig.Id == clasanoua.DiriginteID).FirstOrDefault();
-            clasa.Diriginte = diriginte;
-            //Lista de elevi
+                clasa.Id = clasanoua.Id;
+                clasa.Numar = clasanoua.Numar;
+                clasa.Serie = clasanoua.Serie;
+                clasa.An = clasanoua.An;
 
-            catalog.SaveChanges();
+                t_profil profil = catalog.Profiluri.Where(profilcautat => profilcautat.Id == clasanoua.ProfilID).FirstOrDefault();
+                clasa.Profil = profil;
+                t_profesor diriginte = catalog.Profesorii.Where(dirig => dirig.Id == clasanoua.DiriginteID).FirstOrDefault();
+                clasa.Diriginte = diriginte;
+                //Lista de elevi
+
+                catalog.SaveChanges();
+
+                msg.StatusCode = System.Net.HttpStatusCode.OK;
+                msg.Content = new StringContent("Modificarile au fost procesate cu succes!");
+            }
+            catch (Exception ex)
+            {
+                msg.StatusCode = System.Net.HttpStatusCode.BadRequest;
+                msg.Content = new StringContent("Nu s-au putut executa modificarile dorite!");
+            }
+
+            return msg;
         }
 
         // DELETE: api/Clasa/5
-        public void Delete(int id)
+        public HttpResponseMessage Delete(int id)
         {
-            t_clasa clasa = catalog.Clase.Where(clasacautata => clasacautata.Id == id).FirstOrDefault();
-            catalog.Clase.Remove(clasa);
+            var msg = new HttpResponseMessage();
 
-            catalog.SaveChanges();
+            try
+            { 
+                t_clasa clasa = catalog.Clase.Where(clasacautata => clasacautata.Id == id).FirstOrDefault();
+                catalog.Clase.Remove(clasa);
+
+                catalog.SaveChanges();
+
+                msg.StatusCode = System.Net.HttpStatusCode.OK;
+                msg.Content = new StringContent("Stergerea a fost executata cu succes!");
+            }
+            catch(Exception ex)
+            {
+                msg.StatusCode = System.Net.HttpStatusCode.BadRequest;
+                msg.Content = new StringContent("Clasa dorita nu a putut fi stearsa!");
+            }
+
+            return msg;
         }
     }
 }
