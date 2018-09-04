@@ -12,13 +12,36 @@
         <vm:LoginWindowViewModel />
     </UserControl.DataContext>
     <Grid>
-        <Label Content="Colegiul Național Samuel von Brukenthal" HorizontalAlignment="Center" Height="41" Margin="233,45,226,0" VerticalAlignment="Top" Width="333" FontSize="18"/>
-        <Label Content="Username:" HorizontalAlignment="Left" Height="26" Margin="233,160,0,0" VerticalAlignment="Top" Width="73"/>
-        <Label Content="Password:" HorizontalAlignment="Left" Height="26" Margin="233,191,0,0" VerticalAlignment="Top" Width="73"/>
-        <PasswordBox Name="PasswordBox" PasswordChanged="PasswordBox_OnPasswordChanged" HorizontalAlignment="Left" Height="26" Margin="306,191,0,0" VerticalAlignment="Top" Width="225"/>
-        <TextBox Text="{Binding Path=UsernameTextBox}" HorizontalAlignment="Left" Height="26" Margin="306,160,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="225"/>
-        <Button Content="Login" HorizontalAlignment="Left" Height="28" Margin="340,280,0,0" VerticalAlignment="Top" Width="107" Background="White" Command="{Binding LoginButtonClick}"/>
-        <Button Content="Forgot Password" HorizontalAlignment="Left" Height="23" Margin="460,222,0,0" VerticalAlignment="Top" Width="106" Background="White" Foreground="Gray" BorderThickness="0" Command="{Binding ForgotPasswordButtonClick}"/>
+        <Grid>
+            <!--<Grid.Margin=""233,45,226,0""/>-->
+            <Label Content="Colegiul Național Samuel von Brukenthal" HorizontalAlignment="Center" Height="41"  VerticalAlignment="Top" Margin="0,20,0,0" Width="500" FontSize="18" HorizontalContentAlignment="Center"/>
+        </Grid>
+        <!--<Label Content="Colegiul Național Samuel von Brukenthal" HorizontalAlignment="Center" Height="41" Margin="233,45,226,0" VerticalAlignment="Top" Width="333" FontSize="18"/>-->
+        <Grid>
+            <Label Content="Username:" Height="26"  Width="73" HorizontalContentAlignment="Right" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="-275,-105,0,0"/>
+        </Grid>
+        <!--<Label Content="Username:" HorizontalAlignment="Left" Height="26" Margin="233,160,0,0" VerticalAlignment="Top" Width="73"/>-->
+        <Grid>
+            <Label Content="Password:"  Height="26"  Width="73" HorizontalContentAlignment="Right" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="-275,-45,0,0" />
+        </Grid>
+    <!--<Label Content="Password:" HorizontalAlignment="Left" Height="26" Margin="233,191,0,0" VerticalAlignment="Top" Width="73"/>-->
+        <Grid>
+            <PasswordBox Name="PasswordBox" PasswordChanged="PasswordBox_OnPasswordChanged" HorizontalAlignment="Center" Height="26" Margin="36,-40,0,0" VerticalAlignment="Center" Width="225" HorizontalContentAlignment="Center"/>
+        </Grid>
+        <!--<PasswordBox Name="PasswordBox" PasswordChanged="PasswordBox_OnPasswordChanged" HorizontalAlignment="Left" Height="26" Margin="306,191,0,0" VerticalAlignment="Top" Width="225"/>-->
+        <Grid>
+            <TextBox Text="{Binding Path=UsernameTextBox}" HorizontalAlignment="Center" Height="26" Margin="36,-100,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="225"/>
+        </Grid>
+        
+        <!--<TextBox Text="{Binding Path=UsernameTextBox}" HorizontalAlignment="Left" Height="26" Margin="306,160,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="225"/>-->
+        <Grid>
+            <Button Content="Login" HorizontalAlignment="Center" Height="28" Margin="0,80,0,0" VerticalAlignment="Center" Width="107" Background="White" Command="{Binding LoginButtonClick}"/>
+        </Grid>
+        <!--<Button Content="Login" HorizontalAlignment="Left" Height="28" Margin="340,280,0,0" VerticalAlignment="Top" Width="107" Background="White" Command="{Binding LoginButtonClick}"/>-->
+        <Grid>
+            <Button Content="Forgot Password" HorizontalAlignment="Center" Height="23" Margin="220,20,0,0" VerticalAlignment="Center" Width="106" Background="White" Foreground="Gray" BorderThickness="0" Command="{Binding ForgotPasswordButtonClick}"/>
+        </Grid>
+                <!--<Button Content="Forgot Password" HorizontalAlignment="Left" Height="23" Margin="460,222,0,0" VerticalAlignment="Top" Width="106" Background="White" Foreground="Gray" BorderThickness="0" Command="{Binding ForgotPasswordButtonClick}"/>-->
 
     </Grid>
 </UserControl>

@@ -52,44 +52,77 @@ namespace NewWebService.Controllers
                 catalog.SaveChanges();
 
                 msg.StatusCode = System.Net.HttpStatusCode.OK;
-                msg.Content = new StringContent("POST Request performed successfully");
+                msg.Content = new StringContent("O observatie noua a fost adaugata!");
             }
             catch(Exception)
             {
                 msg.StatusCode = System.Net.HttpStatusCode.BadRequest;
-                msg.Content = new StringContent("POST Request could not be performed");
+                msg.Content = new StringContent("Nu s-a putut adauga o observatie noua!");
             }
 
             return msg;
         }
 
         // PUT api/values/5
-        public void Put(int id, HttpRequestMessage request)
+        public HttpResponseMessage Put(int id, HttpRequestMessage request)
         {
-            var value = request.Content.ReadAsStringAsync().Result;
+            var msg = new HttpResponseMessage();
 
-            ObservatieDTO obsdes = JsonConvert.DeserializeObject<ObservatieDTO>(value);
-            t_observatie obs = catalog.Observatii.Where(observatie => observatie.Id == id).FirstOrDefault();
-            
-            obs.Id = obsdes.Id;
-            obs.Data = obsdes.Data;
-            obs.Text = obsdes.Text;
+            try
+            {
+                var value = request.Content.ReadAsStringAsync().Result;
 
-            t_profesor prof = catalog.Profesorii.Where(profesor => profesor.Id == obsdes.ProfesorID).FirstOrDefault();
-            obs.Profesor = prof;
-            t_elev elev = catalog.Elevi.Where(elevul => elevul.Id == obsdes.ElevID).FirstOrDefault();
-            obs.Elev = elev;
+                t_observatie obs = catalog.Observatii.Where(obscautat => obscautat.Id == id).FirstOrDefault();
+                ObservatieDTO obsnou = JsonConvert.DeserializeObject<ObservatieDTO>(value);
 
-            catalog.SaveChanges();
+                obs.Id = obsnou.Id;
+                obs.Data = obsnou.Data;
+                obs.Text = obsnou.Text;
+                
+
+                t_elev elev = catalog.Elevi.Where(elevcautat => elevcautat.Id == obsnou.ElevID).FirstOrDefault();
+                obs.Elev = elev;
+                t_profesor profesor = catalog.Profesorii.Where(profesorcautat => profesorcautat.Id == obsnou.ProfesorID).FirstOrDefault();
+                obs.Profesor = profesor;
+                
+
+                catalog.SaveChanges();
+
+                msg.StatusCode = System.Net.HttpStatusCode.OK;
+                msg.Content = new StringContent("Modificarile au fost procesate cu succes!");
+            }
+            catch (Exception ex)
+            {
+                msg.StatusCode = System.Net.HttpStatusCode.BadRequest;
+                msg.Content = new StringContent("Nu s-au putut executa modificarile dorite!");
+            }
+
+            return msg;
         }
 
         // DELETE api/values/5
-        public void Delete(int id)
+        public HttpResponseMessage Delete(int id)
         {
-            t_observatie obs = catalog.Observatii.Where(observatie => observatie.Id == id).FirstOrDefault();
-            catalog.Observatii.Remove(obs);
+            var msg = new HttpResponseMessage();
 
-            catalog.SaveChanges();
+            try
+            {
+                t_observatie obs = catalog.Observatii.Where(obscautat => obscautat.Id == id).FirstOrDefault();
+                catalog.Observatii.Remove(obs);
+
+                catalog.SaveChanges();
+
+                msg.StatusCode = System.Net.HttpStatusCode.OK;
+                msg.Content = new StringContent("Stergerea a fost executata cu succes!");
+            }
+            catch (Exception ex)
+            {
+                msg.StatusCode = System.Net.HttpStatusCode.BadRequest;
+                msg.Content = new StringContent("Observatia dorita nu a putut fi stearsa!");
+            }
+
+            return msg;
         }
     }
 }
+

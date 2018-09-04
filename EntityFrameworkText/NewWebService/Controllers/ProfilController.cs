@@ -52,37 +52,71 @@ namespace NewWebService.Controllers
                 catalog.SaveChanges();
 
                 msg.StatusCode = System.Net.HttpStatusCode.OK;
-                msg.Content = new StringContent("POST Request performed successfully");
+                msg.Content = new StringContent("Un profil nou a fost adaugat!");
             }
             catch (Exception)
             {
                 msg.StatusCode = System.Net.HttpStatusCode.BadRequest;
-                msg.Content = new StringContent("POST Request could not be performed");
+                msg.Content = new StringContent("Nu s-a putut adauga un profil nou!");
             }
 
             return msg;
         }
 
         // PUT: api/Profil/5
-        public void Put(int id, HttpRequestMessage request)
+        public HttpResponseMessage Put(int id, HttpRequestMessage request)
         {
-            var value = request.Content.ReadAsStringAsync().Result;
+            var msg = new HttpResponseMessage();
 
-            ProfilDTO profilnou = JsonConvert.DeserializeObject<ProfilDTO>(value);
-            t_profil Profil = catalog.Profiluri.Where(p => p.Id == id).FirstOrDefault();
+            try
+            {
+                var value = request.Content.ReadAsStringAsync().Result;
 
-            Profil.Id = profilnou.Id;
-            Profil.Nume = profilnou.Nume;
+                t_profil profil = catalog.Profiluri.Where(profilcautat => profilcautat.Id == id).FirstOrDefault();
+                ProfilDTO profilnou = JsonConvert.DeserializeObject<ProfilDTO>(value);
 
-            catalog.SaveChanges();
+                profil.Id = profilnou.Id;
+                profil.Nume = profilnou.Nume;
+
+              
+                //Lista de Clase
+
+                catalog.SaveChanges();
+
+                msg.StatusCode = System.Net.HttpStatusCode.OK;
+                msg.Content = new StringContent("Modificarile au fost procesate cu succes!");
+            }
+            catch (Exception ex)
+            {
+                msg.StatusCode = System.Net.HttpStatusCode.BadRequest;
+                msg.Content = new StringContent("Nu s-au putut executa modificarile dorite!");
+            }
+
+            return msg;
         }
 
         // DELETE: api/Profil/5
-        public void Delete(int id)
+        public HttpResponseMessage Delete(int id)
         {
-            t_profil Profil = catalog.Profiluri.Where(p => p.Id == id).FirstOrDefault();
-            catalog.Profiluri.Remove(Profil);
-            catalog.SaveChanges();
+            var msg = new HttpResponseMessage();
+
+            try
+            {
+                t_profil profil = catalog.Profiluri.Where(profilcautat => profilcautat.Id == id).FirstOrDefault();
+                catalog.Profiluri.Remove(profil);
+
+                catalog.SaveChanges();
+
+                msg.StatusCode = System.Net.HttpStatusCode.OK;
+                msg.Content = new StringContent("Stergerea a fost executata cu succes!");
+            }
+            catch (Exception ex)
+            {
+                msg.StatusCode = System.Net.HttpStatusCode.BadRequest;
+                msg.Content = new StringContent("Profilul dorit nu a putut fi sters!");
+            }
+
+            return msg;
         }
     }
 }

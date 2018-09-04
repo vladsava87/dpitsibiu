@@ -39,87 +39,98 @@ namespace NewWebService.Controllers
 
 
         // POST: api/Absenta
-        public void Post(HttpRequestMessage request)
+        public HttpResponseMessage Post(HttpRequestMessage request)
         {
-            var value = request.Content.ReadAsStringAsync().Result;
+            var msg = new HttpResponseMessage();
 
-            AbsentaDTO Absenta = JsonConvert.DeserializeObject<AbsentaDTO>(value);
-            t_absenta Absentanoua = Mapper.Map<AbsentaDTO, t_absenta>(Absenta);
+            try
+            {
+                var value = request.Content.ReadAsStringAsync().Result;
 
+                AbsentaDTO absenta = JsonConvert.DeserializeObject<AbsentaDTO>(value);
+                t_absenta absentanoua = Mapper.Map<AbsentaDTO, t_absenta>(absenta);
 
-            //catalog.Absente.Add(new AbsentaDTO()
-            //{
+                catalog.Absente.Add(absentanoua);
+                catalog.SaveChanges();
 
-            //    Id = Absenta.Id,
-            //    Motivata = Absenta.Motivata,
-            //    Data = Absenta.Data,
-            //    Semestrul = Absenta.Semestrul,
-            //    MaterieID = Absenta.MaterieID,
-            //    Materie = Absenta.Materie,
-            //    ProfesorID = Absenta.ProfesorID,
-            //    Profesor = Absenta.Profesor,
-            //    ElevID = Absenta.ElevID,
-            //    Elev = Absenta.Elev
+                msg.StatusCode = System.Net.HttpStatusCode.OK;
+                msg.Content = new StringContent("O absenta noua a fost adaugata!");
+            }
+            catch (Exception ex)
+            {
+                msg.StatusCode = System.Net.HttpStatusCode.BadRequest;
+                msg.Content = new StringContent("Nu s-a putut adauga o absenta noua!");
+            }
 
-            //});
-            catalog.Absente.Add(Absentanoua);
-            catalog.SaveChanges();
+            return msg;
 
         }
 
         // PUT: api/Absenta/5
-        public void Put(int id, HttpRequestMessage request)
+        public HttpResponseMessage Put(int id, HttpRequestMessage request)
         {
-            var value = request.Content.ReadAsStringAsync().Result;
+            var msg = new HttpResponseMessage();
 
-            t_absenta Absenta = catalog.Absente.Where(a => a.Id == id).FirstOrDefault();
-            AbsentaDTO Absentanoua = JsonConvert.DeserializeObject<AbsentaDTO>(value);
-            //if (!ModelState.IsValid)
-            //    return BadRequest("Not a valid model");
+            try
+            {
+                var value = request.Content.ReadAsStringAsync().Result;
 
-            Absenta.Id = Absentanoua.Id;
-            Absenta.Motivata = Absentanoua.Motivata;
-            Absenta.Data = Absentanoua.Data;
-            Absenta.Semestrul = Absentanoua.Semestrul;
-            //Absenta.MaterieID = Absentanoua.MaterieID;
-            t_materie Materie = catalog.Materii.Where(m => m.Id == Absentanoua.MaterieID).FirstOrDefault();
-            Absenta.Materie = Materie;
-            //Absenta.ProfesorId = Absentanoua.ProfesorID;
-            t_profesor Profesor = catalog.Profesorii.Where(p => p.Id == Absentanoua.ProfesorID).FirstOrDefault();
-            Absenta.Profesor = Profesor;
+                t_absenta absenta = catalog.Absente.Where(absentacautata => absentacautata.Id == id).FirstOrDefault();
+                AbsentaDTO absentanoua = JsonConvert.DeserializeObject<AbsentaDTO>(value);
 
-            //var existingAbsenta = catalog.Absente.Where(a => a == Absenta.Id).FirstorDefault<AbsentaDTO>();
-
-            //if (existingAbsenta != null)
-            //{
-            //    existingAbsenta.Id = Absenta.Id;
-            //    existingAbsenta.Motivata = Absenta.Motivata;
-            //    existingAbsenta.Data = Absenta.Data;
-            //    existingAbsenta.Semestrul = Absenta.Semestrul;
-            //    existingAbsenta.MaterieId = Absenta.MaterieID;
-            //    existingAbsenta.Materie = Absenta.Materie;
-            //    existingAbsenta.ProfesorId = Absenta.ProfesorID;
-            //    existingAbsenta.Profesor = Absenta.Profesor;
-            //    existingAbsenta.ElevId = Absenta.ElevID;
-            //    existingAbsenta.Elev = Absenta.Elev;
-
-            //catalog.SaveChanges();
-            //}
-            //else
-            //{
-            //    return NotFound();
-            //}
+                absenta.Id = absentanoua.Id;
+                absenta.Data = absentanoua.Data;
+                //absenta.ElevID = absentanoua.ElevID;
+                //absenta.Elev = absentanoua.Elev;
+                //absenta.MaterieID = absentanoua.MaterieID;
+                //absenta.Materie = absentanoua.Materie;
 
 
+
+                t_elev elev = catalog.Elevi.Where(elevcautat => elevcautat.Id == absentanoua.ElevID).FirstOrDefault();
+                absenta.Elev = elev;
+                t_materie materie = catalog.Materii.Where(materiecautata => materiecautata.Id == absentanoua.MaterieID).FirstOrDefault();
+                absenta.Materie = materie;
+                //Lista de elevi
+
+                catalog.SaveChanges();
+
+                msg.StatusCode = System.Net.HttpStatusCode.OK;
+                msg.Content = new StringContent("Modificarile au fost procesate cu succes!");
+            }
+            catch (Exception ex)
+            {
+                msg.StatusCode = System.Net.HttpStatusCode.BadRequest;
+                msg.Content = new StringContent("Nu s-au putut executa modificarile dorite!");
+            }
+
+            return msg;
         }
 
 
         // DELETE: api/Absenta/5
-        public void Delete(int id)
+        public HttpResponseMessage Delete(int id)
         {
-            t_absenta Absenta = catalog.Absente.Where(a => a.Id == id).FirstOrDefault();
-            catalog.Absente.Remove(Absenta);
-            catalog.SaveChanges();
+            var msg = new HttpResponseMessage();
+
+            try
+            {
+                t_absenta absenta = catalog.Absente.Where(absentacautata => absentacautata.Id == id).FirstOrDefault();
+                catalog.Absente.Remove(absenta);
+
+                catalog.SaveChanges();
+
+                msg.StatusCode = System.Net.HttpStatusCode.OK;
+                msg.Content = new StringContent("Stergerea a fost executata cu succes!");
+            }
+            catch (Exception ex)
+            {
+                msg.StatusCode = System.Net.HttpStatusCode.BadRequest;
+                msg.Content = new StringContent("Absenta dorita nu a putut fi stearsa!");
+            }
+
+            return msg;
         }
     }
+}
 }

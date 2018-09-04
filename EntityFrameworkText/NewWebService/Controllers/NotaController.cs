@@ -37,98 +37,94 @@ namespace NewWebService.Controllers
         }
 
         // POST: api/Nota
-        public void Post(HttpRequestMessage request)
+        public HttpResponseMessage Post(HttpRequestMessage request)
         {
-            var value = request.Content.ReadAsStringAsync().Result;
+            var msg = new HttpResponseMessage();
 
-            NotaDTO Nota = JsonConvert.DeserializeObject<NotaDTO>(value);
-            t_nota Notanoua = Mapper.Map<NotaDTO, t_nota>(Nota);
+            try
+            {
+                var value = request.Content.ReadAsStringAsync().Result;
 
-            //    catalog.Note.Add(new NotaDTO()
-            //    {
+                NotaDTO nota = JsonConvert.DeserializeObject<NotaDTO>(value);
+                t_nota notanoua = Mapper.Map<NotaDTO, t_nota>(nota);
 
-            //        Id = Nota.Id,
-            //        Nota = Nota.Nota,
-            //        Teza = Nota.Teza,
-            //        Semestrul = Nota.Semestrul,
-            //        Data = Nota.Data,
-            //        ElevID = Nota.ElevID,
-            //        Elev = Nota.Elev,
-            //        MaterieID = Nota.MaterieID,
-            //        Materie = Nota.Materie
+                catalog.Note.Add(notanoua);
+                catalog.SaveChanges();
 
-            //});
+                msg.StatusCode = System.Net.HttpStatusCode.OK;
+                msg.Content = new StringContent("O nota noua a fost adaugata!");
+            }
+            catch (Exception ex)
+            {
+                msg.StatusCode = System.Net.HttpStatusCode.BadRequest;
+                msg.Content = new StringContent("Nu s-a putut adauga o nota noua!");
+            }
 
-            catalog.Note.Add(Notanoua);
-            catalog.SaveChanges();
-
-
+            return msg;
         }
 
         // PUT: api/Nota/5
-        public void Put(int id, HttpRequestMessage request)
+        public HttpResponseMessage Put(int id, HttpRequestMessage request)
         {
-            var value = request.Content.ReadAsStringAsync().Result;
+            var msg = new HttpResponseMessage();
 
-            t_nota Nota = catalog.Note.Where(n => n.Id == id).FirstOrDefault();
-            NotaDTO Notanoua = JsonConvert.DeserializeObject<NotaDTO>(value);
+            try
+            {
+                var value = request.Content.ReadAsStringAsync().Result;
 
+                t_nota nota = catalog.Note.Where(notacautata => notacautata.Id == id).FirstOrDefault();
+                NotaDTO notanoua = JsonConvert.DeserializeObject<NotaDTO>(value);
 
-            Nota.Id = Notanoua.Id;
-            Nota.Nota = Notanoua.Nota;
-            Nota.Teza = Notanoua.Teza;
-            Nota.Semestrul = Notanoua.Semestrul;
-            Nota.Data = Notanoua.Data;
-            Nota.ElevID = Notanoua.ElevID;
-            t_elev Elev = catalog.Elevi.Where(e => e.Id == Nota.ElevID).FirstOrDefault();
-            Nota.Elev = Elev;
-            // Nota.Elev = Notades.Elev;
-            Nota.MaterieID = Notanoua.MaterieID;
-            t_materie materie = catalog.Materii.Where(m => m.Id == Nota.MaterieID).FirstOrDefault();
-            Nota.Materie = materie;
-            // Nota.Materie = Notades.Materie;
+                nota.Id = notanoua.Id;
+                nota.Data = notanoua.Data;
+                nota.Nota = notanoua.Nota;
+                nota.Semestrul = notanoua.Semestrul;
+                nota.Teza = notanoua.Teza;
+                
+                t_elev elev = catalog.Elevi.Where(elevcautat => elevcautat.Id == notanoua.ElevID).FirstOrDefault();
+                nota.Elev = elev;
+                t_materie materie = catalog.Materii.Where(materiecautata => materiecautata.Id == notanoua.MaterieID).FirstOrDefault();
+                nota.Materie = materie;
+               
+                //Lista de elevi
 
+                catalog.SaveChanges();
 
+                msg.StatusCode = System.Net.HttpStatusCode.OK;
+                msg.Content = new StringContent("Modificarile au fost procesate cu succes!");
+            }
+            catch (Exception ex)
+            {
+                msg.StatusCode = System.Net.HttpStatusCode.BadRequest;
+                msg.Content = new StringContent("Nu s-au putut executa modificarile dorite!");
+            }
 
-            //var tNota = Mapper.Map<NotaDTO, t_nota>(Nota);
-            //t_nota newNota = Mapper.Map<NotaDTO, t_nota>(tNota);
-
-
-
-
-            //var existingNota = catalog.Note.Where(n => n = Nota.Id).FirstorDefault<NotaDTO>();
-
-            //if (existingNota != null)
-            //{
-            //    existingNota.Id = Nota.Id;
-            //    existingNota.Nota = Nota.Nota;
-            //    existingNota.Teza = Nota.Teza;
-            //    existingNota.Semestrul = Nota.Semestrul;
-            //    existingNota.Data = Nota.Data;
-            //    existingNota.ElevId = Nota.ElevID;
-            //    existingNota.Elev = Nota.Elev;
-            //    existingNota.MaterieId = Nota.MaterieID;
-            //    existingNota.Materie = Nota.Materie;
-
-            //    catalog.SaveChanges();
-            //}
-            //else
-            //{
-            //    return NotFound();
-            //}
-
-            catalog.SaveChanges();
-
-
+            return msg;
         }
 
         // DELETE: api/Nota/5
-        public void Delete(int id)
+        public HttpResponseMessage Delete(int id)
         {
-            t_nota Nota = catalog.Note.Where(n => n.Id == id).FirstOrDefault();
-            catalog.Note.Remove(Nota);
-            catalog.SaveChanges();
+            var msg = new HttpResponseMessage();
 
+            try
+            {
+                t_nota nota = catalog.Note.Where(notacautata => notacautata.Id == id).FirstOrDefault();
+                catalog.Note.Remove(nota);
+
+                catalog.SaveChanges();
+
+                msg.StatusCode = System.Net.HttpStatusCode.OK;
+                msg.Content = new StringContent("Stergerea a fost executata cu succes!");
+            }
+            catch (Exception ex)
+            {
+                msg.StatusCode = System.Net.HttpStatusCode.BadRequest;
+                msg.Content = new StringContent("Nota dorita nu a putut fi stearsa!");
+            }
+
+            return msg;
         }
     }
 }
+

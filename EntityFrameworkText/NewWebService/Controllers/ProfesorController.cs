@@ -52,45 +52,77 @@ namespace NewWebService.Controllers
                 catalog.SaveChanges();
 
                 msg.StatusCode = System.Net.HttpStatusCode.OK;
-                msg.Content = new StringContent("POST Request performed successfully");
+                msg.Content = new StringContent("Un profesor nou a fost adaugat!");
             }
             catch(Exception)
             {
                 msg.StatusCode = System.Net.HttpStatusCode.BadRequest;
-                msg.Content = new StringContent("POST Request could not be performed");
+                msg.Content = new StringContent("Nu s-a putut adauga un profesor nou!");
             }
 
             return msg;
         }
 
         // PUT: api/Profesor/5
-        public void Put(int id, HttpRequestMessage request)
+        public HttpResponseMessage Put(int id, HttpRequestMessage request)
         {
-            var value = request.Content.ReadAsStringAsync().Result;
+            var msg = new HttpResponseMessage();
 
-            ProfesorDTO profesornou = JsonConvert.DeserializeObject<ProfesorDTO>(value);
-            t_profesor profesor = catalog.Profesorii.Where(prof => prof.Id == id).FirstOrDefault();
+            try
+            {
+                var value = request.Content.ReadAsStringAsync().Result;
 
-            profesor.Id = profesornou.Id;
-            profesor.Nume = profesornou.Nume;
-            profesor.Prenume = profesornou.Prenume;
-            profesor.Telefon = profesornou.Telefon;
-            profesor.Email = profesornou.Email;
+                t_profesor prof = catalog.Profesorii.Where(profcautat => profcautat.Id == id).FirstOrDefault();
+                ProfesorDTO profnou = JsonConvert.DeserializeObject<ProfesorDTO>(value);
 
-            //Lista de absente
-            //Lista de materii
-            //Lista de observatii
+                prof.Id = profnou.Id;
+                prof.Email = profnou.Email;
+                prof.Nume = profnou.Nume;
+                prof.Parola = profnou.Parola;
+                prof.Prenume = profnou.Prenume;
+                prof.Telefon = profnou.Telefon;
+                
+                //Lista de Note
+                //Lista de Observatii
+                //Lista de Absente
+                //ICollection de Materii
 
-            catalog.SaveChanges();
+                catalog.SaveChanges();
+
+                msg.StatusCode = System.Net.HttpStatusCode.OK;
+                msg.Content = new StringContent("Modificarile au fost procesate cu succes!");
+            }
+            catch (Exception ex)
+            {
+                msg.StatusCode = System.Net.HttpStatusCode.BadRequest;
+                msg.Content = new StringContent("Nu s-au putut executa modificarile dorite!");
+            }
+
+            return msg;
         }
 
         // DELETE: api/Profesor/5
-        public void Delete(int id)
+        public HttpResponseMessage Delete(int id)
         {
-            t_profesor profesor = catalog.Profesorii.Where(prof => prof.Id == id).FirstOrDefault();
-            catalog.Profesorii.Remove(profesor);
+            var msg = new HttpResponseMessage();
 
-            catalog.SaveChanges();
+            try
+            {
+                t_profesor prof = catalog.Profesorii.Where(profcautat => profcautat.Id == id).FirstOrDefault();
+                catalog.Profesorii.Remove(prof);
+
+                catalog.SaveChanges();
+
+                msg.StatusCode = System.Net.HttpStatusCode.OK;
+                msg.Content = new StringContent("Stergerea a fost executata cu succes!");
+            }
+            catch (Exception ex)
+            {
+                msg.StatusCode = System.Net.HttpStatusCode.BadRequest;
+                msg.Content = new StringContent("Profesorul dorit nu a putut fi sters!");
+            }
+
+            return msg;
         }
     }
 }

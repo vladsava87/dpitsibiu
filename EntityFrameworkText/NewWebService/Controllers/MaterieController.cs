@@ -38,55 +38,87 @@ namespace NewWebService.Controllers
         }
 
         // POST: api/Materie
-        public void Post(HttpRequestMessage request)
+        public HttpResponseMessage Post(HttpRequestMessage request)
         {
-            var value = request.Content.ReadAsStringAsync().Result;
+            var msg = new HttpResponseMessage();
 
-            MaterieDTO Materie = JsonConvert.DeserializeObject<MaterieDTO>(value);
-            t_materie Materienoua = Mapper.Map<MaterieDTO, t_materie>(Materie);
+            try
+            {
+                var value = request.Content.ReadAsStringAsync().Result;
 
+                MaterieDTO materie = JsonConvert.DeserializeObject<MaterieDTO>(value);
+                t_materie materienoua = Mapper.Map<MaterieDTO, t_materie>(materie);
 
+                catalog.Materii.Add(materienoua);
+                catalog.SaveChanges();
 
-            //catalog.Materii.Add(new MaterieDTO()
-            //    {
-            //        Id = Materie.Id,
-            //        Nume = Materie.Nume,
-            //        Optional = Materie.Optional,
-            //        Absente = Materie.Absente,
-            //        Note = Materie.Note
+                msg.StatusCode = System.Net.HttpStatusCode.OK;
+                msg.Content = new StringContent("O materie noua a fost adaugata!");
+            }
+            catch (Exception ex)
+            {
+                msg.StatusCode = System.Net.HttpStatusCode.BadRequest;
+                msg.Content = new StringContent("Nu s-a putut adauga o materie noua!");
+            }
 
-
-
-            //});
-            catalog.Materii.Add(Materienoua);
-            catalog.SaveChanges();
-
-
-
+            return msg;
         }
 
         // PUT: api/Materie/5
-        public void Put(int id, HttpRequestMessage request)
+        public HttpResponseMessage Put(int id, HttpRequestMessage request)
         {
-            var value = request.Content.ReadAsStringAsync().Result;
+            var msg = new HttpResponseMessage();
 
-            t_materie Materie = catalog.Materii.Where(m => m.Id == id).FirstOrDefault();
-            MaterieDTO Materienoua = JsonConvert.DeserializeObject<MaterieDTO>(value);
+            try
+            {
+                var value = request.Content.ReadAsStringAsync().Result;
 
-            Materie.Id = Materienoua.Id;
-            Materie.Nume = Materienoua.Nume;
-            Materie.Optional = Materienoua.Optional;
-            //Materie.Absente = Materienoua.Absente;
-            //Materie.Note = Materienoua.Note;
+                t_materie materie = catalog.Materii.Where(materiecautata => materiecautata.Id == id).FirstOrDefault();
+                MaterieDTO materienoua = JsonConvert.DeserializeObject<MaterieDTO>(value);
 
+                materie.Id = materienoua.Id;
+                materie.Nume = materienoua.Nume;
+                materie.Optional = materienoua.Optional;
+                
+                //Lista de Note
+                //Lista de Profesori
+
+                catalog.SaveChanges();
+
+                msg.StatusCode = System.Net.HttpStatusCode.OK;
+                msg.Content = new StringContent("Modificarile au fost procesate cu succes!");
+            }
+            catch (Exception ex)
+            {
+                msg.StatusCode = System.Net.HttpStatusCode.BadRequest;
+                msg.Content = new StringContent("Nu s-au putut executa modificarile dorite!");
+            }
+
+            return msg;
         }
 
         // DELETE: api/Materie/5
-        public void Delete(int id)
+        public HttpResponseMessage Delete(int id)
         {
-            t_materie Materie = catalog.Materii.Where(m => m.Id == id).FirstOrDefault();
-            catalog.Materii.Remove(Materie);
-            catalog.SaveChanges();
+            var msg = new HttpResponseMessage();
+
+            try
+            {
+                t_materie materie = catalog.Materii.Where(materiecautata => materiecautata.Id == id).FirstOrDefault();
+                catalog.Materii.Remove(materie);
+
+                catalog.SaveChanges();
+
+                msg.StatusCode = System.Net.HttpStatusCode.OK;
+                msg.Content = new StringContent("Stergerea a fost executata cu succes!");
+            }
+            catch (Exception ex)
+            {
+                msg.StatusCode = System.Net.HttpStatusCode.BadRequest;
+                msg.Content = new StringContent("Materia dorita nu a putut fi stearsa!");
+            }
+
+            return msg;
         }
     }
 }
