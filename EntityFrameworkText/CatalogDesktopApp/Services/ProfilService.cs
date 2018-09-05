@@ -9,14 +9,14 @@ using System.Threading.Tasks;
 
 namespace CatalogDesktopApp.Services
 {
-    public sealed class ClasaService
+    public sealed class ProfilService
     {
         private const string WebSiteAPI = @"http://localhost:1208/api";
 
         private static HttpClient _client;
-        private static ClasaService _instance;
+        private static ProfilService _instance;
 
-        ClasaService()
+        ProfilService()
         {
             _client = new HttpClient();
 
@@ -27,24 +27,24 @@ namespace CatalogDesktopApp.Services
             );
         }
 
-        public static ClasaService Instance
+        public static ProfilService Instance
         {
             get
             {
                 if (_instance == null)
                 {
-                    _instance = new ClasaService();
+                    _instance = new ProfilService();
                 }
 
                 return _instance;
             }
         }
 
-        public async Task<List<ClasaDTO>> GetListaClasa()
+        public async Task<List<ProfilDTO>> GetListaProfil()
         {
             try
             {
-                var requestLink = "/Clasa";
+                var requestLink = "/Profil";
 
                 var uri = new Uri(WebSiteAPI + requestLink);
 
@@ -53,9 +53,9 @@ namespace CatalogDesktopApp.Services
                 {
                     var content = await response.Content.ReadAsStringAsync();
 
-                    List<ClasaDTO> clasacautata = JsonConvert.DeserializeObject<List<ClasaDTO>>(content);
+                    List<ProfilDTO> profiluriCautate = JsonConvert.DeserializeObject<List<ProfilDTO>>(content);
 
-                    return clasacautata;
+                    return profiluriCautate;
                 }
             }
             catch (Exception ex) { }
@@ -63,43 +63,43 @@ namespace CatalogDesktopApp.Services
             return null;
         }
 
-        public async Task<ClasaDTO> GetClasa(int _clasaID)
+        public async Task<ProfilDTO> GetProfil(int _profilID)
         {
             try
             {
-                var requestLink = "/Clasa/";
+                var requestLink = "/Profil/";
 
-                var uri = new Uri(WebSiteAPI + requestLink + _clasaID.ToString());
+                var uri = new Uri(WebSiteAPI + requestLink + _profilID.ToString());
 
                 var response = await _client.GetAsync(uri);
-                if(response.IsSuccessStatusCode)
+                if (response.IsSuccessStatusCode)
                 {
                     var content = await response.Content.ReadAsStringAsync();
 
-                    ClasaDTO clasacautata = JsonConvert.DeserializeObject<ClasaDTO>(content);
+                    ProfilDTO profilCautat = JsonConvert.DeserializeObject<ProfilDTO>(content);
 
-                    return clasacautata;
+                    return profilCautat;
                 }
             }
             catch (Exception ex) { }
-            
+
             return null;
         }
 
-        public async Task<string> PostClasa(ClasaDTO clasaModificata)
+        public async Task<string> PostProfil(ProfilDTO profilNou)
         {
             try
             {
-                var requestLink = "/Clasa/";
+                var requestLink = "/Profil";
 
                 var uri = new Uri(WebSiteAPI + requestLink);
 
-                var myContent = JsonConvert.SerializeObject(clasaModificata);
+                var myContent = JsonConvert.SerializeObject(profilNou);
                 var buffer = Encoding.UTF8.GetBytes(myContent);
                 var byteContent = new ByteArrayContent(buffer);
 
                 var response = await _client.PostAsync(uri, byteContent);
-                if(response.IsSuccessStatusCode)
+                if (response.IsSuccessStatusCode)
                 {
                     var content = await response.Content.ReadAsStringAsync();
 
@@ -111,20 +111,20 @@ namespace CatalogDesktopApp.Services
             return null;
         }
 
-        public async Task<string> PutClasa(ClasaDTO clasaModificat)
+        public async Task<string> PutProfil(ProfilDTO profilNou)
         {
             try
             {
-                var requestLink = "/Clasa/";
+                var requestLink = "/Profil/";
 
-                var uri = new Uri(WebSiteAPI + requestLink + clasaModificat.Id.ToString());
+                var uri = new Uri(WebSiteAPI + requestLink + profilNou.Id.ToString());
 
-                var myContent = JsonConvert.SerializeObject(clasaModificat);
+                var myContent = JsonConvert.SerializeObject(profilNou);
                 var buffer = Encoding.UTF8.GetBytes(myContent);
                 var byteContent = new ByteArrayContent(buffer);
 
                 var response = await _client.PutAsync(uri, byteContent);
-                if(response.IsSuccessStatusCode)
+                if (response.IsSuccessStatusCode)
                 {
                     var content = await response.Content.ReadAsStringAsync();
 
@@ -136,13 +136,13 @@ namespace CatalogDesktopApp.Services
             return null;
         }
 
-        public async Task<string> DeleteClasa(int _clasaID)
+        public async Task<string> DeleteProfil(int _profilID)
         {
             try
             {
-                var requestLink = "/Clasa/";
+                var requestLink = "/Profil/";
 
-                var uri = new Uri(WebSiteAPI + requestLink + _clasaID.ToString());
+                var uri = new Uri(WebSiteAPI + requestLink + _profilID.ToString());
 
                 var response = await _client.DeleteAsync(uri);
                 if (response.IsSuccessStatusCode)

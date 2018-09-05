@@ -63,7 +63,14 @@
     <Compile Include="MessageBus\MessageBus.cs" />
     <Compile Include="MessageBus\TestMessage.cs" />
     <Compile Include="Properties\Annotations.cs" />
+    <Compile Include="Services\AbsentaService.cs" />
     <Compile Include="Services\ClasaService.cs" />
+    <Compile Include="Services\ElevService.cs" />
+    <Compile Include="Services\MaterieService.cs" />
+    <Compile Include="Services\NotaService.cs" />
+    <Compile Include="Services\ObservatieService.cs" />
+    <Compile Include="Services\ProfesorService.cs" />
+    <Compile Include="Services\ProfilService.cs" />
     <Compile Include="Services\UserService.cs" />
     <Compile Include="ViewModels\ClasaWindowViewModel.cs" />
     <Compile Include="ViewModels\ProfesoriWindowViewModel.cs" />

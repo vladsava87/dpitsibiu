@@ -9,53 +9,75 @@ using System.Threading.Tasks;
 
 namespace CatalogDesktopApp.Services
 {
-    public sealed class ClasaService
+    public sealed class ElevService
     {
-        private const string WebSiteAPI = @"http://localhost:1208/api";
+        private const string WebSiteAPI = @"http://localhost:1208/api/";
 
         private static HttpClient _client;
-        private static ClasaService _instance;
+        private static ElevService _instance;
 
-        ClasaService()
+        ElevService()
         {
             _client = new HttpClient();
 
-            //client.MaxResponseContentBufferSize = 256000;
             _client.DefaultRequestHeaders.Accept.Clear();
             _client.DefaultRequestHeaders.Accept.Add(
                 new MediaTypeWithQualityHeaderValue("application/Json")
             );
         }
 
-        public static ClasaService Instance
+        public static ElevService Instance
         {
             get
             {
-                if (_instance == null)
+                if (_instance != null)
                 {
-                    _instance = new ClasaService();
+                    _instance = new ElevService();
                 }
 
                 return _instance;
             }
         }
 
-        public async Task<List<ClasaDTO>> GetListaClasa()
+        public async Task<List<ElevDTO>> GetListaElev()
         {
             try
             {
-                var requestLink = "/Clasa";
+                var requestLink = "/Elev";
 
                 var uri = new Uri(WebSiteAPI + requestLink);
+
+                var response = await _client.GetAsync(uri);
+                if(response.IsSuccessStatusCode)
+                {
+                    var content = await response.Content.ReadAsStringAsync();
+
+                    List<ElevDTO> eleviAfisati = JsonConvert.DeserializeObject<List<ElevDTO>>(content);
+
+                    return eleviAfisati;
+                }
+            }
+            catch (Exception ex) { }
+
+            return null;
+        }
+
+        public async Task<ElevDTO> GetElev(int _clasaID)
+        {
+            try
+            {
+                var requestLink = "/Elev/";
+
+                var uri = new Uri(WebSiteAPI + requestLink + _clasaID.ToString());
 
                 var response = await _client.GetAsync(uri);
                 if (response.IsSuccessStatusCode)
                 {
                     var content = await response.Content.ReadAsStringAsync();
 
-                    List<ClasaDTO> clasacautata = JsonConvert.DeserializeObject<List<ClasaDTO>>(content);
+                    ElevDTO elevAfisat = JsonConvert.DeserializeObject<ElevDTO>(content);
 
-                    return clasacautata;
+                    return elevAfisat;
                 }
             }
             catch (Exception ex) { }
@@ -63,43 +85,20 @@ namespace CatalogDesktopApp.Services
             return null;
         }
 
-        public async Task<ClasaDTO> GetClasa(int _clasaID)
+        public async Task<string> PostElev(ElevDTO elevNou)
         {
             try
             {
-                var requestLink = "/Clasa/";
-
-                var uri = new Uri(WebSiteAPI + requestLink + _clasaID.ToString());
-
-                var response = await _client.GetAsync(uri);
-                if(response.IsSuccessStatusCode)
-                {
-                    var content = await response.Content.ReadAsStringAsync();
-
-                    ClasaDTO clasacautata = JsonConvert.DeserializeObject<ClasaDTO>(content);
-
-                    return clasacautata;
-                }
-            }
-            catch (Exception ex) { }
-            
-            return null;
-        }
-
-        public async Task<string> PostClasa(ClasaDTO clasaModificata)
-        {
-            try
-            {
-                var requestLink = "/Clasa/";
+                var requestLink = "/Elev";
 
                 var uri = new Uri(WebSiteAPI + requestLink);
 
-                var myContent = JsonConvert.SerializeObject(clasaModificata);
+                var myContent = JsonConvert.SerializeObject(elevNou);
                 var buffer = Encoding.UTF8.GetBytes(myContent);
                 var byteContent = new ByteArrayContent(buffer);
 
                 var response = await _client.PostAsync(uri, byteContent);
-                if(response.IsSuccessStatusCode)
+                if (response.IsSuccessStatusCode)
                 {
                     var content = await response.Content.ReadAsStringAsync();
 
@@ -111,20 +110,20 @@ namespace CatalogDesktopApp.Services
             return null;
         }
 
-        public async Task<string> PutClasa(ClasaDTO clasaModificat)
+        public async Task<string> PutElev(ElevDTO elevNou)
         {
             try
             {
-                var requestLink = "/Clasa/";
+                var requestLink = "/Elev/";
 
-                var uri = new Uri(WebSiteAPI + requestLink + clasaModificat.Id.ToString());
+                var uri = new Uri(WebSiteAPI + requestLink + elevNou.Id.ToString());
 
-                var myContent = JsonConvert.SerializeObject(clasaModificat);
+                var myContent = JsonConvert.SerializeObject(elevNou);
                 var buffer = Encoding.UTF8.GetBytes(myContent);
                 var byteContent = new ByteArrayContent(buffer);
 
                 var response = await _client.PutAsync(uri, byteContent);
-                if(response.IsSuccessStatusCode)
+                if (response.IsSuccessStatusCode)
                 {
                     var content = await response.Content.ReadAsStringAsync();
 
@@ -136,13 +135,13 @@ namespace CatalogDesktopApp.Services
             return null;
         }
 
-        public async Task<string> DeleteClasa(int _clasaID)
+        public async Task<string> DeleteElev(int _elevID)
         {
             try
             {
-                var requestLink = "/Clasa/";
+                var requestLink = "/Elev/";
 
-                var uri = new Uri(WebSiteAPI + requestLink + _clasaID.ToString());
+                var uri = new Uri(WebSiteAPI + requestLink + _elevID.ToString());
 
                 var response = await _client.DeleteAsync(uri);
                 if (response.IsSuccessStatusCode)

@@ -9,14 +9,14 @@ using System.Threading.Tasks;
 
 namespace CatalogDesktopApp.Services
 {
-    public sealed class ClasaService
+    public sealed class ObservatieService
     {
         private const string WebSiteAPI = @"http://localhost:1208/api";
 
         private static HttpClient _client;
-        private static ClasaService _instance;
+        private static ObservatieService _instance;
 
-        ClasaService()
+        ObservatieService()
         {
             _client = new HttpClient();
 
@@ -27,24 +27,24 @@ namespace CatalogDesktopApp.Services
             );
         }
 
-        public static ClasaService Instance
+        public static ObservatieService Instance
         {
             get
             {
                 if (_instance == null)
                 {
-                    _instance = new ClasaService();
+                    _instance = new ObservatieService();
                 }
 
                 return _instance;
             }
         }
 
-        public async Task<List<ClasaDTO>> GetListaClasa()
+        public async Task<List<ObservatieDTO>> GetListaObservatie()
         {
             try
             {
-                var requestLink = "/Clasa";
+                var requestLink = "/Observatie";
 
                 var uri = new Uri(WebSiteAPI + requestLink);
 
@@ -53,9 +53,9 @@ namespace CatalogDesktopApp.Services
                 {
                     var content = await response.Content.ReadAsStringAsync();
 
-                    List<ClasaDTO> clasacautata = JsonConvert.DeserializeObject<List<ClasaDTO>>(content);
+                    List<ObservatieDTO> observatieCautata = JsonConvert.DeserializeObject<List<ObservatieDTO>>(content);
 
-                    return clasacautata;
+                    return observatieCautata;
                 }
             }
             catch (Exception ex) { }
@@ -63,43 +63,43 @@ namespace CatalogDesktopApp.Services
             return null;
         }
 
-        public async Task<ClasaDTO> GetClasa(int _clasaID)
+        public async Task<ObservatieDTO> GetObservatie(int _observatieID)
         {
             try
             {
-                var requestLink = "/Clasa/";
+                var requestLink = "/Observatie/";
 
-                var uri = new Uri(WebSiteAPI + requestLink + _clasaID.ToString());
+                var uri = new Uri(WebSiteAPI + requestLink + _observatieID.ToString());
 
                 var response = await _client.GetAsync(uri);
-                if(response.IsSuccessStatusCode)
+                if (response.IsSuccessStatusCode)
                 {
                     var content = await response.Content.ReadAsStringAsync();
 
-                    ClasaDTO clasacautata = JsonConvert.DeserializeObject<ClasaDTO>(content);
+                    ObservatieDTO observatieCautata = JsonConvert.DeserializeObject<ObservatieDTO>(content);
 
-                    return clasacautata;
+                    return observatieCautata;
                 }
             }
             catch (Exception ex) { }
-            
+
             return null;
         }
 
-        public async Task<string> PostClasa(ClasaDTO clasaModificata)
+        public async Task<string> PostObservatie(ObservatieDTO observatieNoua)
         {
             try
             {
-                var requestLink = "/Clasa/";
+                var requestLink = "/Observatie";
 
                 var uri = new Uri(WebSiteAPI + requestLink);
 
-                var myContent = JsonConvert.SerializeObject(clasaModificata);
+                var myContent = JsonConvert.SerializeObject(observatieNoua);
                 var buffer = Encoding.UTF8.GetBytes(myContent);
                 var byteContent = new ByteArrayContent(buffer);
 
                 var response = await _client.PostAsync(uri, byteContent);
-                if(response.IsSuccessStatusCode)
+                if (response.IsSuccessStatusCode)
                 {
                     var content = await response.Content.ReadAsStringAsync();
 
@@ -111,20 +111,20 @@ namespace CatalogDesktopApp.Services
             return null;
         }
 
-        public async Task<string> PutClasa(ClasaDTO clasaModificat)
+        public async Task<string> PutObservatie(ObservatieDTO observatieNoua)
         {
             try
             {
-                var requestLink = "/Clasa/";
+                var requestLink = "/Observatie/";
 
-                var uri = new Uri(WebSiteAPI + requestLink + clasaModificat.Id.ToString());
+                var uri = new Uri(WebSiteAPI + requestLink + observatieNoua.Id.ToString());
 
-                var myContent = JsonConvert.SerializeObject(clasaModificat);
+                var myContent = JsonConvert.SerializeObject(observatieNoua);
                 var buffer = Encoding.UTF8.GetBytes(myContent);
                 var byteContent = new ByteArrayContent(buffer);
 
                 var response = await _client.PutAsync(uri, byteContent);
-                if(response.IsSuccessStatusCode)
+                if (response.IsSuccessStatusCode)
                 {
                     var content = await response.Content.ReadAsStringAsync();
 
@@ -136,13 +136,13 @@ namespace CatalogDesktopApp.Services
             return null;
         }
 
-        public async Task<string> DeleteClasa(int _clasaID)
+        public async Task<string> DeleteObservatie(int _observatieID)
         {
             try
             {
-                var requestLink = "/Clasa/";
+                var requestLink = "/Observatie/";
 
-                var uri = new Uri(WebSiteAPI + requestLink + _clasaID.ToString());
+                var uri = new Uri(WebSiteAPI + requestLink + _observatieID.ToString());
 
                 var response = await _client.DeleteAsync(uri);
                 if (response.IsSuccessStatusCode)

@@ -9,14 +9,14 @@ using System.Threading.Tasks;
 
 namespace CatalogDesktopApp.Services
 {
-    public sealed class ClasaService
+    public sealed class AbsentaService
     {
         private const string WebSiteAPI = @"http://localhost:1208/api";
 
         private static HttpClient _client;
-        private static ClasaService _instance;
+        private static AbsentaService _instance;
 
-        ClasaService()
+        AbsentaService()
         {
             _client = new HttpClient();
 
@@ -27,24 +27,24 @@ namespace CatalogDesktopApp.Services
             );
         }
 
-        public static ClasaService Instance
+        public static AbsentaService Instance
         {
             get
             {
                 if (_instance == null)
                 {
-                    _instance = new ClasaService();
+                    _instance = new AbsentaService();
                 }
 
                 return _instance;
             }
         }
 
-        public async Task<List<ClasaDTO>> GetListaClasa()
+        public async Task<List<AbsentaDTO>> GetListaAbsenta()
         {
             try
             {
-                var requestLink = "/Clasa";
+                var requestLink = "/Absenta";
 
                 var uri = new Uri(WebSiteAPI + requestLink);
 
@@ -53,9 +53,9 @@ namespace CatalogDesktopApp.Services
                 {
                     var content = await response.Content.ReadAsStringAsync();
 
-                    List<ClasaDTO> clasacautata = JsonConvert.DeserializeObject<List<ClasaDTO>>(content);
+                    List<AbsentaDTO> absentaCautata = JsonConvert.DeserializeObject<List<AbsentaDTO>>(content);
 
-                    return clasacautata;
+                    return absentaCautata;
                 }
             }
             catch (Exception ex) { }
@@ -63,43 +63,43 @@ namespace CatalogDesktopApp.Services
             return null;
         }
 
-        public async Task<ClasaDTO> GetClasa(int _clasaID)
+        public async Task<AbsentaDTO> GetAbsenta(int _absentaID)
         {
             try
             {
-                var requestLink = "/Clasa/";
+                var requestLink = "/Absenta/";
 
-                var uri = new Uri(WebSiteAPI + requestLink + _clasaID.ToString());
+                var uri = new Uri(WebSiteAPI + requestLink + _absentaID.ToString());
 
                 var response = await _client.GetAsync(uri);
-                if(response.IsSuccessStatusCode)
+                if (response.IsSuccessStatusCode)
                 {
                     var content = await response.Content.ReadAsStringAsync();
 
-                    ClasaDTO clasacautata = JsonConvert.DeserializeObject<ClasaDTO>(content);
+                    AbsentaDTO absentaCautata = JsonConvert.DeserializeObject<AbsentaDTO>(content);
 
-                    return clasacautata;
+                    return absentaCautata;
                 }
             }
             catch (Exception ex) { }
-            
+
             return null;
         }
 
-        public async Task<string> PostClasa(ClasaDTO clasaModificata)
+        public async Task<string> PostAbsenta(AbsentaDTO absentaNoua)
         {
             try
             {
-                var requestLink = "/Clasa/";
+                var requestLink = "/Absenta";
 
                 var uri = new Uri(WebSiteAPI + requestLink);
 
-                var myContent = JsonConvert.SerializeObject(clasaModificata);
+                var myContent = JsonConvert.SerializeObject(absentaNoua);
                 var buffer = Encoding.UTF8.GetBytes(myContent);
                 var byteContent = new ByteArrayContent(buffer);
 
                 var response = await _client.PostAsync(uri, byteContent);
-                if(response.IsSuccessStatusCode)
+                if (response.IsSuccessStatusCode)
                 {
                     var content = await response.Content.ReadAsStringAsync();
 
@@ -111,20 +111,20 @@ namespace CatalogDesktopApp.Services
             return null;
         }
 
-        public async Task<string> PutClasa(ClasaDTO clasaModificat)
+        public async Task<string> PutAbsenta(AbsentaDTO absentaNoua)
         {
             try
             {
-                var requestLink = "/Clasa/";
+                var requestLink = "/Absenta/";
 
-                var uri = new Uri(WebSiteAPI + requestLink + clasaModificat.Id.ToString());
+                var uri = new Uri(WebSiteAPI + requestLink + absentaNoua.Id.ToString());
 
-                var myContent = JsonConvert.SerializeObject(clasaModificat);
+                var myContent = JsonConvert.SerializeObject(absentaNoua);
                 var buffer = Encoding.UTF8.GetBytes(myContent);
                 var byteContent = new ByteArrayContent(buffer);
 
                 var response = await _client.PutAsync(uri, byteContent);
-                if(response.IsSuccessStatusCode)
+                if (response.IsSuccessStatusCode)
                 {
                     var content = await response.Content.ReadAsStringAsync();
 
@@ -136,13 +136,13 @@ namespace CatalogDesktopApp.Services
             return null;
         }
 
-        public async Task<string> DeleteClasa(int _clasaID)
+        public async Task<string> DeleteAbsenta(int _absentaID)
         {
             try
             {
-                var requestLink = "/Clasa/";
+                var requestLink = "/Absenta/";
 
-                var uri = new Uri(WebSiteAPI + requestLink + _clasaID.ToString());
+                var uri = new Uri(WebSiteAPI + requestLink + _absentaID.ToString());
 
                 var response = await _client.DeleteAsync(uri);
                 if (response.IsSuccessStatusCode)

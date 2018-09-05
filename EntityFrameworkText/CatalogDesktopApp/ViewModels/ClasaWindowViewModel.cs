@@ -30,7 +30,7 @@ namespace CatalogDesktopApp.ViewModels
         {
             _classId = id;
 
-            Clasa = await _clasaService.GetDetailsClasa(_classId);
+            Clasa = await _clasaService.GetClasa(_classId);
         }
         
         public ClasaWindowViewModel()
