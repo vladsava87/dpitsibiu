@@ -11,7 +11,7 @@ namespace CatalogDesktopApp.Services
 {
     public sealed class NotaService
     {
-        private const string WebSiteAPI = @"http://localhost:1208/";
+        private const string WebSiteAPI = @"http://localhost:1208/api";
 
         private static HttpClient _client;
         private static NotaService _instance;
@@ -30,7 +30,7 @@ namespace CatalogDesktopApp.Services
         {
             get
             {
-                if(_instance != null)
+                if(_instance == null)
                 {
                     _instance = new NotaService();
                 }

@@ -90,7 +90,7 @@ namespace CatalogDesktopApp.Services
         {
             try
             {
-                var requestLink = "/Clasa/";
+                var requestLink = "/Clasa";
 
                 var uri = new Uri(WebSiteAPI + requestLink);
 

@@ -11,7 +11,7 @@ namespace CatalogDesktopApp.Services
 {
     public sealed class ElevService
     {
-        private const string WebSiteAPI = @"http://localhost:1208/api/";
+        private const string WebSiteAPI = @"http://localhost:1208/api";
 
         private static HttpClient _client;
         private static ElevService _instance;
@@ -30,7 +30,7 @@ namespace CatalogDesktopApp.Services
         {
             get
             {
-                if (_instance != null)
+                if (_instance == null)
                 {
                     _instance = new ElevService();
                 }
@@ -62,13 +62,13 @@ namespace CatalogDesktopApp.Services
             return null;
         }
 
-        public async Task<ElevDTO> GetElev(int _clasaID)
+        public async Task<ElevDTO> GetElev(int _elevID)
         {
             try
             {
                 var requestLink = "/Elev/";
 
-                var uri = new Uri(WebSiteAPI + requestLink + _clasaID.ToString());
+                var uri = new Uri(WebSiteAPI + requestLink + _elevID.ToString());
 
                 var response = await _client.GetAsync(uri);
                 if (response.IsSuccessStatusCode)

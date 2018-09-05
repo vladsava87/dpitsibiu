@@ -53,9 +53,9 @@ namespace CatalogDesktopApp.Services
                 {
                     var content = await response.Content.ReadAsStringAsync();
 
-                    List<ProfesorDTO> clasacautata = JsonConvert.DeserializeObject<List<ProfesorDTO>>(content);
+                    List<ProfesorDTO> profesoriCautati = JsonConvert.DeserializeObject<List<ProfesorDTO>>(content);
 
-                    return clasacautata;
+                    return profesoriCautati;
                 }
             }
             catch (Exception ex) { }
@@ -76,9 +76,9 @@ namespace CatalogDesktopApp.Services
                 {
                     var content = await response.Content.ReadAsStringAsync();
 
-                    ProfesorDTO clasacautata = JsonConvert.DeserializeObject<ProfesorDTO>(content);
+                    ProfesorDTO profesorCautat = JsonConvert.DeserializeObject<ProfesorDTO>(content);
 
-                    return clasacautata;
+                    return profesorCautat;
                 }
             }
             catch (Exception ex) { }
