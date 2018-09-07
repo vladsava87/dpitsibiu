@@ -85,6 +85,28 @@ namespace CatalogDesktopApp.Services
             return null;
         }
 
+        public Task<ElevDTO> GetElevAsync(int _elevID)
+        {
+            return Task.Factory.StartNew(() =>
+            {
+                var requestLink = "/Elev/";
+
+                var uri = new Uri(WebSiteAPI + requestLink + _elevID.ToString());
+
+                var response = _client.GetAsync(uri).Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    var content = response.Content.ReadAsStringAsync().Result;
+
+                    ElevDTO elevAfisat = JsonConvert.DeserializeObject<ElevDTO>(content);
+
+                    return elevAfisat;
+                }
+
+                return null;
+            });
+        }
+
         public async Task<string> PostElev(ElevDTO elevNou)
         {
             try

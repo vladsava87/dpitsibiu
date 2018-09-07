@@ -11,7 +11,7 @@ using System.Windows.Input;
 
 namespace CatalogDesktopApp.ViewModels
 {
-    public class ProfesoriWindowViewModel : INotifyPropertyChanged
+    public class ProfesoriWindowViewModel : ViewModelBase
     {
         public ProfesorDTO Profesor
         {
@@ -34,16 +34,6 @@ namespace CatalogDesktopApp.ViewModels
         {
             get { return Profesor.Nume + " " + Profesor.Prenume; }
 
-        }
-
-
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        [NotifyPropertyChangedInvocator]
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

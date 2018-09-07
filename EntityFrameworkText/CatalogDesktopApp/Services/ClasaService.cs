@@ -63,28 +63,54 @@ namespace CatalogDesktopApp.Services
             return null;
         }
 
-        public async Task<ClasaDTO> GetClasa(int _clasaID)
+
+        public ClasaDTO GetClasa(int _clasaID)
         {
-            try
+            return GetClasaAsync(_clasaID).Result;
+        }
+
+        public Task<ClasaDTO> GetClasaAsync(int _clasaID)
+        {
+            return Task.Factory.StartNew(() =>
             {
                 var requestLink = "/Clasa/";
 
                 var uri = new Uri(WebSiteAPI + requestLink + _clasaID.ToString());
 
-                var response = await _client.GetAsync(uri);
-                if(response.IsSuccessStatusCode)
+                var response =  _client.GetAsync(uri).Result;
+                if (response.IsSuccessStatusCode)
                 {
-                    var content = await response.Content.ReadAsStringAsync();
+                    var content = response.Content.ReadAsStringAsync().Result;
 
                     ClasaDTO clasacautata = JsonConvert.DeserializeObject<ClasaDTO>(content);
 
                     return clasacautata;
                 }
-            }
-            catch (Exception ex) { }
-            
-            return null;
+
+                return null;
+            });
         }
+
+        //    try
+        //    {
+        //        var requestLink = "/Clasa/";
+
+        //        var uri = new Uri(WebSiteAPI + requestLink + _clasaID.ToString());
+
+        //        var response = await _client.GetAsync(uri);
+        //        if(response.IsSuccessStatusCode)
+        //        {
+        //            var content = await response.Content.ReadAsStringAsync();
+
+        //            ClasaDTO clasacautata = JsonConvert.DeserializeObject<ClasaDTO>(content);
+
+        //            return clasacautata;
+        //        }
+        //    }
+        //    catch (Exception ex) { }
+            
+        //    return null;
+        //}
 
         public async Task<string> PostClasa(ClasaDTO clasaModificata)
         {

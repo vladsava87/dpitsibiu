@@ -7,14 +7,9 @@
         xmlns:view="clr-namespace:CatalogDesktopApp.Views"
         mc:Ignorable="d"
         Background="White" Height="450" Width="800">
-    <UserControl.DataContext>
+    <!--<UserControl.DataContext>
         <vm:ClasaWindowViewModel />
-    </UserControl.DataContext>
-    <UserControl.Resources>
-        <DataTemplate DataType="{x:Type vm:ElevWindowViewModel}">
-            <view:ElevWindow/>
-        </DataTemplate>
-    </UserControl.Resources>
+    </UserControl.DataContext>-->
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -36,7 +31,7 @@
             </ListBox.ItemTemplate>
         </ListBox>
         <Grid Grid.Column="1">
-            <ContentControl Name="PresentationControl" Content="{Binding CurrentElevViewModel}"/>
+            <ContentControl Name="PresentationControl" Content="{Binding CurrentViewElev}"/>
         </Grid>
     </Grid>
 </UserControl>

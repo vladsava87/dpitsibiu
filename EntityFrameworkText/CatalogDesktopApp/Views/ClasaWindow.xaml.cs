@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using CatalogDesktopApp.ViewModels;
 
 namespace CatalogDesktopApp.Views
 {
@@ -8,14 +9,10 @@ namespace CatalogDesktopApp.Views
     /// </summary>
     public partial class ClasaWindow : UserControl
     {
-        public ClasaWindow()
+        public ClasaWindow(ClasaWindowViewModel vm)
         {
             InitializeComponent();
-        }
-
-        private void EleviListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
+            DataContext = vm;
         }
     }
 }

@@ -6,10 +6,10 @@
         xmlns:local="clr-namespace:CatalogDesktopApp.Views"
         xmlns:VM="clr-namespace:CatalogDesktopApp.ViewModels"
         mc:Ignorable="d"
-        Background="White" Height="450" Width="800">
-    <UserControl.DataContext>
+        Background="White">
+    <!--<UserControl.DataContext>
         <VM:ElevWindowViewModel />
-    </UserControl.DataContext>
+    </UserControl.DataContext>-->
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
@@ -17,47 +17,58 @@
             <RowDefinition Height="50" />
             <RowDefinition Height="50" />
         </Grid.RowDefinitions>
-        <Label Content="{Binding NumePrenume, Mode=OneWay}" Height="44" Margin="272,57,274,0" VerticalAlignment="Top" Width="247" FontWeight="Bold" FontSize="22" HorizontalAlignment="Center" Grid.Row="0"/>
-        <Grid Margin="123,129,274,110" ShowGridLines="True" Grid.Row="0">
+        <Grid Row="0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="200"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="1*" />
-                <RowDefinition Height="1*" />
-                <RowDefinition Height="1*" />
-                <RowDefinition Height="1*" />
-                <RowDefinition Height="1*" />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
             </Grid.RowDefinitions>
-            <Label Content="Clasa:" Grid.Column="0" Grid.Row="0" FontSize="15"/>
-            <Label Content="{Binding ClassName}" Grid.Column="1" Grid.Row="0" FontSize="15"/>
-           
-            <Label Content="Numar Matricol:" Grid.Column="0" Grid.Row="1" FontSize="15"/>
-            <Label Content="{Binding Elev.Numar_Matricol}" Grid.Column="1" Grid.Row="1" FontSize="15"/>
-            
-            <Label Content="Data Nasterii:" Grid.Column="0" Grid.Row="2" FontSize="15"/>
-            <Label Content="{Binding Elev.Data}" Grid.Column="1" Grid.Row="2" FontSize="15"/>
-            
-            <Label Content="Telefon:" Grid.Column="0" Grid.Row="3" FontSize="15"/>
-            <Label Content="{Binding Elev.Telefon}" Grid.Column="1" Grid.Row="3" FontSize="15"/>
-            
-            <Label Content="Email:" Grid.Column="0" Grid.Row="4" FontSize="15"/>
-            <Label Content="{Binding Elev.Email}" Grid.Column="1" Grid.Row="4" FontSize="15"/>
+
+            <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Label Content="{Binding Elev.Nume}" VerticalAlignment="Center" FontWeight="Bold" FontSize="22" HorizontalAlignment="Center"/>
+                <Label Content="{Binding Elev.Prenume}" VerticalAlignment="Center" FontWeight="Bold" FontSize="22" HorizontalAlignment="Center"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Label Content="Clasa:" FontSize="15"/>
+                <Label Content="{Binding ClassName}" FontSize="15"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Label Content="Numar Matricol:" Grid.Column="0" Grid.Row="1" FontSize="15"/>
+                <Label Content="{Binding Elev.Numar_Matricol}" Grid.Column="1" Grid.Row="1" FontSize="15"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Label Content="Data Nasterii:" Grid.Column="0" Grid.Row="2" FontSize="15"/>
+                <Label Content="{Binding Elev.Data}" Grid.Column="1" Grid.Row="2" FontSize="15"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Grid.Row="4" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Label Content="Telefon:" Grid.Column="0" Grid.Row="3" FontSize="15"/>
+                <Label Content="{Binding Elev.Telefon}" Grid.Column="1" Grid.Row="3" FontSize="15"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Grid.Row="5" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Label Content="Email:" Grid.Column="0" Grid.Row="4" FontSize="15"/>
+                <Label Content="{Binding Elev.Email}" Grid.Column="1" Grid.Row="4" FontSize="15"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center">
+                <Button Width="100" Margin="4" Content="Note" Command="{Binding NoteCommand}"></Button>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center">
+                <Button Width="100" Margin="4" Content="Absente" Command="{Binding AbsenteCommand}"></Button>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Center">
+                <Button Width="100" Margin="4" Content="Observatii" Command="{Binding ObservatiiCommand}"></Button>
+            </StackPanel>
 
         </Grid>
-        <Grid HorizontalAlignment="Left" Height="180" Margin="602,129,0,0" VerticalAlignment="Top" Width="138" Grid.Row="0">
 
-            <Grid.RowDefinitions>
-                <RowDefinition Height="1*" />
-                <RowDefinition Height="1*" />
-                <RowDefinition Height="1*" />
-            </Grid.RowDefinitions>
-            <Button Grid.Row="0" Content="Note" Command="{Binding NoteCommand}"></Button>
-            <Button Grid.Row="1" Content="Absente" Command="{Binding AbsenteCommand}"></Button>
-            <Button Grid.Row="2" Content="Observatii" Command="{Binding ObservatiiCommand}"></Button>
-
-        </Grid>
-        
     </Grid>
 </UserControl>

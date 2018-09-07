@@ -60,6 +60,7 @@
     </ApplicationDefinition>
     <Compile Include="MessageBus\IMessage.cs" />
     <Compile Include="MessageBus\IMessageBus.cs" />
+    <Compile Include="MessageBus\LoadClassMessage.cs" />
     <Compile Include="MessageBus\MessageBus.cs" />
     <Compile Include="MessageBus\TestMessage.cs" />
     <Compile Include="Properties\Annotations.cs" />

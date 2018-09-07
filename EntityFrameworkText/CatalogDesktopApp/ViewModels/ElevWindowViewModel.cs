@@ -1,14 +1,5 @@
-﻿using CatalogDesktopApp.Annotations;
-using CatalogDesktopApp.Services;
+﻿using CatalogDesktopApp.Services;
 using DatabaseLayer.DTO;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Input;
 
 namespace CatalogDesktopApp.ViewModels
@@ -20,7 +11,7 @@ namespace CatalogDesktopApp.ViewModels
         //private bool obs = true;
 
         private int _elevID;
-        private ElevDTO _elev;
+        private ElevDTO _elev = new ElevDTO();
         private ElevService _serviceElev;
 
         public ElevDTO Elev
@@ -45,24 +36,20 @@ namespace CatalogDesktopApp.ViewModels
 
             _serviceElev = ElevService.Instance;
 
-            Elev = new ElevDTO();
-            Elev.Nume = "Mihai";
-            Elev.Prenume = "Popescu";
-            Elev.Email = "MP@gmail.ro";
-            Elev.Telefon = "097532678";
-            Elev.Numar_Matricol = 1234;
-
-            ClassName = "12A";
-
             messageBus = MessageBus.Instance;
             messageBus.Subscribe<TestMessage>(Getelev);
         }
 
-        public async void InitViewModel(int id)
+        public ElevWindowViewModel(int id) : this()
+        {
+            InitViewModel(id);
+        }
+
+        public void InitViewModel(int id)
         {
             _elevID = id;
 
-            Elev = await _serviceElev.GetElev(_elevID);
+            Elev = _serviceElev.GetElevAsync(_elevID).Result;
         }
 
         private void Getelev(TestMessage obj)
@@ -73,10 +60,11 @@ namespace CatalogDesktopApp.ViewModels
         public string NumePrenume
         {
             get { return Elev.Nume + " " + Elev.Prenume; }
-
+            //get => "tets";
         }
 
         private string className;
+        private int id;
 
         public string ClassName
         {

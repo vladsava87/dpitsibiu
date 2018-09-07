@@ -1,16 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
-
+using System.Windows.Controls;
 using CatalogDesktopApp.Annotations;
-
-    using System.Windows;
-    using System.Windows.Input;
+using System.Windows.Input;
+using CatalogDesktopApp.Views;
 
 namespace CatalogDesktopApp.ViewModels
 {
@@ -21,7 +14,7 @@ namespace CatalogDesktopApp.ViewModels
 
         private readonly MessageBus _messageBus;
 
-        private ViewModelBase _currentViewModel;
+        private UserControl _currentView;
 
         public MainWindowViewModel()
         {
@@ -29,7 +22,7 @@ namespace CatalogDesktopApp.ViewModels
 
             My2ClickCommand = new RelayCommand(OtherClickCommand);
 
-            CurrentViewModel = new LoginWindowViewModel();
+            CurrentView = new LoginWindow();
 
             _messageBus = MessageBus.Instance;
 
@@ -38,19 +31,16 @@ namespace CatalogDesktopApp.ViewModels
 
         private void OnNavigation(TestMessage obj)
         {
-            //MessageBox.Show("OK");
-            //CurrentViewModel = new  ElevWindowViewModel();
-            CurrentViewModel = new ClasaWindowViewModel();
-            (CurrentViewModel as ClasaWindowViewModel).InitViewModel(1);
+            CurrentView = new ClasaWindow(new ClasaWindowViewModel(1));
         }
 
-        public ViewModelBase CurrentViewModel
+        public UserControl CurrentView
         {
-            get { return _currentViewModel; }
+            get => _currentView;
             set
             {
-                _currentViewModel = value;
-                OnPropertyChanged("CurrentViewModel");
+                _currentView = value;
+                OnPropertyChanged("CurrentView");
             }
         }
 

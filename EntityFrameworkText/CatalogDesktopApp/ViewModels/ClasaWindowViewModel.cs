@@ -1,9 +1,9 @@
 ﻿using CatalogDesktopApp.Services;
 using DatabaseLayer.DTO;
-using System;
 using System.Collections.Generic;
-using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
+using CatalogDesktopApp.Views;
 
 namespace CatalogDesktopApp.ViewModels
 {
@@ -12,10 +12,12 @@ namespace CatalogDesktopApp.ViewModels
         private int _classId;
 
         private ClasaService _clasaService;
-        private ClasaDTO clasa;// = new ClasaDTO();
-        private ElevDTO curentelev;// = new ElevDTO();
-        private List<ElevDTO> elevi;// = new List<ElevDTO>();
-        private ElevWindowViewModel viewModelElev;
+        private List<ElevDTO> _elevi;
+        private ClasaDTO clasa;
+        private ElevDTO curentelev;
+        private UserControl viewModelElev;
+
+        private MessageBus _messageBus;
 
         public ICommand EleviCommand { get; set; }
 
@@ -26,17 +28,19 @@ namespace CatalogDesktopApp.ViewModels
             {
                 clasa = value;
                 OnPropertyChanged("Clasa");
-                Elevi = clasa.Elevi;
+                if (clasa.Elevi != null)
+                {
+                    Elevi = clasa.Elevi;
+                }
             }
         }
 
         public List<ElevDTO> Elevi
         {
-            get => elevi;
-
+            get => _elevi;
             set
             {
-                elevi = value;
+                _elevi = value;
                 OnPropertyChanged("Elevi");
             }
         }
@@ -52,21 +56,19 @@ namespace CatalogDesktopApp.ViewModels
             }
         }
 
-        public ElevWindowViewModel ViewModelElev
+        public UserControl CurrentViewElev
         {
             get => viewModelElev;
             set
             {
                 viewModelElev = value;
-                OnPropertyChanged("ViewModelElev");
+                OnPropertyChanged("CurrentViewElev");
             }
         }
 
         private void UpdateElevInfo(int id)
         {
-            ViewModelElev = new ElevWindowViewModel();
-
-            ViewModelElev.InitViewModel(id);
+            CurrentViewElev = new ElevWindow(new ElevWindowViewModel(id));
         }
 
         public ClasaWindowViewModel()
@@ -74,19 +76,17 @@ namespace CatalogDesktopApp.ViewModels
             EleviCommand = new RelayCommand(ListElevi);
 
             _clasaService = ClasaService.Instance;
+            _messageBus = MessageBus.Instance;
         }
 
-        public async void InitViewModel(int id)
+        public ClasaWindowViewModel(int v) : this()
         {
-            _classId = id;
-
-            Clasa = await _clasaService.GetClasa(_classId);
+            Clasa = _clasaService.GetClasaAsync(v).Result;
         }
 
         public void ListElevi(object obj)
         {
 
         }
-
     }
 }
