@@ -6,7 +6,7 @@
         xmlns:vm="clr-namespace:CatalogDesktopApp.ViewModels"
         xmlns:view="clr-namespace:CatalogDesktopApp.Views"
         mc:Ignorable="d"
-        Background="White" Height="450" Width="800">
+        Background="White" >
     <!--<UserControl.DataContext>
         <vm:ClasaWindowViewModel />
     </UserControl.DataContext>-->
