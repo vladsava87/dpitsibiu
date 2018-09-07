@@ -21,7 +21,7 @@
             <ColumnDefinition Width="200"/>
             <ColumnDefinition Width="*"  />
         </Grid.ColumnDefinitions>
-        <ListBox Name="EleviListBox" Grid.Column="0" Width="200" HorizontalAlignment="Left" HorizontalContentAlignment="Stretch" ItemsSource="{Binding Elevi}" SelectionChanged="EleviListBox_SelectionChanged">
+        <ListBox Name="EleviListBox" Grid.Column="0" Width="200" HorizontalAlignment="Left" HorizontalContentAlignment="Stretch" ItemsSource="{Binding Elevi}" SelectedItem="{Binding CurrentElev}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid Margin="0,2">
@@ -29,8 +29,8 @@
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="100" />
                         </Grid.ColumnDefinitions>
-                        <Label Content="{Binding Nume}" />
-                        <Label Grid.Column="1" Content="{Binding Prenume}" />
+                        <Label Content="{Binding Path=Nume}" />
+                        <Label Grid.Column="1" Content="{Binding Path=Prenume}" />
                     </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>

@@ -1,4 +1,5 @@
 ﻿using CatalogDesktopApp.Annotations;
+using CatalogDesktopApp.Services;
 using DatabaseLayer.DTO;
 using System;
 using System.Collections.Generic;
@@ -17,9 +18,19 @@ namespace CatalogDesktopApp.ViewModels
         //private bool note = true;
         //private bool abs = true;
         //private bool obs = true;
+
+        private int _elevID;
+        private ElevDTO _elev;
+        private ElevService _serviceElev;
+
         public ElevDTO Elev
         {
-            get; set;
+            get => _elev;
+            set
+            {
+                _elev = value;
+                OnPropertyChanged("Elev");
+            }
         }
 
         private MessageBus messageBus;
@@ -32,6 +43,8 @@ namespace CatalogDesktopApp.ViewModels
 
             ObservatiiCommand = new RelayCommand(ListObs);
 
+            _serviceElev = ElevService.Instance;
+
             Elev = new ElevDTO();
             Elev.Nume = "Mihai";
             Elev.Prenume = "Popescu";
@@ -43,6 +56,13 @@ namespace CatalogDesktopApp.ViewModels
 
             messageBus = MessageBus.Instance;
             messageBus.Subscribe<TestMessage>(Getelev);
+        }
+
+        public async void InitViewModel(int id)
+        {
+            _elevID = id;
+
+            Elev = await _serviceElev.GetElev(_elevID);
         }
 
         private void Getelev(TestMessage obj)

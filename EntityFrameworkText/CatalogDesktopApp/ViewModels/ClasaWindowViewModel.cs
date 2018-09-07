@@ -1,5 +1,6 @@
 ﻿using CatalogDesktopApp.Services;
 using DatabaseLayer.DTO;
+using System;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Input;
@@ -11,6 +12,12 @@ namespace CatalogDesktopApp.ViewModels
         private int _classId;
 
         private ClasaService _clasaService;
+        private ClasaDTO clasa;// = new ClasaDTO();
+        private ElevDTO curentelev;// = new ElevDTO();
+        private List<ElevDTO> elevi;// = new List<ElevDTO>();
+        private ElevWindowViewModel viewModelElev;
+
+        public ICommand EleviCommand { get; set; }
 
         public ClasaDTO Clasa
         {
@@ -19,28 +26,11 @@ namespace CatalogDesktopApp.ViewModels
             {
                 clasa = value;
                 OnPropertyChanged("Clasa");
+                Elevi = clasa.Elevi;
             }
         }
 
-        private ClasaDTO clasa = new ClasaDTO(); 
-
-        private List<ElevTest> elevi = new List<ElevTest>();
-
-        public async void InitViewModel(int id)
-        {
-            _classId = id;
-
-            Clasa = await _clasaService.GetClasa(_classId);
-        }
-        
-        public ClasaWindowViewModel()
-        {
-            EleviCommand = new RelayCommand(ListElevi);
-
-            _clasaService = ClasaService.Instance;
-        }
-
-        public List<ElevTest> Elevi
+        public List<ElevDTO> Elevi
         {
             get => elevi;
 
@@ -51,18 +41,52 @@ namespace CatalogDesktopApp.ViewModels
             }
         }
 
+        public ElevDTO CurrentElev
+        {
+            get => curentelev;
+            set
+            {
+                curentelev = value;
+                OnPropertyChanged("CurentElev");
+                UpdateElevInfo(curentelev.Id);
+            }
+        }
+
+        public ElevWindowViewModel ViewModelElev
+        {
+            get => viewModelElev;
+            set
+            {
+                viewModelElev = value;
+                OnPropertyChanged("ViewModelElev");
+            }
+        }
+
+        private void UpdateElevInfo(int id)
+        {
+            ViewModelElev = new ElevWindowViewModel();
+
+            ViewModelElev.InitViewModel(id);
+        }
+
+        public ClasaWindowViewModel()
+        {
+            EleviCommand = new RelayCommand(ListElevi);
+
+            _clasaService = ClasaService.Instance;
+        }
+
+        public async void InitViewModel(int id)
+        {
+            _classId = id;
+
+            Clasa = await _clasaService.GetClasa(_classId);
+        }
+
         public void ListElevi(object obj)
         {
 
         }
 
-        public ICommand EleviCommand { get; set; }
-    }
-
-    public class ElevTest
-    {
-        public string Nume { get; set; }
-
-        public string Prenume { get; set; }
     }
 }
