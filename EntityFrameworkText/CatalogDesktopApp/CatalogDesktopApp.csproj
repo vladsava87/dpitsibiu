@@ -74,6 +74,7 @@
     <Compile Include="Services\ProfilService.cs" />
     <Compile Include="Services\UserService.cs" />
     <Compile Include="ViewModels\ClasaWindowViewModel.cs" />
+    <Compile Include="ViewModels\InsertNoteViewModel.cs" />
     <Compile Include="ViewModels\ProfesoriWindowViewModel.cs" />
     <Compile Include="ViewModels\ElevWindowViewModel.cs" />
     <Compile Include="ViewModels\LoginWindowViewModel.cs" />
@@ -83,10 +84,17 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Compile Include="Views\InsertNote.xaml.cs">
+      <DependentUpon>InsertNote.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ProfesoriWindow.xaml.cs">
       <DependentUpon>ProfesoriWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="Views\ElevWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\InsertNote.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -13,6 +13,15 @@ namespace CatalogDesktopApp.ViewModels
         private int _elevID;
         private ElevDTO _elev = new ElevDTO();
         private ElevService _serviceElev;
+        private string className;
+        private int id;
+
+        public ICommand NoteCommand { get; set; }
+        public ICommand AbsenteCommand { get; set; }
+        public ICommand ObservatiiCommand { get; set; }
+        public ICommand InsertNoteCommand { get; set; }
+        public ICommand InsertAbsenteCommand { get; set; }
+        public ICommand InsertObservatiiCommand { get; set; }
 
         public ElevDTO Elev
         {
@@ -33,6 +42,12 @@ namespace CatalogDesktopApp.ViewModels
             AbsenteCommand = new RelayCommand(ListAbs);
 
             ObservatiiCommand = new RelayCommand(ListObs);
+
+            InsertNoteCommand = new RelayCommand(InsertNote);
+
+            InsertAbsenteCommand = new RelayCommand(InsertAbsente);
+
+            InsertObservatiiCommand = new RelayCommand(InsertObservatii);
 
             _serviceElev = ElevService.Instance;
 
@@ -63,9 +78,6 @@ namespace CatalogDesktopApp.ViewModels
             //get => "tets";
         }
 
-        private string className;
-        private int id;
-
         public string ClassName
         {
             get { return className; }
@@ -95,8 +107,19 @@ namespace CatalogDesktopApp.ViewModels
             //messageBus.Publish<TestMessage>(new TestMessage(3));
         }
 
-        public ICommand NoteCommand { get; set; }
-        public ICommand AbsenteCommand { get; set; }
-        public ICommand ObservatiiCommand { get; set; }
+        private void InsertAbsente(object obj)
+        {
+
+        }
+
+        private void InsertNote(object obj)
+        {
+
+        }
+
+        private void InsertObservatii(object obj)
+        {
+
+        }
     }
 }

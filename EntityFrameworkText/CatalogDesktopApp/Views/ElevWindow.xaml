@@ -60,12 +60,15 @@
 
             <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center">
                 <Button Width="100" Margin="4" Content="Note" Command="{Binding NoteCommand}"></Button>
+                <Button Width="30" Margin="4" Content="+" Command="{Binding InsertNoteCommand}"></Button>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center">
                 <Button Width="100" Margin="4" Content="Absente" Command="{Binding AbsenteCommand}"></Button>
+                <Button Width="30" Margin="4" Content="+" Command="{Binding InsertAbsenteCommand}"></Button>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Center">
                 <Button Width="100" Margin="4" Content="Observatii" Command="{Binding ObservatiiCommand}"></Button>
+                <Button Width="30" Margin="4" Content="+" Command="{Binding InsertObservatiiCommand}"></Button>
             </StackPanel>
 
         </Grid>
