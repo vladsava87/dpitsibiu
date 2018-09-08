@@ -1,5 +1,7 @@
 ﻿using CatalogDesktopApp.Services;
+using DatabaseLayer.DataModels;
 using DatabaseLayer.DTO;
+using System;
 using System.Windows.Input;
 
 namespace CatalogDesktopApp.ViewModels
@@ -15,6 +17,7 @@ namespace CatalogDesktopApp.ViewModels
         private ElevService _serviceElev;
         private string className;
         private int id;
+        private NotaService serviciuNota;
 
         public ICommand NoteCommand { get; set; }
         public ICommand AbsenteCommand { get; set; }
@@ -53,6 +56,21 @@ namespace CatalogDesktopApp.ViewModels
 
             messageBus = MessageBus.Instance;
             messageBus.Subscribe<TestMessage>(Getelev);
+
+            messageBus.Subscribe<InsertNotaMessage>(SetNotaInserata);
+            serviciuNota = NotaService.Instance;
+        }
+
+        private void SetNotaInserata(InsertNotaMessage obj)
+        {
+            NotaDTO notaInserata = new NotaDTO();
+
+            notaInserata.Data = obj.Data;
+            notaInserata.MaterieID = obj.MaterieID;
+            notaInserata.Teza = obj.Teza;
+            notaInserata.Semestrul = (sem)obj.Semestrul;
+
+            serviciuNota.PostNota(notaInserata);
         }
 
         public ElevWindowViewModel(int id) : this()
@@ -114,7 +132,10 @@ namespace CatalogDesktopApp.ViewModels
 
         private void InsertNote(object obj)
         {
-
+            var message = new ShowNoteWindow();
+            message.MaterieID = 1;
+            message.Materia = "Istorie";
+            messageBus.Publish<ShowNoteWindow>(message);
         }
 
         private void InsertObservatii(object obj)

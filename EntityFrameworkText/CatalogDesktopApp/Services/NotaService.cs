@@ -26,7 +26,7 @@ namespace CatalogDesktopApp.Services
             );
         }
 
-        private static NotaService Instance
+        public static NotaService Instance
         {
             get
             {

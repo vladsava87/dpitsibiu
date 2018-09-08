@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CatalogDesktopApp.MessageBus
+namespace CatalogDesktopApp
 {
     public class ShowNoteWindow : IMessage
     {

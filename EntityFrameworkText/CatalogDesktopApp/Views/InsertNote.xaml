@@ -35,16 +35,16 @@
             <Label Grid.Row="4" Grid.Column="0" Content="Data" />
             <Label Grid.Row="5" Grid.Column="0" Content="Semestrul" />
 
-            <Label Grid.Row="1" Grid.Column="1" Content="{Binding}" />
-            <TextBox Grid.Row="2" Grid.Column="1" />
+            <Label Grid.Row="1" Grid.Column="1" Content="{Binding Materie}" />
+            <TextBox Grid.Row="2" Grid.Column="1" KeyDown="TextBox_KeyDown" />
             <CheckBox Grid.Row="3" Grid.Column="1" />
             <DatePicker Grid.Row="4" Grid.Column="1" />
             <ListBox Grid.Row="5" Grid.Column="1">
             </ListBox>
 
             <StackPanel Grid.Row="6" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button Height="30" Margin="10" Content="Insereaza" />
-                <Button Height="30" Margin="10" Content="Renunta" />
+                <Button Height="30" Margin="10" Content="Insereaza" Click="Button_Click_1" />
+                <Button Height="30" Margin="10" Content="Renunta" Click="Button_Click" />
             </StackPanel>
         </Grid>
     </Grid>

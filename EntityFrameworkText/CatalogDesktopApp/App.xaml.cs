@@ -5,7 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
-using CatalogDesktopApp.MessageBus;
+using CatalogDesktopApp.Views;
 using CatalogDesktopApp.ViewModels;
 
 namespace CatalogDesktopApp
@@ -23,6 +23,18 @@ namespace CatalogDesktopApp
             _messageBus.Subscribe<ShowNoteWindow>(ShowNoteDialog);
 
             base.OnStartup(e);
+        }
+
+        private void ShowNoteDialog(ShowNoteWindow obj)
+        {
+            var newWindow = new InsertNote();
+            var newWindowViewModel = new InsertNoteViewModel();
+
+            newWindowViewModel.MaterieID = obj.MaterieID;
+            newWindowViewModel.Materie = obj.Materia;
+
+            newWindow.DataContext = newWindowViewModel;
+            newWindow.ShowDialog();
         }
     }
 }
