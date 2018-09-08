@@ -62,6 +62,7 @@
     <Compile Include="MessageBus\IMessageBus.cs" />
     <Compile Include="MessageBus\LoadClassMessage.cs" />
     <Compile Include="MessageBus\MessageBus.cs" />
+    <Compile Include="MessageBus\ShowNoteWindow.cs" />
     <Compile Include="MessageBus\TestMessage.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Services\AbsentaService.cs" />

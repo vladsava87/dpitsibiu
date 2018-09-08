@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using CatalogDesktopApp.MessageBus;
 using CatalogDesktopApp.ViewModels;
 
 namespace CatalogDesktopApp
@@ -14,5 +15,14 @@ namespace CatalogDesktopApp
     /// </summary>
     public partial class App : Application
     {
+        private MessageBus _messageBus;
+
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            _messageBus = MessageBus.Instance;
+            _messageBus.Subscribe<ShowNoteWindow>(ShowNoteDialog);
+
+            base.OnStartup(e);
+        }
     }
 }

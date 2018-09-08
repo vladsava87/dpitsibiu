@@ -8,6 +8,6 @@ namespace CatalogDesktopApp.ViewModels
 {
     public class InsertNoteViewModel : ViewModelBase
     {
-
+        
     }
 }
