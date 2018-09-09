@@ -60,9 +60,11 @@
     </ApplicationDefinition>
     <Compile Include="MessageBus\IMessage.cs" />
     <Compile Include="MessageBus\IMessageBus.cs" />
+    <Compile Include="MessageBus\InsertAbsentaMessage.cs" />
     <Compile Include="MessageBus\InsertNotaMessage.cs" />
     <Compile Include="MessageBus\LoadClassMessage.cs" />
     <Compile Include="MessageBus\MessageBus.cs" />
+    <Compile Include="MessageBus\ShowAbsenteWindow.cs" />
     <Compile Include="MessageBus\ShowNoteWindow.cs" />
     <Compile Include="MessageBus\TestMessage.cs" />
     <Compile Include="Properties\Annotations.cs" />
@@ -76,6 +78,7 @@
     <Compile Include="Services\ProfilService.cs" />
     <Compile Include="Services\UserService.cs" />
     <Compile Include="ViewModels\ClasaWindowViewModel.cs" />
+    <Compile Include="ViewModels\InsertAbsentaViewModel.cs" />
     <Compile Include="ViewModels\InsertNoteViewModel.cs" />
     <Compile Include="ViewModels\ProfesoriWindowViewModel.cs" />
     <Compile Include="ViewModels\ElevWindowViewModel.cs" />
@@ -86,6 +89,9 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Compile Include="Views\InsertAbsenta.xaml.cs">
+      <DependentUpon>InsertAbsenta.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\InsertNote.xaml.cs">
       <DependentUpon>InsertNote.xaml</DependentUpon>
     </Compile>
@@ -93,6 +99,10 @@
       <DependentUpon>ProfesoriWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="Views\ElevWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\InsertAbsenta.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

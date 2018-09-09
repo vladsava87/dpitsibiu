@@ -2,13 +2,13 @@
 
 namespace CatalogDesktopApp
 {
-    public class InsertNotaMessage : IMessage
+    public class InsertAbsentaMessage : IMessage
     {
         public int MaterieID { get; set; }
 
-        public bool Teza { get; set; }
+        public int ProfesorID { get; set; }
 
-        public double Nota { get; set; }
+        public bool Motivata { get; set; }
 
         public DateTime Data { get; set; }
 

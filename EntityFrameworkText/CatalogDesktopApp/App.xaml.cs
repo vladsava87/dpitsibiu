@@ -21,8 +21,23 @@ namespace CatalogDesktopApp
         {
             _messageBus = MessageBus.Instance;
             _messageBus.Subscribe<ShowNoteWindow>(ShowNoteDialog);
+            _messageBus.Subscribe<ShowAbsenteWindow>(ShowAbsenteDialog);
 
             base.OnStartup(e);
+        }
+
+        private void ShowAbsenteDialog(ShowAbsenteWindow obj)
+        {
+            var newWindow = new InsertAbsenta();
+            var newWindowViewModel = new InsertAbsentaViewModel();
+
+            newWindowViewModel.MaterieID = obj.MaterieID;
+            newWindowViewModel.Materie = obj.Materia;
+            newWindowViewModel.ProfesorID = obj.ProfesorID;
+            newWindowViewModel.Profesor = obj.Profesor;
+
+            newWindow.DataContext = newWindowViewModel;
+            newWindow.ShowDialog();
         }
 
         private void ShowNoteDialog(ShowNoteWindow obj)

@@ -8,16 +8,12 @@ namespace CatalogDesktopApp.ViewModels
 {
     public class ElevWindowViewModel : ViewModelBase
     {
-        //private bool note = true;
-        //private bool abs = true;
-        //private bool obs = true;
-
         private int _elevID;
         private ElevDTO _elev = new ElevDTO();
         private ElevService _serviceElev;
         private string className;
-        private int id;
         private NotaService serviciuNota;
+        private AbsentaService serviciuAbsenta;
 
         public ICommand NoteCommand { get; set; }
         public ICommand AbsenteCommand { get; set; }
@@ -55,10 +51,12 @@ namespace CatalogDesktopApp.ViewModels
             _serviceElev = ElevService.Instance;
 
             messageBus = MessageBus.Instance;
-            messageBus.Subscribe<TestMessage>(Getelev);
 
             messageBus.Subscribe<InsertNotaMessage>(SetNotaInserata);
             serviciuNota = NotaService.Instance;
+
+            messageBus.Subscribe<InsertAbsentaMessage>(SetAbsentaInserata);
+            serviciuAbsenta = AbsentaService.Instance;
         }
 
         private void SetNotaInserata(InsertNotaMessage obj)
@@ -73,6 +71,19 @@ namespace CatalogDesktopApp.ViewModels
             serviciuNota.PostNota(notaInserata);
         }
 
+        private void SetAbsentaInserata(InsertAbsentaMessage obj)
+        {
+            AbsentaDTO absentaInserata = new AbsentaDTO();
+
+            absentaInserata.Data = obj.Data;
+            absentaInserata.MaterieID = obj.MaterieID;
+            absentaInserata.Motivata = obj.Motivata;
+            absentaInserata.ProfesorID = obj.ProfesorID;
+            absentaInserata.Semestrul = (sem)obj.Semestrul;
+
+            serviciuAbsenta.PostAbsenta(absentaInserata);
+        }
+
         public ElevWindowViewModel(int id) : this()
         {
             InitViewModel(id);
@@ -83,11 +94,6 @@ namespace CatalogDesktopApp.ViewModels
             _elevID = id;
 
             Elev = _serviceElev.GetElevAsync(_elevID).Result;
-        }
-
-        private void Getelev(TestMessage obj)
-        {
-            //MessageBox.Show(obj.test.ToString(), "Mesaj primit");
         }
         
         public string NumePrenume
@@ -112,13 +118,10 @@ namespace CatalogDesktopApp.ViewModels
 
         }
 
-
-
         private void ListAbs(object obj)
         {
 
         }
-
 
         private void ListNote(object obj)
         {
@@ -127,7 +130,12 @@ namespace CatalogDesktopApp.ViewModels
 
         private void InsertAbsente(object obj)
         {
-
+            var message = new ShowAbsenteWindow();
+            message.MaterieID = 1;
+            message.Materia = "Istorie";
+            message.ProfesorID = 1;
+            message.Profesor = "Ion";
+            messageBus.Publish(message);
         }
 
         private void InsertNote(object obj)
@@ -135,7 +143,7 @@ namespace CatalogDesktopApp.ViewModels
             var message = new ShowNoteWindow();
             message.MaterieID = 1;
             message.Materia = "Istorie";
-            messageBus.Publish<ShowNoteWindow>(message);
+            messageBus.Publish(message);
         }
 
         private void InsertObservatii(object obj)

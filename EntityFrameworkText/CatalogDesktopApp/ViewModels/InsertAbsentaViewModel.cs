@@ -6,12 +6,14 @@ using System.Threading.Tasks;
 
 namespace CatalogDesktopApp.ViewModels
 {
-    public class InsertNoteViewModel : ViewModelBase
+    public class InsertAbsentaViewModel : ViewModelBase
     {
         private MessageBus _messageBus;
 
+        private string profesorNume;
         private string materieNume;
 
+        public int ProfesorID { get; set; }
         public int MaterieID { get; set; }
 
         public string Materie
@@ -24,16 +26,26 @@ namespace CatalogDesktopApp.ViewModels
             }
         }
 
-        public InsertNoteViewModel()
+        public string Profesor
+        {
+            get => profesorNume;
+            set
+            {
+                profesorNume = value;
+                OnPropertyChanged("Profesor");
+            }
+        }
+
+        public InsertAbsentaViewModel()
         {
             _messageBus = MessageBus.Instance;
         }
 
-        public void InsertNota()
+        public void InsertAbsenta()
         {
-            var notaInserata = new InsertNotaMessage();
+            var absentaInserata = new InsertAbsentaMessage();
 
-            _messageBus.Publish(notaInserata);
+            _messageBus.Publish(absentaInserata);
         }
     }
 }
