@@ -9,7 +9,6 @@ namespace CatalogDesktopApp.ViewModels
     public class InsertNoteViewModel : ViewModelBase
     {
         private MessageBus _messageBus;
-
         private string materieNume;
 
         public int MaterieID { get; set; }

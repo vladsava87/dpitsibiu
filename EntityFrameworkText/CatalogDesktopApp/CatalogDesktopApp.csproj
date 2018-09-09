@@ -62,10 +62,12 @@
     <Compile Include="MessageBus\IMessageBus.cs" />
     <Compile Include="MessageBus\InsertAbsentaMessage.cs" />
     <Compile Include="MessageBus\InsertNotaMessage.cs" />
+    <Compile Include="MessageBus\InsertObservatieMessage.cs" />
     <Compile Include="MessageBus\LoadClassMessage.cs" />
     <Compile Include="MessageBus\MessageBus.cs" />
     <Compile Include="MessageBus\ShowAbsenteWindow.cs" />
     <Compile Include="MessageBus\ShowNoteWindow.cs" />
+    <Compile Include="MessageBus\ShowObservatiiWindow.cs" />
     <Compile Include="MessageBus\TestMessage.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Services\AbsentaService.cs" />
@@ -80,6 +82,7 @@
     <Compile Include="ViewModels\ClasaWindowViewModel.cs" />
     <Compile Include="ViewModels\InsertAbsentaViewModel.cs" />
     <Compile Include="ViewModels\InsertNoteViewModel.cs" />
+    <Compile Include="ViewModels\InsertObservatieViewModel.cs" />
     <Compile Include="ViewModels\ProfesoriWindowViewModel.cs" />
     <Compile Include="ViewModels\ElevWindowViewModel.cs" />
     <Compile Include="ViewModels\LoginWindowViewModel.cs" />
@@ -95,6 +98,9 @@
     <Compile Include="Views\InsertNote.xaml.cs">
       <DependentUpon>InsertNote.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\InsertObservatie.xaml.cs">
+      <DependentUpon>InsertObservatie.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ProfesoriWindow.xaml.cs">
       <DependentUpon>ProfesoriWindow.xaml</DependentUpon>
     </Compile>
@@ -107,6 +113,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\InsertNote.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\InsertObservatie.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

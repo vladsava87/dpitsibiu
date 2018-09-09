@@ -14,6 +14,8 @@ namespace CatalogDesktopApp.ViewModels
         private string className;
         private NotaService serviciuNota;
         private AbsentaService serviciuAbsenta;
+        private ObservatieService serviciuObservatie;
+        private MessageBus messageBus;
 
         public ICommand NoteCommand { get; set; }
         public ICommand AbsenteCommand { get; set; }
@@ -32,8 +34,6 @@ namespace CatalogDesktopApp.ViewModels
             }
         }
 
-        private MessageBus messageBus;
-        
         public ElevWindowViewModel()
         {
             NoteCommand = new RelayCommand(ListNote);
@@ -57,6 +57,9 @@ namespace CatalogDesktopApp.ViewModels
 
             messageBus.Subscribe<InsertAbsentaMessage>(SetAbsentaInserata);
             serviciuAbsenta = AbsentaService.Instance;
+
+            messageBus.Subscribe<InsertObservatieMessage>(SetObservatieInserata);
+            serviciuObservatie = ObservatieService.Instance;
         }
 
         private void SetNotaInserata(InsertNotaMessage obj)
@@ -82,6 +85,17 @@ namespace CatalogDesktopApp.ViewModels
             absentaInserata.Semestrul = (sem)obj.Semestrul;
 
             serviciuAbsenta.PostAbsenta(absentaInserata);
+        }
+
+        private void SetObservatieInserata(InsertObservatieMessage obj)
+        {
+            ObservatieDTO observatieInserata = new ObservatieDTO();
+
+            observatieInserata.Data = obj.Data;
+            observatieInserata.ProfesorID = obj.ProfesorID;
+            observatieInserata.Text = obj.Explicatie;
+
+            serviciuObservatie.PostObservatie(observatieInserata);
         }
 
         public ElevWindowViewModel(int id) : this()
@@ -148,7 +162,10 @@ namespace CatalogDesktopApp.ViewModels
 
         private void InsertObservatii(object obj)
         {
-
+            var message = new ShowObservatiiWindow();
+            message.ProfesorID = 1;
+            message.Profesor = "Ion";
+            messageBus.Publish(message);
         }
     }
 }

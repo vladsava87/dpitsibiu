@@ -22,6 +22,7 @@ namespace CatalogDesktopApp
             _messageBus = MessageBus.Instance;
             _messageBus.Subscribe<ShowNoteWindow>(ShowNoteDialog);
             _messageBus.Subscribe<ShowAbsenteWindow>(ShowAbsenteDialog);
+            _messageBus.Subscribe<ShowObservatiiWindow>(ShowObservatiiDialog);
 
             base.OnStartup(e);
         }
@@ -47,6 +48,18 @@ namespace CatalogDesktopApp
 
             newWindowViewModel.MaterieID = obj.MaterieID;
             newWindowViewModel.Materie = obj.Materia;
+
+            newWindow.DataContext = newWindowViewModel;
+            newWindow.ShowDialog();
+        }
+
+        private void ShowObservatiiDialog(ShowObservatiiWindow obj)
+        {
+            var newWindow = new InsertObservatie();
+            var newWindowViewModel = new InsertObservatieViewModel();
+
+            newWindowViewModel.ProfesorID = obj.ProfesorID;
+            newWindowViewModel.Profesor = obj.Profesor;
 
             newWindow.DataContext = newWindowViewModel;
             newWindow.ShowDialog();
