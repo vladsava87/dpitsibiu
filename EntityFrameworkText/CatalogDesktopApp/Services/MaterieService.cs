@@ -63,27 +63,30 @@ namespace CatalogDesktopApp.Services
             return null;
         }
 
-        public async Task<MaterieDTO> GetMaterie(int _materieID)
+        public MaterieDTO GetMaterie(int _materieID)
         {
-            try
+            return GetMaterieAsync(_materieID).Result;
+        }
+        public Task<MaterieDTO> GetMaterieAsync(int _materieID)
+        {
+            return Task.Factory.StartNew(() =>
             {
                 var requestLink = "/Materie/";
 
                 var uri = new Uri(WebSiteAPI + requestLink + _materieID.ToString());
 
-                var response = await _client.GetAsync(uri);
+                var response = _client.GetAsync(uri).Result;
                 if (response.IsSuccessStatusCode)
                 {
-                    var content = await response.Content.ReadAsStringAsync();
+                    var content = response.Content.ReadAsStringAsync().Result;
 
                     MaterieDTO materiecautata = JsonConvert.DeserializeObject<MaterieDTO>(content);
 
                     return materiecautata;
                 }
-            }
-            catch (Exception ex) { }
 
-            return null;
+                return null;
+            });
         }
 
         public async Task<string> PostMaterie(MaterieDTO materieNoua)

@@ -63,28 +63,33 @@ namespace CatalogDesktopApp.Services
             return null;
         }
 
-        public async Task<AbsentaDTO> GetAbsenta(int _absentaID)
+
+        public AbsentaDTO GetAbsenta(int _absentaID)
         {
-            try
-            {
-                var requestLink = "/Absenta/";
-
-                var uri = new Uri(WebSiteAPI + requestLink + _absentaID.ToString());
-
-                var response = await _client.GetAsync(uri);
-                if (response.IsSuccessStatusCode)
-                {
-                    var content = await response.Content.ReadAsStringAsync();
-
-                    AbsentaDTO absentaCautata = JsonConvert.DeserializeObject<AbsentaDTO>(content);
-
-                    return absentaCautata;
-                }
-            }
-            catch (Exception ex) { }
-
-            return null;
+            return GetAbsentaAsync(_absentaID).Result;
         }
+
+    public Task<AbsentaDTO> GetAbsentaAsync(int _absentaID)
+    {
+        return Task.Factory.StartNew(() =>
+            {
+            var requestLink = "/Absenta/";
+
+            var uri = new Uri(WebSiteAPI + requestLink + _absentaID.ToString());
+
+            var response = _client.GetAsync(uri).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                var content = response.Content.ReadAsStringAsync().Result;
+
+                AbsentaDTO absentaCautata = JsonConvert.DeserializeObject<AbsentaDTO>(content);
+
+                return absentaCautata;
+            }   
+            
+            return null;
+        });
+    }
 
         public async Task<string> PostAbsenta(AbsentaDTO absentaNoua)
         {

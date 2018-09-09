@@ -63,27 +63,33 @@ namespace CatalogDesktopApp.Services
             return null;
         }
 
-        public async Task<ObservatieDTO> GetObservatie(int _observatieID)
+        public ObservatieDTO GetObservatie(int _observatieID)
         {
-            try
+            return GetObservatieAsync(_observatieID).Result;
+        }
+
+        public Task<ObservatieDTO> GetObservatieAsync(int _observatieID)
+        {
+            return Task.Factory.StartNew(() =>
             {
                 var requestLink = "/Observatie/";
 
                 var uri = new Uri(WebSiteAPI + requestLink + _observatieID.ToString());
 
-                var response = await _client.GetAsync(uri);
+                var response = _client.GetAsync(uri).Result;
                 if (response.IsSuccessStatusCode)
                 {
-                    var content = await response.Content.ReadAsStringAsync();
+                    var content = response.Content.ReadAsStringAsync().Result;
 
                     ObservatieDTO observatieCautata = JsonConvert.DeserializeObject<ObservatieDTO>(content);
 
                     return observatieCautata;
                 }
-            }
-            catch (Exception ex) { }
+                return null;
 
-            return null;
+            });
+            
+        
         }
 
         public async Task<string> PostObservatie(ObservatieDTO observatieNoua)

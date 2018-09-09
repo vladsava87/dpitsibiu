@@ -62,27 +62,32 @@ namespace CatalogDesktopApp.Services
             return null;
         }
 
-        public async Task<ElevDTO> GetElev(int _elevID)
+        //public async Task<ElevDTO> GetElev(int _elevID)
+        //{
+        //    try
+        //    {
+        //        var requestLink = "/Elev/";
+
+        //        var uri = new Uri(WebSiteAPI + requestLink + _elevID.ToString());
+
+        //        var response = await _client.GetAsync(uri);
+        //        if (response.IsSuccessStatusCode)
+        //        {
+        //            var content = await response.Content.ReadAsStringAsync();
+
+        //            ElevDTO elevAfisat = JsonConvert.DeserializeObject<ElevDTO>(content);
+
+        //            return elevAfisat;
+        //        }
+        //    }
+        //    catch (Exception ex) { }
+
+        //    return null;
+        //}
+
+        public ElevDTO GetElev(int _elevID)
         {
-            try
-            {
-                var requestLink = "/Elev/";
-
-                var uri = new Uri(WebSiteAPI + requestLink + _elevID.ToString());
-
-                var response = await _client.GetAsync(uri);
-                if (response.IsSuccessStatusCode)
-                {
-                    var content = await response.Content.ReadAsStringAsync();
-
-                    ElevDTO elevAfisat = JsonConvert.DeserializeObject<ElevDTO>(content);
-
-                    return elevAfisat;
-                }
-            }
-            catch (Exception ex) { }
-
-            return null;
+            return GetElevAsync(_elevID).Result;
         }
 
         public Task<ElevDTO> GetElevAsync(int _elevID)

@@ -63,27 +63,31 @@ namespace CatalogDesktopApp.Services
             return null;
         }
 
-        public async Task<ProfilDTO> GetProfil(int _profilID)
+        public ProfilDTO GetProfil (int _profilID)
         {
-            try
+            return GetProfilAsync(_profilID).Result;
+        }
+
+        public Task<ProfilDTO> GetProfilAsync(int _profilID)
+        {
+            return Task.Factory.StartNew(() =>
             {
                 var requestLink = "/Profil/";
 
                 var uri = new Uri(WebSiteAPI + requestLink + _profilID.ToString());
 
-                var response = await _client.GetAsync(uri);
+                var response = _client.GetAsync(uri).Result;
                 if (response.IsSuccessStatusCode)
                 {
-                    var content = await response.Content.ReadAsStringAsync();
+                    var content = response.Content.ReadAsStringAsync().Result;
 
                     ProfilDTO profilCautat = JsonConvert.DeserializeObject<ProfilDTO>(content);
 
                     return profilCautat;
                 }
-            }
-            catch (Exception ex) { }
 
-            return null;
+                return null;
+            });
         }
 
         public async Task<string> PostProfil(ProfilDTO profilNou)

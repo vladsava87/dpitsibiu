@@ -62,28 +62,33 @@ namespace CatalogDesktopApp.Services
             return null;
         }
 
-        public async Task<NotaDTO> GetNota(int _notaID)
+        public NotaDTO GetNota(int _notaID)
         {
-            try
+            return GetNotaAsync(_notaID).Result;
+        }
+
+        public Task<NotaDTO> GetNotaAsync(int _notaID)
+        {
+            return Task.Factory.StartNew(() =>
             {
                 var requestLink = "/Nota/";
 
                 var uri = new Uri(WebSiteAPI + requestLink + _notaID.ToString());
 
-                var response = await _client.GetAsync(uri);
-                if(response.IsSuccessStatusCode)
+                var response = _client.GetAsync(uri).Result;
+                if (response.IsSuccessStatusCode)
                 {
-                    var content = await response.Content.ReadAsStringAsync();
+                    var content = response.Content.ReadAsStringAsync().Result;
 
                     NotaDTO notaCautata = JsonConvert.DeserializeObject<NotaDTO>(content);
 
                     return notaCautata;
                 }
-            }
-            catch (Exception ex) { }
 
-            return null;
-        }
+                return null;
+            });
+            }
+        
 
         public async Task<string> PostNota(NotaDTO notaNoua)
         {

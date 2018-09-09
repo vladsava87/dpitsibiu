@@ -63,27 +63,31 @@ namespace CatalogDesktopApp.Services
             return null;
         }
 
-        public async Task<ProfesorDTO> GetProfesor(int _profesorID)
+        public ProfesorDTO GetProfesor (int _profesorID)
         {
-            try
+            return GetProfesorAsync(_profesorID).Result;
+        }
+
+        public Task<ProfesorDTO> GetProfesorAsync(int _profesorID)
+        {
+            return Task.Factory.StartNew(() =>
             {
                 var requestLink = "/Profesor/";
 
                 var uri = new Uri(WebSiteAPI + requestLink + _profesorID.ToString());
 
-                var response = await _client.GetAsync(uri);
+                var response = _client.GetAsync(uri).Result;
                 if (response.IsSuccessStatusCode)
                 {
-                    var content = await response.Content.ReadAsStringAsync();
+                    var content = response.Content.ReadAsStringAsync().Result;
 
                     ProfesorDTO profesorCautat = JsonConvert.DeserializeObject<ProfesorDTO>(content);
 
                     return profesorCautat;
                 }
-            }
-            catch (Exception ex) { }
 
-            return null;
+                return null;
+            });
         }
 
         public async Task<string> PostProfesor(ProfesorDTO profesorNou)
