@@ -40,27 +40,29 @@ namespace CatalogDesktopApp.Services
             }
         }
 
-        public async Task<List<ProfilDTO>> GetListaProfil()
+        public Task<List<ProfilDTO>> GetListaProfilAsync()
         {
-            try
+            return Task.Factory.StartNew(() =>
             {
                 var requestLink = "/Profil";
 
                 var uri = new Uri(WebSiteAPI + requestLink);
 
-                var response = await _client.GetAsync(uri);
+                var response = _client.GetAsync(uri).Result;
                 if (response.IsSuccessStatusCode)
                 {
-                    var content = await response.Content.ReadAsStringAsync();
+                    var content = response.Content.ReadAsStringAsync().Result;
 
                     List<ProfilDTO> profiluriCautate = JsonConvert.DeserializeObject<List<ProfilDTO>>(content);
 
                     return profiluriCautate;
                 }
-            }
-            catch (Exception ex) { }
 
-            return null;
+                return null;
+            });
+           
+
+           
         }
 
         public ProfilDTO GetProfil (int _profilID)
@@ -90,9 +92,9 @@ namespace CatalogDesktopApp.Services
             });
         }
 
-        public async Task<string> PostProfil(ProfilDTO profilNou)
+        public Task<string> PostProfilAsync(ProfilDTO profilNou)
         {
-            try
+            return Task.Factory.StartNew(() =>
             {
                 var requestLink = "/Profil";
 
@@ -102,22 +104,21 @@ namespace CatalogDesktopApp.Services
                 var buffer = Encoding.UTF8.GetBytes(myContent);
                 var byteContent = new ByteArrayContent(buffer);
 
-                var response = await _client.PostAsync(uri, byteContent);
+                var response = _client.PostAsync(uri, byteContent).Result;
                 if (response.IsSuccessStatusCode)
                 {
-                    var content = await response.Content.ReadAsStringAsync();
+                    var content = response.Content.ReadAsStringAsync().Result;
 
                     return content;
                 }
-            }
-            catch (Exception ex) { }
 
-            return null;
+                return null;
+            });
         }
 
-        public async Task<string> PutProfil(ProfilDTO profilNou)
+        public Task<string> PutProfilAsync(ProfilDTO profilNou)
         {
-            try
+            return Task.Factory.StartNew(() =>
             {
                 var requestLink = "/Profil/";
 
@@ -127,38 +128,38 @@ namespace CatalogDesktopApp.Services
                 var buffer = Encoding.UTF8.GetBytes(myContent);
                 var byteContent = new ByteArrayContent(buffer);
 
-                var response = await _client.PutAsync(uri, byteContent);
+                var response = _client.PutAsync(uri, byteContent).Result;
                 if (response.IsSuccessStatusCode)
                 {
-                    var content = await response.Content.ReadAsStringAsync();
+                    var content = response.Content.ReadAsStringAsync().Result;
 
                     return content;
                 }
-            }
-            catch (Exception ex) { }
 
-            return null;
+                return null;
+            });
+            
         }
 
-        public async Task<string> DeleteProfil(int _profilID)
+        public Task<string> DeleteProfilAsync(int _profilID)
         {
-            try
+            return Task.Factory.StartNew(() =>
             {
                 var requestLink = "/Profil/";
 
                 var uri = new Uri(WebSiteAPI + requestLink + _profilID.ToString());
 
-                var response = await _client.DeleteAsync(uri);
+                var response = _client.DeleteAsync(uri).Result;
                 if (response.IsSuccessStatusCode)
                 {
-                    var content = await response.Content.ReadAsStringAsync();
+                    var content = response.Content.ReadAsStringAsync().Result;
 
                     return content;
                 }
-            }
-            catch (Exception ex) { }
 
-            return null;
+                return null;
+            });
+            
         }
     }
 }
