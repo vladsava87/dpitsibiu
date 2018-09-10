@@ -39,32 +39,27 @@ namespace CatalogDesktopApp.Services
             }
         }
 
-        public async Task<List<NotaDTO>> GetListaNota()
+        public Task<List<NotaDTO>> GetListaNotaAsync()
         {
-            try
+            return Task.Factory.StartNew(() =>
             {
                 var requestLink = "/Nota";
 
                 var uri = new Uri(WebSiteAPI + requestLink);
 
-                var response = await _client.GetAsync(uri);
-                if(response.IsSuccessStatusCode)
+                var response = _client.GetAsync(uri).Result;
+                if (response.IsSuccessStatusCode)
                 {
-                    var content = await response.Content.ReadAsStringAsync();
+                    var content = response.Content.ReadAsStringAsync().Result;
 
                     List<NotaDTO> noteCautate = JsonConvert.DeserializeObject<List<NotaDTO>>(content);
 
                     return noteCautate;
                 }
-            }
-            catch (Exception ex) { }
 
-            return null;
-        }
-
-        public NotaDTO GetNota(int _notaID)
-        {
-            return GetNotaAsync(_notaID).Result;
+                return null;
+            });
+          
         }
 
         public Task<NotaDTO> GetNotaAsync(int _notaID)
@@ -90,9 +85,9 @@ namespace CatalogDesktopApp.Services
             }
         
 
-        public async Task<string> PostNota(NotaDTO notaNoua)
+        public Task<string> PostNotaAsync(NotaDTO notaNoua)
         {
-            try
+            return Task.Factory.StartNew(() =>
             {
                 var requestLink = "/Nota";
 
@@ -102,22 +97,22 @@ namespace CatalogDesktopApp.Services
                 var buffer = Encoding.UTF8.GetBytes(myContent);
                 var byteContent = new ByteArrayContent(buffer);
 
-                var response = await _client.PostAsync(uri, byteContent);
+                var response = _client.PostAsync(uri, byteContent).Result;
                 if (response.IsSuccessStatusCode)
                 {
-                    var content = await response.Content.ReadAsStringAsync();
+                    var content = response.Content.ReadAsStringAsync().Result;
 
                     return content;
                 }
-            }
-            catch (Exception ex) { }
 
-            return null;
+                return null;
+            });
+           
         }
 
-        public async Task<string> PutNota(NotaDTO notaNoua)
+        public Task<string> PutNotaAsync(NotaDTO notaNoua)
         {
-            try
+            return Task.Factory.StartNew(() =>
             {
                 var requestLink = "/Nota/";
 
@@ -127,38 +122,38 @@ namespace CatalogDesktopApp.Services
                 var buffer = Encoding.UTF8.GetBytes(myContent);
                 var byteContent = new ByteArrayContent(buffer);
 
-                var response = await _client.PutAsync(uri, byteContent);
+                var response = _client.PutAsync(uri, byteContent).Result;
                 if (response.IsSuccessStatusCode)
                 {
-                    var content = await response.Content.ReadAsStringAsync();
+                    var content = response.Content.ReadAsStringAsync().Result;
 
                     return content;
                 }
-            }
-            catch (Exception ex) { }
 
-            return null;
+                return null;
+            });
+           
         }
 
-        public async Task<string> DeleteNota(int _notaID)
+        public Task<string> DeleteNotaAsync(int _notaID)
         {
-            try
+            return Task.Factory.StartNew(() =>
             {
                 var requestLink = "/Nota/";
 
                 var uri = new Uri(WebSiteAPI + requestLink + _notaID.ToString());
 
-                var response = await _client.DeleteAsync(uri);
+                var response = _client.DeleteAsync(uri).Result;
                 if (response.IsSuccessStatusCode)
                 {
-                    var content = await response.Content.ReadAsStringAsync();
+                    var content = response.Content.ReadAsStringAsync().Result;
 
                     return content;
                 }
-            }
-            catch (Exception ex) { }
 
-            return null;
+                return null;
+            });
+          
         }
     }
 }

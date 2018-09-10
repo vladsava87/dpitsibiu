@@ -40,34 +40,30 @@ namespace CatalogDesktopApp.Services
             }
         }
 
-        public async Task<List<ObservatieDTO>> GetListaObservatie()
+        public Task<List<ObservatieDTO>> GetListaObservatieAsync()
         {
-            try
+            return Task.Factory.StartNew(() =>
             {
                 var requestLink = "/Observatie";
 
                 var uri = new Uri(WebSiteAPI + requestLink);
 
-                var response = await _client.GetAsync(uri);
+                var response = _client.GetAsync(uri).Result;
                 if (response.IsSuccessStatusCode)
                 {
-                    var content = await response.Content.ReadAsStringAsync();
+                    var content = response.Content.ReadAsStringAsync().Result;
 
                     List<ObservatieDTO> observatieCautata = JsonConvert.DeserializeObject<List<ObservatieDTO>>(content);
 
                     return observatieCautata;
                 }
-            }
-            catch (Exception ex) { }
 
-            return null;
+                return null;
+            });
+          
         }
 
-        public ObservatieDTO GetObservatie(int _observatieID)
-        {
-            return GetObservatieAsync(_observatieID).Result;
-        }
-
+        
         public Task<ObservatieDTO> GetObservatieAsync(int _observatieID)
         {
             return Task.Factory.StartNew(() =>
@@ -92,9 +88,9 @@ namespace CatalogDesktopApp.Services
         
         }
 
-        public async Task<string> PostObservatie(ObservatieDTO observatieNoua)
+        public Task<string> PostObservatieAsync(ObservatieDTO observatieNoua)
         {
-            try
+            return Task.Factory.StartNew(() =>
             {
                 var requestLink = "/Observatie";
 
@@ -104,22 +100,22 @@ namespace CatalogDesktopApp.Services
                 var buffer = Encoding.UTF8.GetBytes(myContent);
                 var byteContent = new ByteArrayContent(buffer);
 
-                var response = await _client.PostAsync(uri, byteContent);
+                var response = _client.PostAsync(uri, byteContent).Result;
                 if (response.IsSuccessStatusCode)
                 {
-                    var content = await response.Content.ReadAsStringAsync();
+                    var content = response.Content.ReadAsStringAsync().Result;
 
                     return content;
                 }
-            }
-            catch (Exception ex) { }
 
-            return null;
+                return null;
+            });
+           
         }
 
-        public async Task<string> PutObservatie(ObservatieDTO observatieNoua)
+        public Task<string> PutObservatieAsync(ObservatieDTO observatieNoua)
         {
-            try
+            return Task.Factory.StartNew(() =>
             {
                 var requestLink = "/Observatie/";
 
@@ -129,38 +125,37 @@ namespace CatalogDesktopApp.Services
                 var buffer = Encoding.UTF8.GetBytes(myContent);
                 var byteContent = new ByteArrayContent(buffer);
 
-                var response = await _client.PutAsync(uri, byteContent);
+                var response = _client.PutAsync(uri, byteContent).Result;
                 if (response.IsSuccessStatusCode)
                 {
-                    var content = await response.Content.ReadAsStringAsync();
+                    var content = response.Content.ReadAsStringAsync().Result;
 
                     return content;
                 }
-            }
-            catch (Exception ex) { }
-
-            return null;
+                return null;
+            });
+           
         }
 
-        public async Task<string> DeleteObservatie(int _observatieID)
+        public Task<string> DeleteObservatieAsync(int _observatieID)
         {
-            try
+            return Task.Factory.StartNew(() =>
             {
                 var requestLink = "/Observatie/";
 
                 var uri = new Uri(WebSiteAPI + requestLink + _observatieID.ToString());
 
-                var response = await _client.DeleteAsync(uri);
+                var response = _client.DeleteAsync(uri).Result;
                 if (response.IsSuccessStatusCode)
                 {
-                    var content = await response.Content.ReadAsStringAsync();
+                    var content = response.Content.ReadAsStringAsync().Result;
 
                     return content;
                 }
-            }
-            catch (Exception ex) { }
 
-            return null;
+                return null;
+            });
+            
         }
     }
 }

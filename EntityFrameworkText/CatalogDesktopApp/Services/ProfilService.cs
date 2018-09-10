@@ -65,11 +65,6 @@ namespace CatalogDesktopApp.Services
            
         }
 
-        public ProfilDTO GetProfil (int _profilID)
-        {
-            return GetProfilAsync(_profilID).Result;
-        }
-
         public Task<ProfilDTO> GetProfilAsync(int _profilID)
         {
             return Task.Factory.StartNew(() =>

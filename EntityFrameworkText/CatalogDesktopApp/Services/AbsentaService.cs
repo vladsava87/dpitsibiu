@@ -40,35 +40,29 @@ namespace CatalogDesktopApp.Services
             }
         }
 
-        public async Task<List<AbsentaDTO>> GetListaAbsenta()
+        public Task<List<AbsentaDTO>> GetListaAbsentaAsync()
         {
-            try
+            return Task.Factory.StartNew(() =>
             {
                 var requestLink = "/Absenta";
 
                 var uri = new Uri(WebSiteAPI + requestLink);
 
-                var response = await _client.GetAsync(uri);
+                var response = _client.GetAsync(uri).Result;
                 if (response.IsSuccessStatusCode)
                 {
-                    var content = await response.Content.ReadAsStringAsync();
+                    var content = response.Content.ReadAsStringAsync().Result;
 
                     List<AbsentaDTO> absentaCautata = JsonConvert.DeserializeObject<List<AbsentaDTO>>(content);
 
                     return absentaCautata;
                 }
-            }
-            catch (Exception ex) { }
 
-            return null;
+                return null;
+            });
+           
         }
-
-
-        public AbsentaDTO GetAbsenta(int _absentaID)
-        {
-            return GetAbsentaAsync(_absentaID).Result;
-        }
-
+        
     public Task<AbsentaDTO> GetAbsentaAsync(int _absentaID)
     {
         return Task.Factory.StartNew(() =>
@@ -91,9 +85,9 @@ namespace CatalogDesktopApp.Services
         });
     }
 
-        public async Task<string> PostAbsenta(AbsentaDTO absentaNoua)
+        public Task<string> PostAbsentaAsync(AbsentaDTO absentaNoua)
         {
-            try
+            return Task.Factory.StartNew(() =>
             {
                 var requestLink = "/Absenta";
 
@@ -103,22 +97,22 @@ namespace CatalogDesktopApp.Services
                 var buffer = Encoding.UTF8.GetBytes(myContent);
                 var byteContent = new ByteArrayContent(buffer);
 
-                var response = await _client.PostAsync(uri, byteContent);
+                var response = _client.PostAsync(uri, byteContent).Result;
                 if (response.IsSuccessStatusCode)
                 {
-                    var content = await response.Content.ReadAsStringAsync();
+                    var content = response.Content.ReadAsStringAsync().Result;
 
                     return content;
                 }
-            }
-            catch (Exception ex) { }
 
-            return null;
+                return null;
+            });
+           
         }
 
-        public async Task<string> PutAbsenta(AbsentaDTO absentaNoua)
+        public Task<string> PutAbsentaAsync(AbsentaDTO absentaNoua)
         {
-            try
+            return Task.Factory.StartNew(() =>
             {
                 var requestLink = "/Absenta/";
 
@@ -128,38 +122,38 @@ namespace CatalogDesktopApp.Services
                 var buffer = Encoding.UTF8.GetBytes(myContent);
                 var byteContent = new ByteArrayContent(buffer);
 
-                var response = await _client.PutAsync(uri, byteContent);
+                var response = _client.PutAsync(uri, byteContent).Result;
                 if (response.IsSuccessStatusCode)
                 {
-                    var content = await response.Content.ReadAsStringAsync();
+                    var content = response.Content.ReadAsStringAsync().Result;
 
                     return content;
                 }
-            }
-            catch (Exception ex) { }
 
-            return null;
+                return null;
+            });
+           
         }
 
-        public async Task<string> DeleteAbsenta(int _absentaID)
+        public Task<string> DeleteAbsentaAsync(int _absentaID)
         {
-            try
+            return Task.Factory.StartNew(() =>
             {
                 var requestLink = "/Absenta/";
 
                 var uri = new Uri(WebSiteAPI + requestLink + _absentaID.ToString());
 
-                var response = await _client.DeleteAsync(uri);
+                var response = _client.DeleteAsync(uri).Result;
                 if (response.IsSuccessStatusCode)
                 {
-                    var content = await response.Content.ReadAsStringAsync();
+                    var content = response.Content.ReadAsStringAsync().Result;
 
                     return content;
                 }
-            }
-            catch (Exception ex) { }
 
-            return null;
+                return null;
+            });
+          
         }
     }
 }

@@ -40,33 +40,30 @@ namespace CatalogDesktopApp.Services
             }
         }
 
-        public async Task<List<MaterieDTO>> GetListaMaterie()
+        public Task<List<MaterieDTO>> GetListaMaterieAsync()
         {
-            try
+            return Task.Factory.StartNew(() =>
             {
                 var requestLink = "/Materie";
 
                 var uri = new Uri(WebSiteAPI + requestLink);
 
-                var response = await _client.GetAsync(uri);
+                var response = _client.GetAsync(uri).Result;
                 if (response.IsSuccessStatusCode)
                 {
-                    var content = await response.Content.ReadAsStringAsync();
+                    var content = response.Content.ReadAsStringAsync().Result;
 
                     List<MaterieDTO> materiecautata = JsonConvert.DeserializeObject<List<MaterieDTO>>(content);
 
                     return materiecautata;
                 }
-            }
-            catch (Exception ex) { }
 
-            return null;
+                return null;
+            });
+            
         }
 
-        public MaterieDTO GetMaterie(int _materieID)
-        {
-            return GetMaterieAsync(_materieID).Result;
-        }
+       
         public Task<MaterieDTO> GetMaterieAsync(int _materieID)
         {
             return Task.Factory.StartNew(() =>
@@ -89,9 +86,9 @@ namespace CatalogDesktopApp.Services
             });
         }
 
-        public async Task<string> PostMaterie(MaterieDTO materieNoua)
+        public Task<string> PostMaterieAsync(MaterieDTO materieNoua)
         {
-            try
+            return Task.Factory.StartNew(() =>
             {
                 var requestLink = "/Materie";
 
@@ -101,22 +98,22 @@ namespace CatalogDesktopApp.Services
                 var buffer = Encoding.UTF8.GetBytes(myContent);
                 var byteContent = new ByteArrayContent(buffer);
 
-                var response = await _client.PostAsync(uri, byteContent);
+                var response = _client.PostAsync(uri, byteContent).Result;
                 if (response.IsSuccessStatusCode)
                 {
-                    var content = await response.Content.ReadAsStringAsync();
+                    var content = response.Content.ReadAsStringAsync().Result;
 
                     return content;
                 }
-            }
-            catch (Exception ex) { }
 
-            return null;
+                return null;
+            });
+            
         }
 
-        public async Task<string> PutMaterie(MaterieDTO materieNoua)
+        public Task<string> PutMaterieAsync(MaterieDTO materieNoua)
         {
-            try
+            return Task.Factory.StartNew(() =>
             {
                 var requestLink = "/Materie/";
 
@@ -126,38 +123,38 @@ namespace CatalogDesktopApp.Services
                 var buffer = Encoding.UTF8.GetBytes(myContent);
                 var byteContent = new ByteArrayContent(buffer);
 
-                var response = await _client.PutAsync(uri, byteContent);
+                var response = _client.PutAsync(uri, byteContent).Result;
                 if (response.IsSuccessStatusCode)
                 {
-                    var content = await response.Content.ReadAsStringAsync();
+                    var content = response.Content.ReadAsStringAsync().Result;
 
                     return content;
                 }
-            }
-            catch (Exception ex) { }
 
-            return null;
+                return null;
+            });
+          
         }
 
-        public async Task<string> DeleteMaterie(int _materieID)
+        public Task<string> DeleteMaterieAsync(int _materieID)
         {
-            try
+            return Task.Factory.StartNew(() =>
             {
                 var requestLink = "/Materie/";
 
                 var uri = new Uri(WebSiteAPI + requestLink + _materieID.ToString());
 
-                var response = await _client.DeleteAsync(uri);
+                var response = _client.DeleteAsync(uri).Result;
                 if (response.IsSuccessStatusCode)
                 {
-                    var content = await response.Content.ReadAsStringAsync();
+                    var content = response.Content.ReadAsStringAsync().Result;
 
                     return content;
                 }
-            }
-            catch (Exception ex) { }
 
-            return null;
+                return null;
+            });
+            
         }
     }
 }
