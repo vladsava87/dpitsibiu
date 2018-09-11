@@ -1,5 +1,7 @@
 ﻿using DatabaseLayer;
 using DatabaseLayer.DataModels;
+using Newtonsoft.Json;
+using NewWebService.Util;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,6 +24,7 @@ namespace NewWebService.Controllers
             string[] usernamePasswordArray = userpass.Split(':');
             string username = usernamePasswordArray[0];
             string password = usernamePasswordArray[1];
+            var utilizator = new Utilizator();
 
             t_elev userelev = catalog.Elevi.Where(elevspecific => elevspecific.Email == username).FirstOrDefault();
 
@@ -31,9 +34,10 @@ namespace NewWebService.Controllers
 
                 if(userprof != null && userprof.Parola == password)
                 {
-                    string token = "1A1C0E0M0N0O1P0P";
-                    msg.StatusCode = HttpStatusCode.OK;
-                    msg.Content = new StringContent("Login successful. Your token is " + token);
+                    utilizator.Tip = ut.profesor;
+                    utilizator.Id = userprof.Id;
+
+                    msg.Content = new StringContent(JsonConvert.SerializeObject(utilizator));
                 }
                 else
                 {
@@ -45,9 +49,10 @@ namespace NewWebService.Controllers
             {
                 if(userelev.Parola == password)
                 {
-                    string token = "0A0C0E0M0N0O0P0P";
-                    msg.StatusCode = HttpStatusCode.OK;
-                    msg.Content = new StringContent("Login successful. Your token is " + token);
+                    utilizator.Tip = ut.elev;
+                    utilizator.Id = userelev.Id;
+
+                    msg.Content = new StringContent(JsonConvert.SerializeObject(utilizator));
                 }
                 else
                 {

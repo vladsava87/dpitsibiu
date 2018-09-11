@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using CatalogDesktopApp.Views;
 using CatalogDesktopApp.ViewModels;
+using CatalogDesktopApp.Util;
 
 namespace CatalogDesktopApp
 {
@@ -16,6 +17,8 @@ namespace CatalogDesktopApp
     public partial class App : Application
     {
         private MessageBus _messageBus;
+
+        public static Utilizator UtilizatorCurent;
 
         protected override void OnStartup(StartupEventArgs e)
         {

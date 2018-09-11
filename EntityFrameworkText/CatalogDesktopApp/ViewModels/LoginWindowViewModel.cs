@@ -10,6 +10,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using CatalogDesktopApp.Services;
 using CatalogDesktopApp.Util;
+using Newtonsoft.Json;
 
 namespace CatalogDesktopApp.ViewModels
 {
@@ -18,9 +19,11 @@ namespace CatalogDesktopApp.ViewModels
         private MessageBus _messageBus;
         private UserService _userService;
 
+        private bool isPerformingLogin;
+
         public LoginWindowViewModel()
         {
-            LoginButtonClick = new RelayCommand(MyLoginButtonClick);
+            LoginButtonClick = new RelayCommand(MyLoginButtonClick, CanLogin);
           //  UserName = new RelayCommand(MyUserName);
             ForgotPasswordButtonClick = new RelayCommand(MyForgotPasswordButtonClick);
 
@@ -28,11 +31,16 @@ namespace CatalogDesktopApp.ViewModels
             _userService = UserService.Instance;
         }
 
+        private bool CanLogin(object arg)
+        {
+            return !isPerformingLogin;
+        }
 
         private async void MyLoginButtonClick(object obj)
         {
             //string Username = "AlexAlexandrescu@elev.ro";
             //string Password = "1234";
+            isPerformingLogin = true;
 
             string hashPassword = Password.CalculateMD5Hash(PasswordTextBox);
 
@@ -40,11 +48,15 @@ namespace CatalogDesktopApp.ViewModels
 
             if (ret != null)
             {
+                App.UtilizatorCurent = JsonConvert.DeserializeObject<Utilizator>(ret);
+
                 var mesg = new TestMessage();
                 mesg.Str = ret;
 
                 _messageBus.Publish(mesg);
             }
+
+            isPerformingLogin = false;
         }
 
         private void MyForgotPasswordButtonClick(object obj)

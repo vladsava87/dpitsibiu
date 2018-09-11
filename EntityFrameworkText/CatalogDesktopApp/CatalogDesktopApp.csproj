@@ -81,6 +81,7 @@
     <Compile Include="Services\ProfilService.cs" />
     <Compile Include="Services\UserService.cs" />
     <Compile Include="Util\Password.cs" />
+    <Compile Include="Util\Utilizator.cs" />
     <Compile Include="ViewModels\ClasaWindowViewModel.cs" />
     <Compile Include="ViewModels\InsertAbsentaViewModel.cs" />
     <Compile Include="ViewModels\InsertNoteViewModel.cs" />
