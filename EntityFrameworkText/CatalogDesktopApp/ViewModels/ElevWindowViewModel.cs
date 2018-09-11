@@ -71,7 +71,7 @@ namespace CatalogDesktopApp.ViewModels
             notaInserata.Teza = obj.Teza;
             notaInserata.Semestrul = (sem)obj.Semestrul;
 
-            serviciuNota.PostNota(notaInserata);
+            serviciuNota.PostNotaAsync(notaInserata);
         }
 
         private void SetAbsentaInserata(InsertAbsentaMessage obj)
@@ -84,7 +84,7 @@ namespace CatalogDesktopApp.ViewModels
             absentaInserata.ProfesorID = obj.ProfesorID;
             absentaInserata.Semestrul = (sem)obj.Semestrul;
 
-            serviciuAbsenta.PostAbsenta(absentaInserata);
+            serviciuAbsenta.PostAbsentaAsync(absentaInserata);
         }
 
         private void SetObservatieInserata(InsertObservatieMessage obj)
@@ -95,7 +95,7 @@ namespace CatalogDesktopApp.ViewModels
             observatieInserata.ProfesorID = obj.ProfesorID;
             observatieInserata.Text = obj.Explicatie;
 
-            serviciuObservatie.PostObservatie(observatieInserata);
+            serviciuObservatie.PostObservatieAsync(observatieInserata);
         }
 
         public ElevWindowViewModel(int id) : this()
