@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Input;
 using CatalogDesktopApp.Services;
+using CatalogDesktopApp.Util;
 
 namespace CatalogDesktopApp.ViewModels
 {
@@ -32,8 +33,10 @@ namespace CatalogDesktopApp.ViewModels
         {
             //string Username = "AlexAlexandrescu@elev.ro";
             //string Password = "1234";
-            
-            var ret = await _userService.PerformLogin(UsernameTextBox, PasswordTextBox);
+
+            string hashPassword = Password.CalculateMD5Hash(PasswordTextBox);
+
+            var ret = await _userService.PerformLogin(UsernameTextBox, hashPassword);
 
             if (ret != null)
             {
