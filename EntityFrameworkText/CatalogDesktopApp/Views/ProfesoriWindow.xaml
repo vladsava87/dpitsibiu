@@ -39,6 +39,6 @@
             <system:String>12D</system:String>
 
         </ItemsControl>
-        <TextBox HorizontalAlignment="Left" Height="93" Margin="294,46,0,0" TextWrapping="Wrap" Text="Lista Clase" VerticalAlignment="Top" Width="270" FontSize="32"/>
+        <TextBox HorizontalAlignment="Center" Height="50" Margin="308,46,295,0" TextWrapping="Wrap" Text=" Lista Clase" VerticalAlignment="Top" Width="177" FontSize="32"/>
     </Grid>
 </UserControl>

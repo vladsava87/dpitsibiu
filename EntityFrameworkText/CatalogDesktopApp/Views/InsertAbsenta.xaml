@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:CatalogDesktopApp.Views"
         xmlns:vm="clr-namespace:CatalogDesktopApp.ViewModels"
         mc:Ignorable="d"
-        Title="InsertAbsenta" Height="450" Width="800">
+        Title="Inserare Absenta" Height="300" Width="450" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Topmost="True">
     
     <Grid>
         <Grid>

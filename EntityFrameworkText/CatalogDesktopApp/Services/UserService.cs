@@ -74,5 +74,10 @@ namespace CatalogDesktopApp.Services
 
             return null;
         }
+
+        public static implicit operator UserService(ClasaService v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

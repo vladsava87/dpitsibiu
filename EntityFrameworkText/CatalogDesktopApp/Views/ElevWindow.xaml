@@ -6,10 +6,10 @@
         xmlns:local="clr-namespace:CatalogDesktopApp.Views"
         xmlns:VM="clr-namespace:CatalogDesktopApp.ViewModels"
         mc:Ignorable="d"
-        Background="White">
-    <!--<UserControl.DataContext>
+        Background="White" Height="450" Width="800">
+    <UserControl.DataContext>
         <VM:ElevWindowViewModel />
-    </UserControl.DataContext>-->
+    </UserControl.DataContext>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
