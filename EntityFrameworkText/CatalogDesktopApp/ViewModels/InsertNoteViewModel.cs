@@ -10,6 +10,8 @@ namespace CatalogDesktopApp.ViewModels
     {
         private MessageBus _messageBus;
         private string materieNume;
+        public int Nota { get; set; }
+       //public bool Teza { get; set; }
 
         public int MaterieID { get; set; }
 

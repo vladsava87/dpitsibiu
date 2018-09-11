@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DatabaseLayer.DataModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,9 @@ namespace CatalogDesktopApp.ViewModels
 
         public int ProfesorID { get; set; }
         public int MaterieID { get; set; }
+        public sem Semestrul { get; set; }
+
+        
 
         public string Materie
         {
@@ -47,5 +51,6 @@ namespace CatalogDesktopApp.ViewModels
 
             _messageBus.Publish(absentaInserata);
         }
+
     }
 }

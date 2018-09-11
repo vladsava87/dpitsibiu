@@ -36,7 +36,7 @@ namespace CatalogDesktopApp
             newWindowViewModel.Materie = obj.Materia;
             newWindowViewModel.ProfesorID = obj.ProfesorID;
             newWindowViewModel.Profesor = obj.Profesor;
-
+            
             newWindow.DataContext = newWindowViewModel;
             newWindow.ShowDialog();
         }

@@ -10,7 +10,7 @@ namespace CatalogDesktopApp.ViewModels
     {
         private MessageBus _messageBus;
         private string profesorNume;
-
+        public string Explicatie { get; set; }
         public int  ProfesorID { get; set; }
 
         public string Profesor
