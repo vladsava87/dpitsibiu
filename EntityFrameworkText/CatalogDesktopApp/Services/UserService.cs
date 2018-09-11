@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
@@ -8,7 +9,7 @@ namespace CatalogDesktopApp.Services
 {
     public sealed class UserService
     {
-        private const string WebSiteAPI = @"http://localhost:1208/api";
+        private string WebSiteAPI = ConfigurationManager.AppSettings["RestAPI"];
 
         private static HttpClient _client;
         private static UserService _instance;

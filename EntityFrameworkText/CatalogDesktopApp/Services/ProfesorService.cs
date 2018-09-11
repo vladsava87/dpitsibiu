@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
@@ -11,7 +12,7 @@ namespace CatalogDesktopApp.Services
 {
     public sealed class ProfesorService
     {
-        private const string WebSiteAPI = @"http://localhost:1208/api";
+        private string WebSiteAPI = ConfigurationManager.AppSettings["RestAPI"];
 
         private static HttpClient _client;
         private static ProfesorService _instance;
