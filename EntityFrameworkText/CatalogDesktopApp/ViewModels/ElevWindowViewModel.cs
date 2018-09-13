@@ -118,11 +118,11 @@ namespace CatalogDesktopApp.ViewModels
 
         public ElevWindowViewModel()
         {
-            NoteCommand = new RelayCommand(ListNote);
+            NoteCommand = new RelayCommand(ListNote, CanListNote);
 
-            AbsenteCommand = new RelayCommand(ListAbs);
+            AbsenteCommand = new RelayCommand(ListAbs, CanListAbs);
 
-            ObservatiiCommand = new RelayCommand(ListObs);
+            ObservatiiCommand = new RelayCommand(ListObs, CanListObs);
 
             InsertNoteCommand = new RelayCommand(InsertNote, CanInsertNote);
 
@@ -142,6 +142,21 @@ namespace CatalogDesktopApp.ViewModels
 
             messageBus.Subscribe<InsertObservatieMessage>(SetObservatieInserata);
             serviciuObservatie = ObservatieService.Instance;
+        }
+
+        private bool CanListObs(object arg)
+        {
+            return !ObservatiiVisible;
+        }
+
+        private bool CanListAbs(object arg)
+        {
+            return !AbsenteVisible;
+        }
+
+        private bool CanListNote(object arg)
+        {
+            return !NoteVisible;
         }
 
         private bool CanInsertObservatii(object arg)
