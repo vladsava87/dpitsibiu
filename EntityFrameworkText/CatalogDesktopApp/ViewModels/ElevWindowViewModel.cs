@@ -37,16 +37,16 @@ namespace CatalogDesktopApp.ViewModels
         public ElevWindowViewModel()
         {
             NoteCommand = new RelayCommand(ListNote);
-
+            
             AbsenteCommand = new RelayCommand(ListAbs);
 
             ObservatiiCommand = new RelayCommand(ListObs);
 
-            InsertNoteCommand = new RelayCommand(InsertNote);
+            InsertNoteCommand = new RelayCommand(InsertNote, CanInsertNota);
+            
+            InsertAbsenteCommand = new RelayCommand(InsertAbsente, CanInsertAbsenta);
 
-            InsertAbsenteCommand = new RelayCommand(InsertAbsente);
-
-            InsertObservatiiCommand = new RelayCommand(InsertObservatii);
+            InsertObservatiiCommand = new RelayCommand(InsertObservatii, CanInsertObservatie);
 
             _serviceElev = ElevService.Instance;
 
@@ -60,6 +60,30 @@ namespace CatalogDesktopApp.ViewModels
 
             messageBus.Subscribe<InsertObservatieMessage>(SetObservatieInserata);
             serviciuObservatie = ObservatieService.Instance;
+        }
+
+        private bool CanInsertObservatie(object arg)
+        {
+            if (App.UtilizatorCurent.Tip == Util.ut.profesor)
+                return true;
+            else
+                return false;
+        }
+
+        private bool CanInsertAbsenta(object arg)
+        {
+            if (App.UtilizatorCurent.Tip == Util.ut.profesor)
+                return true;
+            else
+                return false;
+        }
+
+        private bool CanInsertNota(object arg)
+        {
+            if (App.UtilizatorCurent.Tip == Util.ut.profesor)
+                return true;
+            else
+                return false;
         }
 
         private void SetNotaInserata(InsertNotaMessage obj)
@@ -144,28 +168,35 @@ namespace CatalogDesktopApp.ViewModels
 
         private void InsertAbsente(object obj)
         {
-            var message = new ShowAbsenteWindow();
-            message.MaterieID = 1;
-            message.Materia = "Istorie";
-            message.ProfesorID = 1;
-            message.Profesor = "Ion";
-            messageBus.Publish(message);
+            
+            
+                var message = new ShowAbsenteWindow();
+                message.MaterieID = 1;
+                message.Materia = "Istorie";
+                message.ProfesorID = 1;
+                message.Profesor = "Ion";
+                messageBus.Publish(message);
+            
         }
 
         private void InsertNote(object obj)
         {
-            var message = new ShowNoteWindow();
-            message.MaterieID = 1;
-            message.Materia = "Istorie";
-            messageBus.Publish(message);
+           
+                var message = new ShowNoteWindow();
+                message.MaterieID = 1;
+                message.Materia = "Istorie";
+                messageBus.Publish(message);
+            
         }
 
         private void InsertObservatii(object obj)
         {
-            var message = new ShowObservatiiWindow();
-            message.ProfesorID = 1;
-            message.Profesor = "Ion";
-            messageBus.Publish(message);
+            
+                var message = new ShowObservatiiWindow();
+                message.ProfesorID = 1;
+                message.Profesor = "Ion";
+                messageBus.Publish(message);
+            
         }
     }
 }
