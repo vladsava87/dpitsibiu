@@ -10,6 +10,7 @@ namespace DatabaseLayer.DTO
     [DataContract]
     public class ProfesorDTO
     {
+        
         [DataMember]
         public int Id { get; set; }
         [DataMember]
@@ -35,5 +36,7 @@ namespace DatabaseLayer.DTO
         // public int ObservatieID { get; set; }
         [DataMember]
         public List<ObservatieDTO> Observatii { get; set; }
+        [DataMember]
+        public List<ClasaDTO> Clasa { get; set; }
     }
 }

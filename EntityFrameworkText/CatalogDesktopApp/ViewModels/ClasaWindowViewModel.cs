@@ -10,7 +10,6 @@ namespace CatalogDesktopApp.ViewModels
     public class ClasaWindowViewModel : ViewModelBase
     {
         private int _classId;
-
         private ClasaService _clasaService;
         private List<ElevDTO> _elevi;
         private ClasaDTO clasa;

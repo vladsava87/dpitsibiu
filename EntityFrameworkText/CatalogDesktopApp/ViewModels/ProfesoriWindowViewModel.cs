@@ -1,38 +1,90 @@
-﻿using CatalogDesktopApp.Annotations;
+﻿using CatalogDesktopApp.Services;
 using DatabaseLayer.DTO;
-using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows.Controls;
 using System.Windows.Input;
+using CatalogDesktopApp.Views;
 
 namespace CatalogDesktopApp.ViewModels
 {
     public class ProfesoriWindowViewModel : ViewModelBase
     {
+        private int _profesorId;
+        private ProfesorService _profesorService;
+        private List<ClasaDTO> _clase;
+        private ProfesorDTO profesor;
+        private ClasaDTO curentclasa;
+        private UserControl viewModelClasa;
+
+        private MessageBus _messageBus;
+
+        public ICommand ClasaCommand { get; set; }
+
         public ProfesorDTO Profesor
         {
-            get; set;
+            get => profesor;
+            set
+            {
+                profesor = value;
+                OnPropertyChanged("Profesor");
+                if (profesor.Clasa != null)
+                {
+                    Clase = profesor.Clasa;
+                }
+            }
+        }
+
+        public List<ClasaDTO> Clase
+        {
+            get => _clase;
+            set
+            {
+                _clase = value;
+                OnPropertyChanged("Clasa");
+            }
+        }
+
+        public ClasaDTO CurrentClasa
+        {
+            get => curentclasa;
+            set
+            {
+                curentclasa = value;
+                OnPropertyChanged("CurentClasa");
+                UpdateClasaInfo(curentclasa.Id);
+            }
+        }
+
+        public UserControl CurrentViewClasa
+        {
+            get => viewModelClasa;
+            set
+            {
+                viewModelClasa = value;
+                OnPropertyChanged("CurrentViewClasa");
+            }
+        }
+
+        private void UpdateClasaInfo(int id)
+        {
+            CurrentViewClasa = new ClasaWindow(new ClasaWindowViewModel(id));
         }
 
         public ProfesoriWindowViewModel()
         {
+            ClasaCommand = new RelayCommand(ListClasa);
 
-           Profesor = new ProfesorDTO();
-           Profesor.Nume = "Mihai";
-           Profesor.Prenume = "Popa";
-           Profesor.Email = "MPopa@gmail.ro";
-     
-
-
+            _profesorService = ProfesorService.Instance;
+            _messageBus = MessageBus.Instance;
         }
 
-        public string NumePrenume
+        public ProfesoriWindowViewModel(int v) : this()
         {
-            get { return Profesor.Nume + " " + Profesor.Prenume; }
+            Profesor = _profesorService.GetProfesorAsync(v).Result;
+        }
+
+        public void ListClasa(object obj)
+        {
 
         }
     }
