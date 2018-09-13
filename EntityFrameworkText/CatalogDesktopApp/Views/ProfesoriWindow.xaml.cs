@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using CatalogDesktopApp.ViewModels;
 
 namespace CatalogDesktopApp.Views
 {
@@ -22,6 +23,12 @@ namespace CatalogDesktopApp.Views
         public ProfesoriWindow()
         {
             InitializeComponent();
+        }
+
+        public ProfesoriWindow(ProfesoriWindowViewModel profesoriWindowViewModel)
+        {
+            InitializeComponent();
+            this.DataContext = profesoriWindowViewModel;
         }
     }
 }

@@ -6,39 +6,28 @@
         xmlns:vm="clr-namespace:CatalogDesktopApp.ViewModels"
         Background="White" Height="450" Width="800">
 
-    <UserControl.DataContext>
+    <!--<UserControl.DataContext>
         <vm:ProfesoriWindowViewModel />
-    </UserControl.DataContext>
+    </UserControl.DataContext>-->
     <Grid Margin="10">
-        <ItemsControl Margin="143,161,143.6,-29">
-            <ItemsControl.ItemsPanel>
+        <ItemsControl Margin="143,161,143.6, 0" ItemsSource="{Binding Clase}">
+            <!--<ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapPanel />
                 </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
+            </ItemsControl.ItemsPanel>-->
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <Button Content="{Binding}" Margin="10,10,10,10" Width="100"/>
+                    <Button Margin="10,10,10,10" Width="100">
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="{Binding Numar}"/>
+                            <Label Content="{Binding Serie}"/>
+                        </StackPanel>
+                    </Button>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
-            <system:String>9A</system:String>
-            <system:String>9B</system:String>
-            <system:String>9C</system:String>
-            <system:String>9D</system:String>
-            <system:String>10A</system:String>
-            <system:String>10B</system:String>
-            <system:String>10C</system:String>
-            <system:String>10D</system:String>
-            <system:String>11A</system:String>
-            <system:String>11B</system:String>
-            <system:String>11C</system:String>
-            <system:String>11D</system:String>
-            <system:String>12A</system:String>
-            <system:String>12B</system:String>
-            <system:String>12C</system:String>
-            <system:String>12D</system:String>
 
         </ItemsControl>
-        <TextBox HorizontalAlignment="Center" Height="50" Margin="308,46,295,0" TextWrapping="Wrap" Text=" Lista Clase" VerticalAlignment="Top" Width="177" FontSize="32"/>
+        <Label HorizontalAlignment="Center" Height="50" Margin="308,46,295,0"  Content=" Lista Clase" VerticalAlignment="Top" Width="177" FontSize="32"/>
     </Grid>
 </UserControl>

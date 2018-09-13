@@ -38,5 +38,8 @@ namespace DatabaseLayer.DTO
         public List<ObservatieDTO> Observatii { get; set; }
         [DataMember]
         public List<ClasaDTO> Clasa { get; set; }
+
+        [DataMember]
+        public List<ClasaDTO> Clase { get; set; }
     }
 }

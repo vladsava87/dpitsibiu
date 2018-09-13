@@ -3,6 +3,7 @@ using System.Runtime.CompilerServices;
 using System.Windows.Controls;
 using CatalogDesktopApp.Annotations;
 using System.Windows.Input;
+using CatalogDesktopApp.Util;
 using CatalogDesktopApp.Views;
 
 namespace CatalogDesktopApp.ViewModels
@@ -26,12 +27,20 @@ namespace CatalogDesktopApp.ViewModels
 
             _messageBus = MessageBus.Instance;
 
-            _messageBus.Subscribe<TestMessage>(OnNavigation);
+            _messageBus.Subscribe<TestMessage>(OnLogin);
         }
 
-        private void OnNavigation(TestMessage obj)
+        private void OnLogin(TestMessage obj)
         {
-            CurrentView = new ClasaWindow(new ClasaWindowViewModel(1));
+            if (App.UtilizatorCurent.Tip == ut.elev)
+            {
+                CurrentView = new ElevWindow(new ElevWindowViewModel(App.UtilizatorCurent.Id));
+            }
+
+            if (App.UtilizatorCurent.Tip == ut.profesor)
+            {
+                CurrentView = new ProfesoriWindow(new ProfesoriWindowViewModel(App.UtilizatorCurent.Id));
+            }
         }
 
         public UserControl CurrentView

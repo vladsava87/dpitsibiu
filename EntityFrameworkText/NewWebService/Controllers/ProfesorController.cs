@@ -11,7 +11,7 @@ using System.Web.Http;
 
 namespace NewWebService.Controllers
 {
-    [BasicAuthentication]
+    //[BasicAuthentication]
     public class ProfesorController : ApiController
     {
         private CatalogContex catalog = new CatalogContex();

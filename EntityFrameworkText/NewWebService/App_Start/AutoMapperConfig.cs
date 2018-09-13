@@ -18,7 +18,7 @@ namespace NewWebService.App_Start
 
                 cfg.CreateMap<t_clasa, ClasaDTO>()
                     //.ForMember(ignoraelevi => ignoraelevi.Elevi, opt => opt.Ignore())
-                    .ForMember(ignoraprofesori => ignoraprofesori.Diriginte, opt => opt.Ignore())
+                    //.ForMember(ignoraprofesori => ignoraprofesori.Diriginte, opt => opt.Ignore())
                     .ForMember(ignoraprofilul => ignoraprofilul.Profil, opt => opt.Ignore());
 
                 //cfg.CreateMap<t_clasa, ClasaDTO>()
@@ -29,21 +29,28 @@ namespace NewWebService.App_Start
                         .ForMember(ignoraabsente => ignoraabsente.Absente, opt => opt.Ignore())
                         .ForMember(ignoraobservatii => ignoraobservatii.Observatii, opt => opt.Ignore())
                         .ForMember(ignoraclasa => ignoraclasa.ClasaID, opt => opt.Ignore());
+
                     cfg.CreateMap<t_materie, MaterieDTO>()
                         .ForMember(ignoraabsente => ignoraabsente.Absente, opt => opt.Ignore())
                         .ForMember(ignoranote => ignoranote.Note, opt => opt.Ignore())
                         .ForMember(ignoraprofesor => ignoraprofesor.Profesor, opt => opt.Ignore());
+
                     cfg.CreateMap<t_nota, NotaDTO>()
                         .ForMember(ignoraelev => ignoraelev.Elev, opt => opt.Ignore())
                         .ForMember(ignoramaterie => ignoramaterie.Materie, opt => opt.Ignore());
+
                     cfg.CreateMap<t_observatie, ObservatieDTO>()
                         .ForMember(ignoraprofesori => ignoraprofesori.Profesor, opt => opt.Ignore())
                         .ForMember(ignoraelevii => ignoraelevii.Elev, opt => opt.Ignore());
-                    cfg.CreateMap<t_profesor, ProfesorDTO>()
-                        .ForMember(ignoraabsente => ignoraabsente.Absente, opt => opt.Ignore())
-                        .ForMember(ignoramaterii => ignoramaterii.Materie, opt => opt.Ignore())
-                        .ForMember(ignoraobservatii => ignoraobservatii.Observatii, opt => opt.Ignore());
-                    cfg.CreateMap<t_profil, ProfilDTO>()
+
+                cfg.CreateMap<t_profesor, ProfesorDTO>()
+                    .ForMember(ignoraabsente => ignoraabsente.Absente, opt => opt.Ignore())
+                    .ForMember(ignoramaterii => ignoramaterii.Materie, opt => opt.Ignore())
+                    .ForMember(ignoraobservatii => ignoraobservatii.Observatii, opt => opt.Ignore())
+                    .ForMember(ingnoreClasa => ingnoreClasa.Clasa, opt => opt.Ignore())
+                    .ForMember(dto => dto.Clase, opt => opt.MapFrom(x => x.Clase.Select(y => y.Clasa).ToList()));
+
+                cfg.CreateMap<t_profil, ProfilDTO>()
                         .ForMember(ignoraclase => ignoraclase.Clase, opt => opt.Ignore());
             });
         }

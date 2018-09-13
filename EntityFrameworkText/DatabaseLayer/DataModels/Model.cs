@@ -69,6 +69,8 @@ namespace DatabaseLayer.DataModels
         public virtual ICollection<t_profesor_materie> Materie { get; set; }
         public virtual List<t_observatie> Observatii { get; set; }
 
+        public virtual ICollection<t_profesor_clasa> Clase { get; set; }
+
         #region IDisposable Support
         private bool disposedValue = false; // To detect redundant calls
 
@@ -188,6 +190,8 @@ namespace DatabaseLayer.DataModels
         public int DiriginteID { get; set; }
         public virtual t_profesor Diriginte { get; set; }
         public virtual List<t_elev> Elevi { get; set; }
+
+        public virtual ICollection<t_profesor_clasa> Profesori { get; set; }
     }
 
     public class t_profil
@@ -208,6 +212,18 @@ namespace DatabaseLayer.DataModels
         
 
         public virtual t_materie Materie { get; set; }
+        public virtual t_profesor Profesor { get; set; }
+    }
+
+    public class t_profesor_clasa
+    {
+        [Key, Column(Order = 0)]
+        public int ClasaID { get; set; }
+        [Key, Column(Order = 1)]
+        public int ProfesorID { get; set; }
+
+
+        public virtual t_clasa Clasa { get; set; }
         public virtual t_profesor Profesor { get; set; }
     }
 }

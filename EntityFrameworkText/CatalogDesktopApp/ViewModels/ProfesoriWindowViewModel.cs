@@ -11,7 +11,7 @@ namespace CatalogDesktopApp.ViewModels
     {
         private int _profesorId;
         private ProfesorService _profesorService;
-        private List<ClasaDTO> _clase;
+        private List<ClasaDTO> _clase = new List<ClasaDTO>();
         private ProfesorDTO profesor;
         private ClasaDTO curentclasa;
         private UserControl viewModelClasa;
@@ -27,9 +27,9 @@ namespace CatalogDesktopApp.ViewModels
             {
                 profesor = value;
                 OnPropertyChanged("Profesor");
-                if (profesor.Clasa != null)
+                if (profesor != null)
                 {
-                    Clase = profesor.Clasa;
+                    Clase = profesor.Clase;
                 }
             }
         }
