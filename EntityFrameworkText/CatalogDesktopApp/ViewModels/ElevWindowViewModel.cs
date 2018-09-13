@@ -2,6 +2,7 @@
 using DatabaseLayer.DataModels;
 using DatabaseLayer.DTO;
 using System;
+using System.Collections.Generic;
 using System.Windows.Input;
 
 namespace CatalogDesktopApp.ViewModels
@@ -16,6 +17,9 @@ namespace CatalogDesktopApp.ViewModels
         private AbsentaService serviciuAbsenta;
         private ObservatieService serviciuObservatie;
         private MessageBus messageBus;
+        private List<NotaDTO> _nota = new List<NotaDTO>();
+        private List<AbsentaDTO> _absenta = new List<AbsentaDTO>();
+        private List<ObservatieDTO> _observatie = new List<ObservatieDTO>();
 
         public ICommand NoteCommand { get; set; }
         public ICommand AbsenteCommand { get; set; }
@@ -34,19 +38,97 @@ namespace CatalogDesktopApp.ViewModels
             }
         }
 
+        public List<NotaDTO> Note
+        {
+            get => _nota;
+            set
+            {
+                _nota = value;
+                OnPropertyChanged("Note");
+            }
+        }
+
+        public List<AbsentaDTO> Absente
+        {
+            get => _absenta;
+            set
+            {
+                _absenta = value;
+                OnPropertyChanged("Absente");
+            }
+        }
+
+        public List<ObservatieDTO> Observatii
+        {
+            get => _observatie;
+            set
+            {
+                _observatie = value;
+                OnPropertyChanged("Observatii");
+            }
+        }
+
+        private bool noteVisible = false;
+
+        public bool NoteVisible
+        {
+            get
+            {
+                return noteVisible;
+            }
+
+            set
+            {
+                noteVisible = value;
+                OnPropertyChanged("NoteVisible");
+            }
+        }
+
+        private bool absenteVisible = false;
+
+        public bool AbsenteVisible
+        {
+            get
+            {
+                return absenteVisible;
+            }
+
+            set
+            {
+                absenteVisible = value;
+                OnPropertyChanged("AbsenteVisible");
+            }
+        }
+
+        private bool observatiiVisible = false;
+
+        public bool ObservatiiVisible
+        {
+            get
+            {
+                return observatiiVisible;
+            }
+
+            set
+            {
+                observatiiVisible = value;
+                OnPropertyChanged("ObservatiiVisible");
+            }
+        }
+
         public ElevWindowViewModel()
         {
             NoteCommand = new RelayCommand(ListNote);
-            
+
             AbsenteCommand = new RelayCommand(ListAbs);
 
             ObservatiiCommand = new RelayCommand(ListObs);
 
-            InsertNoteCommand = new RelayCommand(InsertNote, CanInsertNota);
-            
-            InsertAbsenteCommand = new RelayCommand(InsertAbsente, CanInsertAbsenta);
+            InsertNoteCommand = new RelayCommand(InsertNote, CanInsertNote);
 
-            InsertObservatiiCommand = new RelayCommand(InsertObservatii, CanInsertObservatie);
+            InsertAbsenteCommand = new RelayCommand(InsertAbsente, CanInsertAbsente);
+
+            InsertObservatiiCommand = new RelayCommand(InsertObservatii, CanInsertObservatii);
 
             _serviceElev = ElevService.Instance;
 
@@ -62,28 +144,19 @@ namespace CatalogDesktopApp.ViewModels
             serviciuObservatie = ObservatieService.Instance;
         }
 
-        private bool CanInsertObservatie(object arg)
+        private bool CanInsertObservatii(object arg)
         {
-            if (App.UtilizatorCurent.Tip == Util.ut.profesor)
-                return true;
-            else
-                return false;
+            return (App.UtilizatorCurent.Tip == Util.ut.profesor);
         }
 
-        private bool CanInsertAbsenta(object arg)
+        private bool CanInsertAbsente(object arg)
         {
-            if (App.UtilizatorCurent.Tip == Util.ut.profesor)
-                return true;
-            else
-                return false;
+            return (App.UtilizatorCurent.Tip == Util.ut.profesor);
         }
 
-        private bool CanInsertNota(object arg)
+        private bool CanInsertNote(object arg)
         {
-            if (App.UtilizatorCurent.Tip == Util.ut.profesor)
-                return true;
-            else
-                return false;
+            return (App.UtilizatorCurent.Tip == Util.ut.profesor);
         }
 
         private void SetNotaInserata(InsertNotaMessage obj)
@@ -153,50 +226,52 @@ namespace CatalogDesktopApp.ViewModels
 
         private void ListObs(object obj)
         {
-
+            Observatii = serviciuObservatie.GetListaObservatieAsync(_elevID).Result;
+            ObservatiiVisible = true;
+            NoteVisible = !ObservatiiVisible;
+            AbsenteVisible = !ObservatiiVisible;
         }
 
         private void ListAbs(object obj)
         {
-
+            Absente = serviciuAbsenta.GetListaAbsentaAsync(_elevID).Result;
+            AbsenteVisible = true;
+            ObservatiiVisible = !AbsenteVisible;
+            NoteVisible = !AbsenteVisible;
         }
 
         private void ListNote(object obj)
         {
-            //messageBus.Publish<TestMessage>(new TestMessage(3));
+            Note = serviciuNota.GetListaNotaAsync(_elevID).Result;
+            NoteVisible = true;
+            ObservatiiVisible = !NoteVisible;
+            AbsenteVisible = !NoteVisible;
         }
 
         private void InsertAbsente(object obj)
         {
-            
-            
-                var message = new ShowAbsenteWindow();
-                message.MaterieID = 1;
-                message.Materia = "Istorie";
-                message.ProfesorID = 1;
-                message.Profesor = "Ion";
-                messageBus.Publish(message);
-            
+            var message = new ShowAbsenteWindow();
+            message.MaterieID = 1;
+            message.Materia = "Istorie";
+            message.ProfesorID = 1;
+            message.Profesor = "Ion";
+            messageBus.Publish(message);
         }
 
         private void InsertNote(object obj)
         {
-           
-                var message = new ShowNoteWindow();
-                message.MaterieID = 1;
-                message.Materia = "Istorie";
-                messageBus.Publish(message);
-            
+            var message = new ShowNoteWindow();
+            message.MaterieID = 1;
+            message.Materia = "Istorie";
+            messageBus.Publish(message);
         }
 
         private void InsertObservatii(object obj)
         {
-            
-                var message = new ShowObservatiiWindow();
-                message.ProfesorID = 1;
-                message.Profesor = "Ion";
-                messageBus.Publish(message);
-            
+            var message = new ShowObservatiiWindow();
+            message.ProfesorID = 1;
+            message.Profesor = "Ion";
+            messageBus.Publish(message);
         }
     }
 }

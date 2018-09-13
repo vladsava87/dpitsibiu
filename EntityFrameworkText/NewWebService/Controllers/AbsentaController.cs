@@ -27,11 +27,11 @@ namespace NewWebService.Controllers
         }
 
         // GET: api/Absenta/5
-        public AbsentaDTO Get(int id)
+        public object Get(int id)
         {
-            var Absenta = catalog.Absente.Where(a => a.Id == id).FirstOrDefault();
+            var Absenta = catalog.Absente.Where(a => a.Elev.Id == id).ToList();
 
-            var tAbsenta = Mapper.Map<AbsentaDTO>(Absenta);
+            var tAbsenta = Mapper.Map<List<AbsentaDTO>>(Absenta);
 
             return tAbsenta;
 

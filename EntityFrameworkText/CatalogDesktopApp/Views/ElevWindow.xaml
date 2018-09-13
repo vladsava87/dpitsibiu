@@ -7,15 +7,13 @@
         xmlns:VM="clr-namespace:CatalogDesktopApp.ViewModels"
         mc:Ignorable="d"
         Background="White" Height="450" Width="800">
-    <UserControl.DataContext>
-        <VM:ElevWindowViewModel />
-    </UserControl.DataContext>
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVis" />
+    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
-            <RowDefinition Height="50" />
-            <RowDefinition Height="50" />
-            <RowDefinition Height="50" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Grid Row="0">
             <Grid.ColumnDefinitions>
@@ -64,7 +62,7 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center">
                 <Button Width="100" Margin="4" Content="Absente" Command="{Binding AbsenteCommand}" />
-                <Button Width="30" Margin="4" Content="+" Command="{Binding InsertAbsenteCommand}" /> 
+                <Button Width="30" Margin="4" Content="+" Command="{Binding InsertAbsenteCommand}" />
             </StackPanel>
             <StackPanel Orientation="Horizontal" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Center">
                 <Button Width="100" Margin="4" Content="Observatii" Command="{Binding ObservatiiCommand}" />
@@ -72,6 +70,12 @@
             </StackPanel>
 
         </Grid>
+
+        <DataGrid Visibility="{Binding NoteVisible, Converter={StaticResource BoolToVis}}" Grid.Row="1" Margin="0" ItemsSource="{Binding Note}" IsReadOnly="True" />
+
+        <DataGrid Visibility="{Binding AbsenteVisible, Converter={StaticResource BoolToVis}}" Margin="0"  Grid.Row="1" ItemsSource="{Binding Absente}" IsReadOnly="True" />
+
+        <DataGrid Visibility="{Binding ObservatiiVisible, Converter={StaticResource BoolToVis}}" Margin="0"  Grid.Row="1" ItemsSource="{Binding Observatii}" IsReadOnly="True" />
 
     </Grid>
 </UserControl>

@@ -41,13 +41,13 @@ namespace CatalogDesktopApp.Services
             }
         }
 
-        public Task<List<AbsentaDTO>> GetListaAbsentaAsync()
+        public Task<List<AbsentaDTO>> GetListaAbsentaAsync(int id)
         {
             return Task.Factory.StartNew(() =>
             {
-                var requestLink = "/Absenta";
+                var requestLink = "/Absenta/";
 
-                var uri = new Uri(WebSiteAPI + requestLink);
+                var uri = new Uri(WebSiteAPI + requestLink + id);
 
                 var response = _client.GetAsync(uri).Result;
                 if (response.IsSuccessStatusCode)

@@ -27,11 +27,11 @@ namespace NewWebService.Controllers
         }
 
         // GET: api/Nota/5
-        public NotaDTO Get(int id)
+        public object Get(int id)
         {
-            var Nota = catalog.Note.Where(n => n.Id == id).FirstOrDefault();
+            var Nota = catalog.Note.Where(n => n.Elev.Id == id).ToList();
 
-            var tNota = Mapper.Map<NotaDTO>(Nota);
+            var tNota = Mapper.Map<List<NotaDTO>>(Nota);
 
             return tNota;
         }

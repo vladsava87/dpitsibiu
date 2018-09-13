@@ -41,13 +41,13 @@ namespace CatalogDesktopApp.Services
             }
         }
 
-        public Task<List<ObservatieDTO>> GetListaObservatieAsync()
+        public Task<List<ObservatieDTO>> GetListaObservatieAsync(int id)
         {
             return Task.Factory.StartNew(() =>
             {
-                var requestLink = "/Observatie";
+                var requestLink = "/Observatie/";
 
-                var uri = new Uri(WebSiteAPI + requestLink);
+                var uri = new Uri(WebSiteAPI + requestLink + id);
 
                 var response = _client.GetAsync(uri).Result;
                 if (response.IsSuccessStatusCode)

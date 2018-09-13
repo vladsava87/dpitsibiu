@@ -27,11 +27,11 @@ namespace NewWebService.Controllers
         }
 
         // GET api/values/5
-        public ObservatieDTO Get(int id)
+        public object Get(int id)
         {
-            var obs = catalog.Observatii.Where(observatie => observatie.Id == id).FirstOrDefault();
+            var obs = catalog.Observatii.Where(observatie => observatie.Elev.Id == id).ToList();
 
-            var tobs = Mapper.Map<ObservatieDTO>(obs);
+            var tobs = Mapper.Map<List<ObservatieDTO>>(obs);
 
             return tobs;
         }
