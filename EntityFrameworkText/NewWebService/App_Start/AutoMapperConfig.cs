@@ -28,8 +28,8 @@ namespace NewWebService.App_Start
                 cfg.CreateMap<t_elev, ElevDTO>()
                         .ForMember(ignoranote => ignoranote.Note, opt => opt.Ignore())
                         .ForMember(ignoraabsente => ignoraabsente.Absente, opt => opt.Ignore())
-                        .ForMember(ignoraobservatii => ignoraobservatii.Observatii, opt => opt.Ignore())
-                        .ForMember(ignoraclasa => ignoraclasa.ClasaID, opt => opt.Ignore());
+                        .ForMember(ignoraobservatii => ignoraobservatii.Observatii, opt => opt.Ignore());
+                        //.ForMember(ignoraclasa => ignoraclasa.ClasaID, opt => opt.Ignore());
 
                     cfg.CreateMap<t_materie, MaterieDTO>()
                         .ForMember(ignoraabsente => ignoraabsente.Absente, opt => opt.Ignore())

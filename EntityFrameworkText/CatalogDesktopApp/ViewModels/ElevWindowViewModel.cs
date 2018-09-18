@@ -216,10 +216,10 @@ namespace CatalogDesktopApp.ViewModels
             serviciuObservatie.PostObservatieAsync(observatieInserata);
         }
 
-        public ElevWindowViewModel(int id, int diriginteElevId = 0) : this()
+        public ElevWindowViewModel(int id, int? diriginteElevId = null) : this()
         {
             InitViewModel(id);
-            _diriginteElevId = diriginteElevId;
+            _diriginteElevId = diriginteElevId.Value;
         }
 
         public void InitViewModel(int id)
@@ -228,12 +228,15 @@ namespace CatalogDesktopApp.ViewModels
 
             Elev = _serviceElev.GetElevAsync(_elevID).Result;
 
-            var clasaElevului = _serviciuClasa.GetClasaAsync(_elevID).Result;
-            ClassName = clasaElevului.Numar + " " + clasaElevului.Serie;
-
-            if (clasaElevului.Profil != null)
+            var clasaElevului = _serviciuClasa.GetClasaAsync(Elev.ClasaID).Result;
+            if (clasaElevului != null)
             {
-                ClassName = ClassName  + " " + clasaElevului.Profil.Nume;
+                ClassName = clasaElevului.Numar + " " + clasaElevului.Serie;
+
+                if (clasaElevului.Profil != null)
+                {
+                    ClassName = ClassName + " " + clasaElevului.Profil.Nume;
+                }
             }
         }
 
