@@ -92,9 +92,36 @@
         </DataGrid>
 
 
-        <DataGrid Visibility="{Binding AbsenteVisible, Converter={StaticResource BoolToVis}}" Margin="0"  Grid.Row="1" ItemsSource="{Binding Absente}" IsReadOnly="True" />
+        <DataGrid Visibility="{Binding AbsenteVisible, Converter={StaticResource BoolToVis}}" AutoGenerateColumns="False" Margin="0"  Grid.Row="1" ItemsSource="{Binding Absente}" IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTemplateColumn Width="*" Header="Motivata">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel>
+                                <CheckBox IsEnabled="False" IsChecked="{Binding Motivata}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Header="Data"
+                                    Binding="{Binding Data, StringFormat=\{0:dd.MM.yyyy\}}" Width="*" />
+                <DataGridTextColumn Header="Materie"
+                                    Binding="{Binding Materie.Nume}" Width="*" />
+                <DataGridTextColumn Header="Profesor"
+                                    Binding="{Binding Profesor.Nume}" Width="*" />
+            </DataGrid.Columns>
+        </DataGrid>
 
-        <DataGrid Visibility="{Binding ObservatiiVisible, Converter={StaticResource BoolToVis}}" Margin="0"  Grid.Row="1" ItemsSource="{Binding Observatii}" IsReadOnly="True" />
+        <DataGrid Visibility="{Binding ObservatiiVisible, Converter={StaticResource BoolToVis}}" AutoGenerateColumns="False" Margin="0"  Grid.Row="1" ItemsSource="{Binding Observatii}" IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Data"
+                                    Binding="{Binding Data, StringFormat=\{0:dd.MM.yyyy\}}" Width="*" />
+                <DataGridTextColumn Header="Explicatia"
+                                    Binding="{Binding Text}" Width="*" />
+                <DataGridTextColumn Header="Profesor"
+                                    Binding="{Binding Profesor.Nume}" Width="*" />
+            </DataGrid.Columns>
+        </DataGrid>
 
     </Grid>
 </UserControl>
