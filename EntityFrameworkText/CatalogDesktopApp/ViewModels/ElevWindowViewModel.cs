@@ -203,6 +203,7 @@ namespace CatalogDesktopApp.ViewModels
             absentaInserata.ElevID = _elevID;
 
             serviciuAbsenta.PostAbsentaAsync(absentaInserata);
+            ListAbs();
         }
 
         private void SetObservatieInserata(InsertObservatieMessage obj)
@@ -250,7 +251,7 @@ namespace CatalogDesktopApp.ViewModels
             }
         }
 
-        private void ListObs(object obj)
+        private void ListObs(object obj = null)
         {
             Observatii = serviciuObservatie.GetListaObservatieAsync(_elevID).Result;
             ObservatiiVisible = true;
@@ -258,7 +259,7 @@ namespace CatalogDesktopApp.ViewModels
             AbsenteVisible = !ObservatiiVisible;
         }
 
-        private void ListAbs(object obj)
+        private void ListAbs(object obj = null)
         {
             Absente = serviciuAbsenta.GetListaAbsentaAsync(_elevID).Result;
             AbsenteVisible = true;
@@ -266,7 +267,7 @@ namespace CatalogDesktopApp.ViewModels
             NoteVisible = !AbsenteVisible;
         }
 
-        private void ListNote(object obj)
+        private void ListNote(object obj = null)
         {
             Note = serviciuNota.GetListaNotaAsync(_elevID).Result;
             NoteVisible = true;

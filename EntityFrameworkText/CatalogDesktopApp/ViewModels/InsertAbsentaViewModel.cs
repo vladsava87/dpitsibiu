@@ -112,6 +112,7 @@ namespace CatalogDesktopApp.ViewModels
 
             Profesor.Nume = prof.Nume;
             Profesor.Prenume = prof.Prenume;
+            _insertAbsentaMessage.ProfesorID = prof.Id;
 
             Semestre = new List<string>();
 
