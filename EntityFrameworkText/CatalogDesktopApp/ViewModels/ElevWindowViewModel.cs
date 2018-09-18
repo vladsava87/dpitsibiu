@@ -229,7 +229,12 @@ namespace CatalogDesktopApp.ViewModels
             Elev = _serviceElev.GetElevAsync(_elevID).Result;
 
             var clasaElevului = _serviciuClasa.GetClasaAsync(_elevID).Result;
-            ClassName = clasaElevului.Numar + " " + clasaElevului.Serie + " " + clasaElevului.Profil.Nume;
+            ClassName = clasaElevului.Numar + " " + clasaElevului.Serie;
+
+            if (clasaElevului.Profil != null)
+            {
+                ClassName = ClassName  + " " + clasaElevului.Profil.Nume;
+            }
         }
 
         public string ClassName
