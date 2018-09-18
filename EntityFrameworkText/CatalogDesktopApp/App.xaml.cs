@@ -49,8 +49,8 @@ namespace CatalogDesktopApp
             var newWindow = new InsertNote();
             var newWindowViewModel = new InsertNoteViewModel();
 
-            newWindowViewModel.MaterieID = obj.MaterieID;
-            newWindowViewModel.Materie = obj.Materia;
+            //newWindowViewModel.MaterieID = obj.MaterieID;
+            //newWindowViewModel.Materie = obj.Materia;
 
             newWindow.DataContext = newWindowViewModel;
             newWindow.ShowDialog();

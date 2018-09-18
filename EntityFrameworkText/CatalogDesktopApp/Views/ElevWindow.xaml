@@ -91,8 +91,12 @@
             </DataGrid.Columns>
         </DataGrid>
 
-
         <DataGrid Visibility="{Binding AbsenteVisible, Converter={StaticResource BoolToVis}}" AutoGenerateColumns="False" Margin="0"  Grid.Row="1" ItemsSource="{Binding Absente}" IsReadOnly="True">
+            <DataGrid.Resources>
+                <Style TargetType="DataGridRow">
+                    <EventSetter Event="MouseDoubleClick" Handler="DataGrid_Row_DoubleClick_Event"/>
+                </Style>
+            </DataGrid.Resources>
             <DataGrid.Columns>
                 <DataGridTemplateColumn Width="*" Header="Motivata">
                     <DataGridTemplateColumn.CellTemplate>
@@ -118,8 +122,16 @@
                                     Binding="{Binding Data, StringFormat=\{0:dd.MM.yyyy\}}" Width="*" />
                 <DataGridTextColumn Header="Explicatia"
                                     Binding="{Binding Text}" Width="*" />
-                <DataGridTextColumn Header="Profesor"
-                                    Binding="{Binding Profesor.Nume}" Width="*" />
+                <DataGridTemplateColumn Width="*" Header="Profesor">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="{Binding Profesor.Nume}"></Label>
+                                <Label Content="{Binding Profesor.Prenume}"></Label>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
 

@@ -16,10 +16,12 @@ namespace CatalogDesktopApp.ViewModels
         private NotaService serviciuNota;
         private AbsentaService serviciuAbsenta;
         private ObservatieService serviciuObservatie;
+        private ClasaService _serviciuClasa;
         private MessageBus messageBus;
         private List<NotaDTO> _nota = new List<NotaDTO>();
         private List<AbsentaDTO> _absenta = new List<AbsentaDTO>();
         private List<ObservatieDTO> _observatie = new List<ObservatieDTO>();
+        private int _diriginteElevId;
 
         public ICommand NoteCommand { get; set; }
         public ICommand AbsenteCommand { get; set; }
@@ -133,6 +135,7 @@ namespace CatalogDesktopApp.ViewModels
             _serviceElev = ElevService.Instance;
 
             messageBus = MessageBus.Instance;
+            _serviciuClasa = ClasaService.Instance;
 
             messageBus.Subscribe<InsertNotaMessage>(SetNotaInserata);
             serviciuNota = NotaService.Instance;
@@ -181,7 +184,9 @@ namespace CatalogDesktopApp.ViewModels
             notaInserata.Data = obj.Data;
             notaInserata.MaterieID = obj.MaterieID;
             notaInserata.Teza = obj.Teza;
+            notaInserata.Nota = obj.Nota;
             notaInserata.Semestrul = (sem)obj.Semestrul;
+            notaInserata.ElevID = _elevID;
 
             serviciuNota.PostNotaAsync(notaInserata);
         }
@@ -210,9 +215,10 @@ namespace CatalogDesktopApp.ViewModels
             serviciuObservatie.PostObservatieAsync(observatieInserata);
         }
 
-        public ElevWindowViewModel(int id) : this()
+        public ElevWindowViewModel(int id, int diriginteElevId = 0) : this()
         {
             InitViewModel(id);
+            _diriginteElevId = diriginteElevId;
         }
 
         public void InitViewModel(int id)
@@ -220,6 +226,9 @@ namespace CatalogDesktopApp.ViewModels
             _elevID = id;
 
             Elev = _serviceElev.GetElevAsync(_elevID).Result;
+
+            var clasaElevului = _serviciuClasa.GetClasaAsync(_elevID).Result;
+            ClassName = clasaElevului.Numar + " " + clasaElevului.Serie + " " + clasaElevului.Profil.Nume;
         }
 
         public string ClassName
@@ -230,7 +239,6 @@ namespace CatalogDesktopApp.ViewModels
                 className = value;
                 OnPropertyChanged(ClassName);
             }
-
         }
 
         private void ListObs(object obj)
@@ -261,9 +269,9 @@ namespace CatalogDesktopApp.ViewModels
         {
             var message = new ShowAbsenteWindow();
             message.MaterieID = 1;
-            message.Materia = "Istorie";
-            message.ProfesorID = 1;
-            message.Profesor = "Ion";
+            //message.Materia = "Istorie";
+            message.ProfesorID = App.UtilizatorCurent.Id;
+            //message.Profesor = "Ion";
             messageBus.Publish(message);
         }
 
@@ -271,16 +279,24 @@ namespace CatalogDesktopApp.ViewModels
         {
             var message = new ShowNoteWindow();
             message.MaterieID = 1;
-            message.Materia = "Istorie";
+            //message.Materia = "Istorie";
             messageBus.Publish(message);
         }
 
         private void InsertObservatii(object obj)
         {
             var message = new ShowObservatiiWindow();
-            message.ProfesorID = 1;
-            message.Profesor = "Ion";
+            message.ProfesorID = App.UtilizatorCurent.Id;
+            //message.Profesor = "Ion";
             messageBus.Publish(message);
+        }
+
+        public void MotivareAbsenta()
+        {
+            if (_diriginteElevId == App.UtilizatorCurent.Id)
+            {
+
+            }
         }
     }
 }

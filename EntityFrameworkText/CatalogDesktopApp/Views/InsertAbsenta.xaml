@@ -31,13 +31,11 @@
             <Label Grid.Row="2" Grid.Column="0" Content="Profesor" HorizontalAlignment="Center" VerticalAlignment="Center" />
             <Label Grid.Row="3" Grid.Column="0" Content="Semestrul" HorizontalAlignment="Center" VerticalAlignment="Center" />
             <Label Grid.Row="4" Grid.Column="0" Content="Data" HorizontalAlignment="Center" VerticalAlignment="Center" />
-            <!--<Label Grid.Row="5" Grid.Column="0" Content="Motivata" HorizontalAlignment="Center" VerticalAlignment="Center" />-->
-
+            
             <Label Grid.Row="1" Grid.Column="1" Content="{Binding Materie}" HorizontalAlignment="Center" VerticalAlignment="Center" />
             <Label Grid.Row="2" Grid.Column="1" Content="{Binding Profesor}" HorizontalAlignment="Center" VerticalAlignment="Center" />
             <Label Grid.Row="3" Grid.Column="1" Content="{Binding }" HorizontalAlignment="Center" VerticalAlignment="Center" />
             <DatePicker Grid.Row="4" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" />
-            <!--<CheckBox Grid.Row="5" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" />-->
 
             <StackPanel Grid.Row="6" Grid.ColumnSpan="2" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
                 <Button Height="30" Margin="5" Content="Insereaza" Click="Button_Click_1"/>

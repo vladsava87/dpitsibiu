@@ -2,7 +2,6 @@
 using DatabaseLayer.DTO;
 using System.Collections.Generic;
 using System.Windows.Controls;
-using System.Windows.Input;
 using CatalogDesktopApp.Views;
 
 namespace CatalogDesktopApp.ViewModels
@@ -15,17 +14,17 @@ namespace CatalogDesktopApp.ViewModels
         private ClasaDTO clasa;
         private ElevDTO curentelev;
         private UserControl viewModelElev;
+        private int _diriginteId;
+        private int _materieId;
 
         private MessageBus _messageBus;
-
-        public ICommand EleviCommand { get; set; }
-
         public ClasaDTO Clasa
         {
             get => clasa;
             set
             {
                 clasa = value;
+                _diriginteId = clasa.DiriginteID;
                 OnPropertyChanged("Clasa");
                 if (clasa.Elevi != null)
                 {
@@ -67,13 +66,11 @@ namespace CatalogDesktopApp.ViewModels
 
         private void UpdateElevInfo(int id)
         {
-            CurrentViewElev = new ElevWindow(new ElevWindowViewModel(id));
+            CurrentViewElev = new ElevWindow(new ElevWindowViewModel(id, _diriginteId));
         }
 
         public ClasaWindowViewModel()
         {
-            EleviCommand = new RelayCommand(ListElevi);
-
             _clasaService = ClasaService.Instance;
             _messageBus = MessageBus.Instance;
         }
@@ -81,11 +78,6 @@ namespace CatalogDesktopApp.ViewModels
         public ClasaWindowViewModel(int v) : this()
         {
             Clasa = _clasaService.GetClasaAsync(v).Result;
-        }
-
-        public void ListElevi(object obj)
-        {
-
         }
     }
 }

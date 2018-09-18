@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:CatalogDesktopApp.Views"
         xmlns:vm="clr-namespace:CatalogDesktopApp.ViewModels"
         mc:Ignorable="d"
-        Title="Inserare Note" Height="350" Width="450" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+        Title="Inserare Note" Height="380" Width="450" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     
     <Grid>
         <Grid>
@@ -34,12 +34,18 @@
             <Label Grid.Row="3" Grid.Column="0" Content="Teza" HorizontalAlignment="Center" VerticalAlignment="Center" />
             <Label Grid.Row="4" Grid.Column="0" Content="Data" HorizontalAlignment="Center" VerticalAlignment="Center" />
             <Label Grid.Row="5" Grid.Column="0" Content="Semestrul" HorizontalAlignment="Center" VerticalAlignment="Center" />
-
-            <Label Grid.Row="1" Grid.Column="1" Content="{Binding Materie}" HorizontalAlignment="Center" VerticalAlignment="Center" />
-            <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Path=Nota}" KeyDown="TextBox_KeyDown" HorizontalAlignment="Center" VerticalAlignment="Center" />
-            <CheckBox Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" />
-            <DatePicker Grid.Row="4" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" />
-            <ListBox Grid.Row="5" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <ListBox Width="150" SelectedItem="{Binding SelectedMaterie}" ItemsSource="{Binding Materii}" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" >
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Label Padding="0" Height="20" Content="{Binding Path=Nume}" />
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            <TextBox Width="150" Grid.Row="2" Grid.Column="1" Text="{Binding Path=Nota}" KeyDown="TextBox_KeyDown" HorizontalAlignment="Center" VerticalAlignment="Center" />
+            <CheckBox IsChecked="{Binding Teza}" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" />
+            <DatePicker SelectedDate="{Binding Data}" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" />
+            <ListBox SelectedItem="{Binding Semestru}" Width="150" ItemsSource="{Binding Semestre}" Grid.Row="5" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" >
+                
             </ListBox>
 
             <StackPanel Grid.Row="6" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">

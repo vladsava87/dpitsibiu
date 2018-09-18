@@ -17,10 +17,10 @@ namespace NewWebService.App_Start
                      //   .ForMember(ignoramaterie => ignoramaterie.Materie, opt => opt.Ignore())
                      //   .ForMember(ignoraprofesor => ignoraprofesor.Profesor, opt => opt.Ignore());
 
-                cfg.CreateMap<t_clasa, ClasaDTO>()
+                cfg.CreateMap<t_clasa, ClasaDTO>();
                     //.ForMember(ignoraelevi => ignoraelevi.Elevi, opt => opt.Ignore())
                     //.ForMember(ignoraprofesori => ignoraprofesori.Diriginte, opt => opt.Ignore())
-                    .ForMember(ignoraprofilul => ignoraprofilul.Profil, opt => opt.Ignore());
+                    //.ForMember(ignoraprofilul => ignoraprofilul.Profil, opt => opt.Ignore());
 
                 //cfg.CreateMap<t_clasa, ClasaDTO>()
                 //        .ForMember(clasa => clasa.Elevi, opt => opt.MapFrom(op => op.Elevi.Select(e => e.Id).ToList()));
@@ -45,7 +45,7 @@ namespace NewWebService.App_Start
 
                 cfg.CreateMap<t_profesor, ProfesorDTO>()
                     .ForMember(ignoraabsente => ignoraabsente.Absente, opt => opt.Ignore())
-                    .ForMember(ignoramaterii => ignoramaterii.Materie, opt => opt.Ignore())
+                    .ForMember(ignoramaterii => ignoramaterii.Materie, opt => opt.MapFrom(x => x.Materie.Select(y => y.Materie).ToList()))
                     .ForMember(ignoraobservatii => ignoraobservatii.Observatii, opt => opt.Ignore())
                     .ForMember(ingnoreClasa => ingnoreClasa.Clasa, opt => opt.Ignore())
                     .ForMember(dto => dto.Clase, opt => opt.MapFrom(x => x.Clase.Select(y => y.Clasa).ToList()));

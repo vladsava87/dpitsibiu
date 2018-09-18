@@ -1,4 +1,5 @@
 ﻿using System.Windows.Controls;
+using System.Windows.Input;
 using CatalogDesktopApp.ViewModels;
 
 namespace CatalogDesktopApp.Views
@@ -17,6 +18,11 @@ namespace CatalogDesktopApp.Views
         {
             InitializeComponent();
             DataContext = elevWindowViewModel;
+        }
+
+        private void DataGrid_Row_DoubleClick_Event(object sender, MouseButtonEventArgs e)
+        {
+            (DataContext as ElevWindowViewModel).MotivareAbsenta();
         }
     }
 }
