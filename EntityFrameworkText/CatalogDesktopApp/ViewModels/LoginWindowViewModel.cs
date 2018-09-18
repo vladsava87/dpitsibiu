@@ -24,7 +24,6 @@ namespace CatalogDesktopApp.ViewModels
         public LoginWindowViewModel()
         {
             LoginButtonClick = new RelayCommand(MyLoginButtonClick, CanLogin);
-          //  UserName = new RelayCommand(MyUserName);
             ForgotPasswordButtonClick = new RelayCommand(MyForgotPasswordButtonClick);
 
             _messageBus = MessageBus.Instance;
@@ -38,8 +37,6 @@ namespace CatalogDesktopApp.ViewModels
 
         private async void MyLoginButtonClick(object obj)
         {
-            //string Username = "AlexAlexandrescu@elev.ro";
-            //string Password = "1234";
             isPerformingLogin = true;
 
             string hashPassword = Password.CalculateMD5Hash(PasswordTextBox);
@@ -64,14 +61,11 @@ namespace CatalogDesktopApp.ViewModels
 
         }
 
-       
-
         public ICommand LoginButtonClick { get; set; }
         public ICommand ForgotPasswordButtonClick { get; set; }
       //  public ICommand UserName { get; set; }
 
         public string UsernameTextBox { get; set; }
         public string PasswordTextBox { get; set; }
-        
     }
 }
