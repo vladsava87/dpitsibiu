@@ -203,7 +203,6 @@ namespace CatalogDesktopApp.ViewModels
             absentaInserata.ElevID = _elevID;
 
             serviciuAbsenta.PostAbsentaAsync(absentaInserata);
-            ListAbs();
         }
 
         private void SetObservatieInserata(InsertObservatieMessage obj)
@@ -281,9 +280,7 @@ namespace CatalogDesktopApp.ViewModels
         {
             var message = new ShowAbsenteWindow();
             message.MaterieID = 1;
-            //message.Materia = "Istorie";
             message.ProfesorID = App.UtilizatorCurent.Id;
-            //message.Profesor = "Ion";
             messageBus.Publish(message);
         }
 
@@ -291,7 +288,6 @@ namespace CatalogDesktopApp.ViewModels
         {
             var message = new ShowNoteWindow();
             message.MaterieID = 1;
-            //message.Materia = "Istorie";
             messageBus.Publish(message);
         }
 
@@ -299,7 +295,6 @@ namespace CatalogDesktopApp.ViewModels
         {
             var message = new ShowObservatiiWindow();
             message.ProfesorID = App.UtilizatorCurent.Id;
-            //message.Profesor = "Ion";
             messageBus.Publish(message);
         }
 

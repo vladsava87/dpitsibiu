@@ -7,7 +7,7 @@
         xmlns:vm="clr-namespace:CatalogDesktopApp.ViewModels"
         xmlns:view="clr-namespace:CatalogDesktopApp.Views"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Catalog" Height="450" Width="800" WindowStartupLocation="CenterScreen">
     <Window.DataContext>
         <vm:MainWindowViewModel />
     </Window.DataContext>
