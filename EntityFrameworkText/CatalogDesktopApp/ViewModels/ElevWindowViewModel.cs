@@ -221,12 +221,6 @@ namespace CatalogDesktopApp.ViewModels
 
             Elev = _serviceElev.GetElevAsync(_elevID).Result;
         }
-        
-        public string NumePrenume
-        {
-            get { return Elev.Nume + " " + Elev.Prenume; }
-            //get => "tets";
-        }
 
         public string ClassName
         {
