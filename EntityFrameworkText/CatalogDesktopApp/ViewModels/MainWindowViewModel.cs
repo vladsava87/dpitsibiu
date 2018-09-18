@@ -2,13 +2,11 @@
 using System.Runtime.CompilerServices;
 using System.Windows.Controls;
 using CatalogDesktopApp.Annotations;
-using System.Windows.Input;
 using CatalogDesktopApp.Util;
 using CatalogDesktopApp.Views;
 
 namespace CatalogDesktopApp.ViewModels
 {
-
     public class MainWindowViewModel : INotifyPropertyChanged
     {
         private bool _test = true;
@@ -19,18 +17,20 @@ namespace CatalogDesktopApp.ViewModels
 
         public MainWindowViewModel()
         {
-            MyClickCommand = new RelayCommand(ClickCommand, CanClickCommand);
-
-            My2ClickCommand = new RelayCommand(OtherClickCommand);
-
             CurrentView = new LoginWindow();
 
             _messageBus = MessageBus.Instance;
 
-            _messageBus.Subscribe<TestMessage>(OnLogin);
+            _messageBus.Subscribe<LoginMessage>(OnLogin);
+            _messageBus.Subscribe<LoadClassMessage>(LoadClasa);
         }
 
-        private void OnLogin(TestMessage obj)
+        private void LoadClasa(LoadClassMessage obj)
+        {
+            CurrentView = new ClasaWindow(new ClasaWindowViewModel(obj.Id));
+        }
+
+        private void OnLogin(LoginMessage obj)
         {
             if (App.UtilizatorCurent.Tip == ut.elev)
             {
@@ -52,46 +52,7 @@ namespace CatalogDesktopApp.ViewModels
                 OnPropertyChanged("CurrentView");
             }
         }
-
-        private void OtherClickCommand(object obj)
-        {
-            _test = true;
-
-            MyLabel = "Text For Label";
-        }
-
-        private bool CanClickCommand(object arg)
-        {
-            return _test;
-        }
-
-        private void ClickCommand(object obj)
-        {
-
-            _test = false;
-            MyLabel = MyLabel + " false";
-        }
-
-        public ICommand MyClickCommand { get; set; }
-
-        private string _MyLabel;
-
-        public string MyLabel
-        {
-            get
-            {
-                return _MyLabel;
-            }
-            set
-            {
-                _MyLabel = value;
-                OnPropertyChanged("MyLabel");
-            }
-        }
-
-        public ICommand My2ClickCommand { get; set; }
-
-
+        
         public event PropertyChangedEventHandler PropertyChanged;
 
         [NotifyPropertyChangedInvocator]

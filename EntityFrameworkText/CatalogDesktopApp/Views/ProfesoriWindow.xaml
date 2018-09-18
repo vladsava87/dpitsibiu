@@ -6,19 +6,11 @@
         xmlns:vm="clr-namespace:CatalogDesktopApp.ViewModels"
         Background="White" Height="450" Width="800">
 
-    <!--<UserControl.DataContext>
-        <vm:ProfesoriWindowViewModel />
-    </UserControl.DataContext>-->
     <Grid Margin="10">
-        <ItemsControl Margin="143,161,143.6, 0" ItemsSource="{Binding Clase}">
-            <!--<ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <WrapPanel />
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>-->
+        <ItemsControl x:Name="ListaClase" Margin="143,161,143.6, 0" ItemsSource="{Binding Clase}">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <Button Margin="10,10,10,10" Width="100">
+                    <Button Margin="10,10,10,10" Width="100" Command="{Binding ElementName=ListaClase, Path=DataContext.ClasaCommand}" CommandParameter="{Binding}">
                         <StackPanel Orientation="Horizontal">
                             <Label Content="{Binding Numar}"/>
                             <Label Content="{Binding Serie}"/>
@@ -26,8 +18,8 @@
                     </Button>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
-
         </ItemsControl>
+
         <Label HorizontalAlignment="Center" Height="50" Margin="308,46,295,0"  Content=" Lista Clase" VerticalAlignment="Top" Width="177" FontSize="32"/>
     </Grid>
 </UserControl>

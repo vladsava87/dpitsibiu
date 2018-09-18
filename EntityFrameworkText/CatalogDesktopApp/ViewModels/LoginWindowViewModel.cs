@@ -50,7 +50,7 @@ namespace CatalogDesktopApp.ViewModels
             {
                 App.UtilizatorCurent = JsonConvert.DeserializeObject<Utilizator>(ret);
 
-                var mesg = new TestMessage();
+                var mesg = new LoginMessage();
                 mesg.Str = ret;
 
                 _messageBus.Publish(mesg);

@@ -85,7 +85,10 @@ namespace CatalogDesktopApp.ViewModels
 
         public void ListClasa(object obj)
         {
+            var msg = new LoadClassMessage();
+            msg.Id = (obj as ClasaDTO).Id;
 
+            _messageBus.Publish(msg);
         }
     }
 }

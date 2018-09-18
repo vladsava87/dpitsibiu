@@ -69,7 +69,7 @@
     <Compile Include="MessageBus\ShowAbsenteWindow.cs" />
     <Compile Include="MessageBus\ShowNoteWindow.cs" />
     <Compile Include="MessageBus\ShowObservatiiWindow.cs" />
-    <Compile Include="MessageBus\TestMessage.cs" />
+    <Compile Include="MessageBus\LoginMessage.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Services\AbsentaService.cs" />
     <Compile Include="Services\ClasaService.cs" />

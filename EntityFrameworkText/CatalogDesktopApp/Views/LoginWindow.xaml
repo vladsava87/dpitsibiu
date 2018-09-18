@@ -21,11 +21,11 @@
         <Label Content="Colegiul Național Samuel von Brukenthal" HorizontalAlignment="Center" Height="41"  VerticalAlignment="Top" Margin="0,20,0,0" Width="500" HorizontalContentAlignment="Center" FontWeight="Bold" FontSize="22" Grid.Row="0"/>
         <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">
             <Label Content="Username:"  HorizontalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" />
-            <TextBox Text="{Binding Path=UsernameTextBox}" HorizontalAlignment="Center"  TextWrapping="Wrap" VerticalAlignment="Center" Width="225" Height="26"/>
+            <TextBox Text="{Binding Path=UsernameTextBox}" HorizontalAlignment="Center"  TextWrapping="Wrap" VerticalAlignment="Center" Width="225" Height="26" VerticalContentAlignment="Center"/>
         </StackPanel>
         <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">
             <Label Content="Password:"  Height="26"  Width="73" HorizontalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"  />
-            <PasswordBox Name="PasswordBox" PasswordChanged="PasswordBox_OnPasswordChanged" HorizontalAlignment="Center" Height="26"  VerticalAlignment="Center" Width="225" HorizontalContentAlignment="Center"/>
+            <PasswordBox Name="PasswordBox" PasswordChanged="PasswordBox_OnPasswordChanged" HorizontalAlignment="Center" Height="26"  VerticalAlignment="Center" Width="225" VerticalContentAlignment="Center"/>
         </StackPanel>
         <Button Content="Forgot Password" Grid.Row="2" HorizontalAlignment="Center" Height="23" VerticalAlignment="Bottom" Width="106" Background="White" Foreground="Gray" BorderThickness="0" Command="{Binding ForgotPasswordButtonClick}" Visibility="Hidden"/>
 
