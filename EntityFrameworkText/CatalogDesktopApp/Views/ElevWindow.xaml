@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:CatalogDesktopApp.Views"
         xmlns:VM="clr-namespace:CatalogDesktopApp.ViewModels"
         mc:Ignorable="d"
-        Background="White" Height="450" Width="800">
+        Background="White">
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVis" />
     </UserControl.Resources>
@@ -21,13 +21,13 @@
                 <ColumnDefinition Width="200"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition />
-                <RowDefinition />
-                <RowDefinition />
-                <RowDefinition />
-                <RowDefinition />
-                <RowDefinition />
-                <RowDefinition />
+                <RowDefinition Height="50" />
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="20"/>
             </Grid.RowDefinitions>
 
             <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">
@@ -71,7 +71,26 @@
 
         </Grid>
 
-        <DataGrid Visibility="{Binding NoteVisible, Converter={StaticResource BoolToVis}}" Grid.Row="1" Margin="0" ItemsSource="{Binding Note}" IsReadOnly="True" />
+        <DataGrid Visibility="{Binding NoteVisible, Converter={StaticResource BoolToVis}}" AutoGenerateColumns="False" Grid.Row="1" Margin="0" ItemsSource="{Binding Note}" IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Nota"
+                                    Binding="{Binding Nota}" Width="*" />
+                <DataGridTemplateColumn Width="*" Header="Teza">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel>
+                                <CheckBox IsEnabled="False" IsChecked="{Binding Teza}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Header="Data"
+                                    Binding="{Binding Data, StringFormat=\{0:dd.MM.yyyy\}}" Width="*" />
+                <DataGridTextColumn Header="Materie"
+                                    Binding="{Binding Materie.Nume}" Width="*" />
+            </DataGrid.Columns>
+        </DataGrid>
+
 
         <DataGrid Visibility="{Binding AbsenteVisible, Converter={StaticResource BoolToVis}}" Margin="0"  Grid.Row="1" ItemsSource="{Binding Absente}" IsReadOnly="True" />
 
