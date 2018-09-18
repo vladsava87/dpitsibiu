@@ -12,8 +12,8 @@ namespace NewWebService.App_Start
         {
             Mapper.Initialize(cfg =>
             {
-                cfg.CreateMap<t_absenta, AbsentaDTO>()
-                    .ForMember(ignoraabsenta => ignoraabsenta.Elev, opt => opt.Ignore());
+                cfg.CreateMap<t_absenta, AbsentaDTO>();
+                     //   .ForMember(ignoraabsenta => ignoraabsenta.Elev, opt => opt.Ignore());
                      //   .ForMember(ignoramaterie => ignoramaterie.Materie, opt => opt.Ignore())
                      //   .ForMember(ignoraprofesor => ignoraprofesor.Profesor, opt => opt.Ignore());
 

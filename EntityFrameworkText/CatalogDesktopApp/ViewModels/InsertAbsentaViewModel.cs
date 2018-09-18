@@ -1,4 +1,6 @@
-﻿using DatabaseLayer.DataModels;
+﻿using CatalogDesktopApp.Services;
+using DatabaseLayer.DataModels;
+using DatabaseLayer.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,32 +12,83 @@ namespace CatalogDesktopApp.ViewModels
     public class InsertAbsentaViewModel : ViewModelBase
     {
         private MessageBus _messageBus;
+        private ProfesorService _profesorService;
+        private List<MaterieDTO> _materii;
+        private List<string> _semestre;
+        private MaterieDTO _selectedMaterie;
+        private string _semestru;
+        private DateTime _data;
+        private ProfesorDTO _profesor;
 
-        private string profesorNume;
-        private string materieNume;
+        private InsertAbsentaMessage _insertAbsentaMessage;
 
-        public int ProfesorID { get; set; }
-        public int MaterieID { get; set; }
-        public sem Semestrul { get; set; }
-
-        
-
-        public string Materie
+        public DateTime Data
         {
-            get => materieNume;
+            get => _data;
             set
             {
-                materieNume = value;
-                OnPropertyChanged("Materie");
+                _data = value;
+                _insertAbsentaMessage.Data = _data;
+                OnPropertyChanged("Data");
             }
         }
 
-        public string Profesor
+        public List<MaterieDTO> Materii
         {
-            get => profesorNume;
+            get => _materii;
             set
             {
-                profesorNume = value;
+                _materii = value;
+                OnPropertyChanged("Materii");
+            }
+        }
+
+        public List<string> Semestre
+        {
+            get => _semestre;
+            set
+            {
+                _semestre = value;
+                OnPropertyChanged("Semestre");
+            }
+        }
+
+        public string Semestru
+        {
+            get => _semestru;
+            set
+            {
+                _semestru = value;
+                if(_semestru == "Semestrul I")
+                {
+                    _insertAbsentaMessage.Semestrul = 0;
+                }
+                if (_semestru == "Semestrul II")
+                {
+                    _insertAbsentaMessage.Semestrul = 1;
+                }
+                OnPropertyChanged("Semestru");
+            }
+        }
+
+        public MaterieDTO SelectedMaterie
+        {
+            get => _selectedMaterie;
+            set
+            {
+                _selectedMaterie = value;
+
+                _insertAbsentaMessage.MaterieID = _selectedMaterie.Id;
+                OnPropertyChanged("SelectedMaterie");
+            }
+        }
+
+        public ProfesorDTO Profesor
+        {
+            get => _profesor;
+            set
+            {
+                _profesor = value;
                 OnPropertyChanged("Profesor");
             }
         }
@@ -43,13 +96,34 @@ namespace CatalogDesktopApp.ViewModels
         public InsertAbsentaViewModel()
         {
             _messageBus = MessageBus.Instance;
+            _profesorService = ProfesorService.Instance;
+
+            Materii = new List<MaterieDTO>();
+            _insertAbsentaMessage = new InsertAbsentaMessage();
+
+            var prof = _profesorService.GetProfesorAsync(App.UtilizatorCurent.Id).Result;
+
+            if(prof != null)
+            {
+                Materii = prof.Materie;
+            }
+
+            Profesor = new ProfesorDTO();
+
+            Profesor.Nume = prof.Nume;
+            Profesor.Prenume = prof.Prenume;
+
+            Semestre = new List<string>();
+
+            Semestre.Add("Semestrul I");
+            Semestre.Add("Semestrul II");
+
+            Data = DateTime.Now;
         }
 
         public void InsertAbsenta()
         {
-            var absentaInserata = new InsertAbsentaMessage();
-
-            _messageBus.Publish(absentaInserata);
+            _messageBus.Publish(_insertAbsentaMessage);
         }
 
     }

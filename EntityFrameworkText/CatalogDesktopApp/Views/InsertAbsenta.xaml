@@ -6,12 +6,11 @@
         xmlns:local="clr-namespace:CatalogDesktopApp.Views"
         xmlns:vm="clr-namespace:CatalogDesktopApp.ViewModels"
         mc:Ignorable="d"
-        Title="Inserare Absenta" Height="300" Width="450" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Topmost="True">
+        Title="Inserare Absenta" Height="350" Width="450" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Topmost="True">
     
     <Grid>
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
@@ -31,13 +30,23 @@
             <Label Grid.Row="2" Grid.Column="0" Content="Profesor" HorizontalAlignment="Center" VerticalAlignment="Center" />
             <Label Grid.Row="3" Grid.Column="0" Content="Semestrul" HorizontalAlignment="Center" VerticalAlignment="Center" />
             <Label Grid.Row="4" Grid.Column="0" Content="Data" HorizontalAlignment="Center" VerticalAlignment="Center" />
-            
-            <Label Grid.Row="1" Grid.Column="1" Content="{Binding Materie}" HorizontalAlignment="Center" VerticalAlignment="Center" />
-            <Label Grid.Row="2" Grid.Column="1" Content="{Binding Profesor}" HorizontalAlignment="Center" VerticalAlignment="Center" />
-            <Label Grid.Row="3" Grid.Column="1" Content="{Binding }" HorizontalAlignment="Center" VerticalAlignment="Center" />
+
+            <ListBox Width="150" SelectedItem="{Binding SelectedMaterie}" ItemsSource="{Binding Materii}" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" >
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Label Padding="0" Height="20" Content="{Binding Path=Nume}" />
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            <!--<Label Grid.Row="2" Grid.Column="1" Height="20" Content="{Binding Profesor.Nume}" HorizontalAlignment="Center" VerticalAlignment="Center" />-->
+            <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="1" Height="40" HorizontalAlignment="Center">
+                <Label Content="{Binding Profesor.Nume}"></Label>
+                <Label Content="{Binding Profesor.Prenume}"></Label>
+            </StackPanel>
+            <ListBox SelectedItem="{Binding Semestru}" Width="150" ItemsSource="{Binding Semestre}" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" />
             <DatePicker Grid.Row="4" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" />
 
-            <StackPanel Grid.Row="6" Grid.ColumnSpan="2" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <StackPanel Grid.Row="5" Grid.ColumnSpan="2" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
                 <Button Height="30" Margin="5" Content="Insereaza" Click="Button_Click_1"/>
                 <Button Height="30" Margin="5" Content="Renunta" Click="Button_Click" />
             </StackPanel>

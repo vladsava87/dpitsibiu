@@ -35,10 +35,10 @@ namespace CatalogDesktopApp
             var newWindow = new InsertAbsenta();
             var newWindowViewModel = new InsertAbsentaViewModel();
 
-            newWindowViewModel.MaterieID = obj.MaterieID;
-            newWindowViewModel.Materie = obj.Materia;
-            newWindowViewModel.ProfesorID = obj.ProfesorID;
-            newWindowViewModel.Profesor = obj.Profesor;
+            //newWindowViewModel.MaterieID = obj.MaterieID;
+            //newWindowViewModel.Materie = obj.Materia;
+            //newWindowViewModel.ProfesorID = obj.ProfesorID;
+            //newWindowViewModel.Profesor = obj.Profesor;
             
             newWindow.DataContext = newWindowViewModel;
             newWindow.ShowDialog();

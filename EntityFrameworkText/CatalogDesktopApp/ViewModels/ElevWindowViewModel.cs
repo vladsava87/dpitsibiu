@@ -200,6 +200,7 @@ namespace CatalogDesktopApp.ViewModels
             absentaInserata.Motivata = obj.Motivata;
             absentaInserata.ProfesorID = obj.ProfesorID;
             absentaInserata.Semestrul = (sem)obj.Semestrul;
+            absentaInserata.ElevID = _elevID;
 
             serviciuAbsenta.PostAbsentaAsync(absentaInserata);
         }
