@@ -213,6 +213,7 @@ namespace CatalogDesktopApp.ViewModels
             observatieInserata.Data = obj.Data;
             observatieInserata.ProfesorID = obj.ProfesorID;
             observatieInserata.Text = obj.Explicatie;
+            observatieInserata.ElevID = _elevID;
 
             serviciuObservatie.PostObservatieAsync(observatieInserata);
         }

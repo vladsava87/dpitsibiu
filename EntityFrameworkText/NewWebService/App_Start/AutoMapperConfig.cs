@@ -39,9 +39,9 @@ namespace NewWebService.App_Start
                 cfg.CreateMap<t_nota, NotaDTO>()
                     .ForMember(ignoraelev => ignoraelev.Elev, opt => opt.Ignore());
 
-                cfg.CreateMap<t_observatie, ObservatieDTO>()
+                cfg.CreateMap<t_observatie, ObservatieDTO>();
                       //  .ForMember(ignoraprofesori => ignoraprofesori.Profesor, opt => opt.Ignore())
-                        .ForMember(ignoraelevii => ignoraelevii.Elev, opt => opt.Ignore());
+                       // .ForMember(ignoraelevii => ignoraelevii.Elev, opt => opt.Ignore());
 
                 cfg.CreateMap<t_profesor, ProfesorDTO>()
                     .ForMember(ignoraabsente => ignoraabsente.Absente, opt => opt.Ignore())

@@ -61,8 +61,8 @@ namespace CatalogDesktopApp
             var newWindow = new InsertObservatie();
             var newWindowViewModel = new InsertObservatieViewModel();
 
-            newWindowViewModel.ProfesorID = obj.ProfesorID;
-            newWindowViewModel.Profesor = obj.Profesor;
+            //newWindowViewModel.ProfesorID = obj.ProfesorID;
+            //newWindowViewModel.Profesor = obj.Profesor;
 
             newWindow.DataContext = newWindowViewModel;
             newWindow.ShowDialog();

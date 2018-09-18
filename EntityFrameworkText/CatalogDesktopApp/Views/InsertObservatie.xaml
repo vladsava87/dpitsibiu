@@ -4,8 +4,10 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CatalogDesktopApp.Views"
+        xmlns:vm="clr-namespace:CatalogDesktopApp.ViewModels"
         mc:Ignorable="d"
         Title="Inserare Observatie" Height="300" Width="450" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+    
     <Grid>
         <Grid>
 
@@ -29,9 +31,13 @@
             <Label Grid.Row="2" Grid.Column="0" Content="Data" HorizontalAlignment="Center" VerticalAlignment="Center" />
             <Label Grid.Row="3" Grid.Column="0" Content="Explicatie" HorizontalAlignment="Center" VerticalAlignment="Center" />
 
-            <Label Grid.Row="1" Grid.Column="1" Content="{Binding Profesor}" HorizontalAlignment="Center" VerticalAlignment="Center" />
-            <DatePicker Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" />
-            <TextBox Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="150"/>
+            <!--<Label Grid.Row="1" Grid.Column="1" Content="{Binding Profesor}" HorizontalAlignment="Center" VerticalAlignment="Center" />-->
+            <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1" Height="40" HorizontalAlignment="Center">
+                <Label Content="{Binding Profesor.Nume}"></Label>
+                <Label Content="{Binding Profesor.Prenume}"></Label>
+            </StackPanel>
+            <DatePicker SelectedDate="{Binding Data}" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" />
+            <TextBox Text="{Binding Explicatie}" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="150"/>
 
             <StackPanel Grid.Row="6" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Button Height="30" Margin="10" Content="Insereaza" Click="Button_Click_1" />
