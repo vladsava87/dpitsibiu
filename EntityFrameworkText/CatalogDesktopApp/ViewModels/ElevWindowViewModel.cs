@@ -220,7 +220,10 @@ namespace CatalogDesktopApp.ViewModels
         public ElevWindowViewModel(int id, int? diriginteElevId = null) : this()
         {
             InitViewModel(id);
-            _diriginteElevId = diriginteElevId.Value;
+            if (diriginteElevId != null)
+            {
+                _diriginteElevId = diriginteElevId.Value;
+            }
         }
 
         public void InitViewModel(int id)
