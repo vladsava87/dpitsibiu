@@ -65,6 +65,7 @@
     <Compile Include="MessageBus\InsertNotaMessage.cs" />
     <Compile Include="MessageBus\InsertObservatieMessage.cs" />
     <Compile Include="MessageBus\LoadClassMessage.cs" />
+    <Compile Include="MessageBus\LoadingMessage.cs" />
     <Compile Include="MessageBus\MessageBus.cs" />
     <Compile Include="MessageBus\ShowAbsenteWindow.cs" />
     <Compile Include="MessageBus\ShowNoteWindow.cs" />

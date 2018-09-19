@@ -12,11 +12,16 @@
     </UserControl.DataContext>-->
 
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30" />
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200"/>
             <ColumnDefinition Width="*"  />
         </Grid.ColumnDefinitions>
-        <ListBox Name="EleviListBox" Grid.Column="0" Width="200" HorizontalAlignment="Left" HorizontalContentAlignment="Stretch" ItemsSource="{Binding Elevi}" SelectedItem="{Binding CurrentElev}">
+        <Button Grid.Row="0" Grid.Column="0" Content="Inapoi" Command="{Binding BackMessage}" />
+        <ListBox Grid.Row="1" Grid.Column="0"  Name="EleviListBox" Width="200" HorizontalAlignment="Left" HorizontalContentAlignment="Stretch" ItemsSource="{Binding Elevi}" SelectedItem="{Binding CurrentElev}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid Margin="0,2">
@@ -30,7 +35,7 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <Grid Grid.Column="1">
+        <Grid Grid.Column="1" Grid.RowSpan="2">
             <ContentControl Name="PresentationControl" Content="{Binding CurrentViewElev}"/>
         </Grid>
     </Grid>

@@ -23,6 +23,12 @@ namespace CatalogDesktopApp.ViewModels
 
             _messageBus.Subscribe<LoginMessage>(OnLogin);
             _messageBus.Subscribe<LoadClassMessage>(LoadClasa);
+            _messageBus.Subscribe<LoadingMessage>(BackFunction);
+        }
+
+        private void BackFunction(LoadingMessage obj)
+        {
+            CurrentView = new ProfesoriWindow(new ProfesoriWindowViewModel(App.UtilizatorCurent.Id));
         }
 
         private void LoadClasa(LoadClassMessage obj)

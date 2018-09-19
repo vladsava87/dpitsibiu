@@ -3,6 +3,8 @@ using DatabaseLayer.DTO;
 using System.Collections.Generic;
 using System.Windows.Controls;
 using CatalogDesktopApp.Views;
+using System.Windows.Input;
+using System;
 
 namespace CatalogDesktopApp.ViewModels
 {
@@ -16,6 +18,8 @@ namespace CatalogDesktopApp.ViewModels
         private UserControl viewModelElev;
         private int _diriginteId;
         private int _materieId;
+
+        public ICommand BackMessage { get; set; }
 
         private MessageBus _messageBus;
         public ClasaDTO Clasa
@@ -73,6 +77,14 @@ namespace CatalogDesktopApp.ViewModels
         {
             _clasaService = ClasaService.Instance;
             _messageBus = MessageBus.Instance;
+
+            BackMessage = new RelayCommand(BackListFunction);
+
+        }
+
+        private void BackListFunction(object obj)
+        {
+            _messageBus.Publish(new LoadingMessage());
         }
 
         public ClasaWindowViewModel(int v) : this()
